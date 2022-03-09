@@ -1,4 +1,4 @@
-export default function Home({children}) {
+export default function Home({ children }) {
   return (
     <>
       {/* <header></header> */}
