@@ -2,7 +2,6 @@
 import Head from 'next/head'
 import Layout from '../src/components/global/Layout'
 
-const test = false
 const Home = () => (
   <>
     <Head>
