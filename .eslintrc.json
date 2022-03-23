@@ -382,6 +382,9 @@
       "return": "parens-new-line"
     }],
 
+    // React Hooks
+    "react-hooks/exhaustive-deps": 0,
+
     // JSX-a11y Rules
     "jsx-a11y/alt-text": "warn",
     "jsx-a11y/anchor-has-content": "warn",
