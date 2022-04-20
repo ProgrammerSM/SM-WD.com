@@ -11,7 +11,7 @@
     "next/core-web-vitals",
     "plugin:json/recommended-with-comments",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:jest/recommended"
   ],
   "globals": {
     "React": "writable"
@@ -382,8 +382,19 @@
       "return": "parens-new-line"
     }],
 
-    // React Hooks
-    "react-hooks/exhaustive-deps": 0,
+    // Jest
+    "jest/consistent-test-it": ["error", {
+      "fn": "it"
+    }],
+    "jest/no-alias-methods": "error",
+    "jest/prefer-to-be": "error",
+    "jest/prefer-to-contain": "error",
+    "jest/prefer-todo": "error",
+    "jest/prefer-to-have-length": "error",
+    "jest/prefer-strict-equal": "error",
+    "jest/valid-title": ["error", {
+      "disallowedWords": ["stuff", "thing", "things"]
+    }],
 
     // JSX-a11y Rules
     "jsx-a11y/alt-text": "warn",

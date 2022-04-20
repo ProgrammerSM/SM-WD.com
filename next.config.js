@@ -5,6 +5,12 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  settings: {
+    jest: {
+      version: require('jest/package.json').version,
+    },
+  },
+
 }
 
 module.exports = nextConfig
