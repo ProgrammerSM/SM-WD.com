@@ -10,8 +10,7 @@
     "next",
     "next/core-web-vitals",
     "plugin:json/recommended-with-comments",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react/recommended"
   ],
   "globals": {
     "React": "writable"
@@ -381,9 +380,6 @@
       "prop": "parens-new-line",
       "return": "parens-new-line"
     }],
-
-    // React Hooks
-    "react-hooks/exhaustive-deps": 0,
 
     // JSX-a11y Rules
     "jsx-a11y/alt-text": "warn",

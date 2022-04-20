@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { mediumUp } from 'data/media-queries'
 
 const BackgroundSVG = () => {
+  console.log('mediumup', mediumUp)
   const isAnimationActive = true
   const tempColor = '#000'
   const BackgroundSVGStyles = styled.svg`
