@@ -9,7 +9,7 @@ import {
 // Components
 import HomePage from 'pages/index'
 
-describe('Home Page', () => {
+describe('home Page', () => {
   it('should have h1', () => {
     render(<HomePage />)
 

@@ -33,6 +33,8 @@
     "eslint-config-next": "^12.1.5",
     "eslint-plugin-destructuring-newline": "0.0.2",
     "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-jest": "^26.1.4",
+    "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-modules-newline": "0.0.6",
