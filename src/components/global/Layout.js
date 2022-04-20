@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types'
 
 // Components
+import BackgroundSVG from './BackgroundSVG'
 import Footer from './Footer'
 import Header from './Header'
 
