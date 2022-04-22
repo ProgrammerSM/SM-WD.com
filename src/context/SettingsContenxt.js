@@ -3,7 +3,7 @@ import { createContext } from 'react'
 import PropTypes from 'prop-types'
 
 // Hooks
-import useLocalStorage from 'hooks/useLocalStorage'
+import useLocalStorage from 'hooks/useBrowserStorage'
 
 // Variables
 const settingsContextDefault = {}

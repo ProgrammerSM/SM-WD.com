@@ -9,13 +9,13 @@ import { SettingsProvider } from './SettingsContenxt'
 // PropTypes
 const propTypes = { children: PropTypes.node }
 const GlobalContext = ({ children }) => (
-  <BreakpointProvider>
+  // <BreakpointProvider>
     <CurrentThemeProvider>
-      <SettingsProvider>
+      {/* <SettingsProvider> */}
         {children}
-      </SettingsProvider>
+      {/* </SettingsProvider> */}
     </CurrentThemeProvider>
-  </BreakpointProvider>
+  // </BreakpointProvider>
 )
 
 GlobalContext.propTypes = propTypes

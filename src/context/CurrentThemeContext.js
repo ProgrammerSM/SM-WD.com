@@ -2,12 +2,11 @@
 import { createContext } from 'react'
 import PropTypes from 'prop-types'
 
-// Functions
-import commonThemeValues from 'data/commonThemeValues'
+// Data
 import themeColorGroups from 'data/themeColorGroups'
 
 // Hooks
-import useLocalStorage from 'hooks/useLocalStorage'
+import useLocalStorage from 'hooks/useBrowserStorage'
 
 // Variables
 const currentThemeDefaultValue = {}
@@ -15,21 +14,15 @@ const CurrentThemeContext = createContext(currentThemeDefaultValue)
 // PropTypes
 const propTypes = { children: PropTypes.node }
 const CurrentThemeProvider = ({ children }) => {
-  const [themeName, setThemeName] = useLocalStorage('smwdColorThemeName', 'light')
-  const [customTheme, setCustomTheme] = useLocalStorage('smwdCustomTheme', { ...themeColorGroups.light })
+  const [themeName, setThemeName] = useLocalStorage('smwdColorThemeName', 'monochrome')
+  const [customTheme, setCustomTheme] = useLocalStorage('smwdCustomTheme', { ...themeColorGroups.monochrome })
   const [hasCustomTheme, setHasCustomTheme] = useLocalStorage('smwdHasCustomTheme', false)
 
   let theme
   if (themeName === 'custom')
-    theme = {
-      ...commonThemeValues,
-      ...customTheme,
-    }
+    theme = customTheme
   else
-    theme = {
-      ...commonThemeValues,
-      ...themeColorGroups[themeName],
-    }
+    theme = themeColorGroups[themeName]
 
   return (
     <CurrentThemeContext.Provider
