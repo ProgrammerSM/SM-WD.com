@@ -4,18 +4,18 @@ import PropTypes from 'prop-types'
 // Context
 import { BreakpointProvider } from './BreakpointContext'
 import { CurrentThemeProvider } from './CurrentThemeContext'
-import { SettingsProvider } from './SettingsContenxt'
+import { SettingsProvider } from './SettingsContext'
 
 // PropTypes
 const propTypes = { children: PropTypes.node }
 const GlobalContext = ({ children }) => (
-  // <BreakpointProvider>
+  <BreakpointProvider>
     <CurrentThemeProvider>
-      {/* <SettingsProvider> */}
+      <SettingsProvider>
         {children}
-      {/* </SettingsProvider> */}
+      </SettingsProvider>
     </CurrentThemeProvider>
-  // </BreakpointProvider>
+  </BreakpointProvider>
 )
 
 GlobalContext.propTypes = propTypes

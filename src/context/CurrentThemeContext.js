@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import themeColorGroups from 'data/themeColorGroups'
 
 // Hooks
-import useLocalStorage from 'hooks/useBrowserStorage'
+import useBrowserStorage from 'hooks/useBrowserStorage'
 
 // Variables
 const currentThemeDefaultValue = {}
@@ -14,9 +14,9 @@ const CurrentThemeContext = createContext(currentThemeDefaultValue)
 // PropTypes
 const propTypes = { children: PropTypes.node }
 const CurrentThemeProvider = ({ children }) => {
-  const [themeName, setThemeName] = useLocalStorage('smwdColorThemeName', 'monochrome')
-  const [customTheme, setCustomTheme] = useLocalStorage('smwdCustomTheme', { ...themeColorGroups.monochrome })
-  const [hasCustomTheme, setHasCustomTheme] = useLocalStorage('smwdHasCustomTheme', false)
+  const [themeName, setThemeName] = useBrowserStorage('smwdColorThemeName', 'monochrome')
+  const [customTheme, setCustomTheme] = useBrowserStorage('smwdCustomTheme', { ...themeColorGroups.monochrome })
+  const [hasCustomTheme, setHasCustomTheme] = useBrowserStorage('smwdHasCustomTheme', false)
 
   let theme
   if (themeName === 'custom')

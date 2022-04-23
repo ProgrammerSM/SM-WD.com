@@ -26,8 +26,8 @@ const FooterStyles = styled.footer`
       bottom: 0;
       width: 60%;
       height: 8px;
-      border-top: 4px solid var(--accent-Color-1);
-      box-shadow: inset 0 5px 5px -5px var(--accent-Color-1);
+      border-top: 4px solid var(--accent-color-1);
+      box-shadow: inset 0 5px 5px -5px var(--accent-color-1);
       content: '';
     }
 
@@ -77,9 +77,7 @@ const FooterStyles = styled.footer`
 `
 
 const Footer = () => {
-  const copyrightDate = new Date().getFullYear() > 2021
-    ? `2021 - ${new Date().getFullYear()}`
-    : '2021'
+  const copyrightDate = `2021 - ${new Date().getFullYear()}`
 
   return (
     <FooterStyles>

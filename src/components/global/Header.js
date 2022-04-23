@@ -32,8 +32,8 @@ const HeaderStyles = styled.header`
       top: 0;
       width: 60%;
       height: 8px;
-      border-bottom: 4px solid var(--accent-Color-1);
-      box-shadow: inset 0 -5px 5px -5px var(--accent-Color-1);
+      border-bottom: 4px solid var(--accent-color-1);
+      box-shadow: inset 0 -5px 5px -5px var(--accent-color-1);
       content: '';
     }
 
@@ -93,22 +93,19 @@ const Header = () => (
   <HeaderStyles>
     <div className='header-border' />
     <div className='logo-shape'>
-      {/* eslint-disable jsx-a11y/tabindex-no-positive -- needed for better UX*/}
-      <Link
-        passHref
-        href='/'
-        tabIndex={1}
-      >
-        <div className='logo-wrapper'>
-          <span>Sterling May</span>
-          <Logo
-            height={50}
-            width={41}
-          />
-          <span>Web Developer</span>
-        </div>
+      { }
+      <Link href='/'>
+        <a>
+          <div className='logo-wrapper'>
+            <span>Sterling May</span>
+            <Logo
+              height={50}
+              width={41}
+            />
+            <span>Web Developer</span>
+          </div>
+        </a>
       </Link>
-      {/* eslint-enable jsx-a11y/tabindex-no-positive -- needed for better UX*/}
     </div>
     <div className='header-border' />
   </HeaderStyles>

@@ -1,183 +1,172 @@
 // Modules
-import styled from 'styled-components'
+import { useContext } from 'react'
+import styled, { keyframes } from 'styled-components'
+
+// Context
+import { SettingsContext } from 'context/SettingsContext'
 
 // Data
 import { mediumUp } from 'data/media-queries'
 
+// Styles
+const loadSvg = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`
+
+const continuousRotation = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(1800deg); }
+`
+
+const alternatingRataion = keyframes`
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(-90deg); }
+  20% { transform: rotate(45deg); }
+  30% { transform: rotate(-180deg); }
+  40% { transform: rotate(45deg); }
+  50% { transform: rotate(-20deg); }
+  60% { transform: rotate(180deg); }
+  70% { transform: rotate(-90deg); }
+  80% { transform: rotate(220deg); }
+  90% { transform: rotate(-360deg); }
+  100% { transform: rotate(0deg); }
+`
+
+const BackgroundSVGStyles = styled.svg`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 80vw;
+  z-index: 0;
+  animation: ${loadSvg} 5s;
+
+  ${mediumUp} {
+    max-width: 675px;
+    max-height: 675px;
+  }
+
+  circle {
+    transform-origin: center center;
+  }
+
+  .circle1,
+  .circle2,
+  .circle3,
+  .circle4,
+  .circle5,
+  .circle6,
+  .circle7,
+  .circle8,
+  .circle9,
+  .circle10,
+  .circle11,
+  .circle12,
+  .circle13 {
+    fill: transparent;
+  }
+
+  .circle1,
+  .circle3,
+  .circle4,
+  .circle5,
+  .circle7,
+  .circle9,
+  .circle12 {
+    stroke: var(--primary-color);
+  }
+
+  .circle2,
+  .circle11,
+  .circle13 {
+    stroke: var(--accent-color-1);
+  }
+
+  .circle1,
+  .circle4,
+  .circle5,
+  .circle7,
+  .circle10,
+  .circle12 {
+    stroke-width: 2px;
+  }
+
+  .circle2,
+  .circle6,
+  .circle8,
+  .circle11 {
+    stroke-width: 4px;
+  }
+
+  .circle5,
+  .circle6 {
+    stroke-dasharray: 23%;
+  }
+
+  .circle2 {
+    stroke-dasharray: 10%, 1%;
+    transform: rotate(2deg);
+    animation: ${continuousRotation} 200s linear alternate infinite;
+  }
+
+  .circle3 {
+    stroke-width: 1.5%;
+    stroke-dasharray: 1%;
+    stroke: var(--primary-color);
+
+    ${mediumUp} { stroke-dasharray: .3%; }
+  }
+
+  .circle5 {
+    transform: rotate(-51deg);
+  }
+
+  .circle6 {
+    stroke: var(--primary-color);
+    animation: ${alternatingRataion} 30s linear alternate-reverse infinite;
+  }
+
+  .circle8 {
+    stroke: var(--accent-color-2);
+    stroke-dasharray: 21%;
+    animation: ${continuousRotation} 200s linear alternate-reverse infinite;
+  }
+  
+  .circle9 {
+    stroke-width: 5%;
+    stroke-dasharray: .8%;
+    stroke: var(--primary-color);
+
+    ${mediumUp} { stroke-dasharray: .48%; }
+  }
+
+  .circle10 {
+    stroke: var(--accent-color-1);
+  }
+
+  .circle11 {
+    stroke: var(--accent-color-3);
+    stroke-dasharray: 8% 82%;
+    animation: ${alternatingRataion} 200s linear alternate infinite;
+  }
+
+  .circle12 {
+    stroke-dasharray: 35% 75%;
+    transform: rotate(61deg);
+  }
+  
+  .circle13 {
+    stroke-width: 2%;
+    stroke-dasharray: 15% 96%;
+    transform: rotate(-13deg);
+    animation: ${alternatingRataion} 100s linear alternate-reverse infinite;
+  }
+`
+
 const BackgroundSVG = () => {
-  const isAnimationActive = true
-  const tempColor = '#000'
-  const BackgroundSVGStyles = styled.svg`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 80vw;
-    z-index: 0;
-    ${isAnimationActive && 'animation: loadSvg 5s;'}
-
-    ${mediumUp} {
-      max-width: 675px;
-      max-height: 675px;
-    }
-
-    circle {
-      transform-origin: center center;
-    }
-
-    .circle1,
-    .circle2,
-    .circle3,
-    .circle4,
-    .circle5,
-    .circle6,
-    .circle7,
-    .circle8,
-    .circle9,
-    .circle10,
-    .circle11,
-    .circle12,
-    .circle13 {
-      fill: transparent;
-    }
-
-    .circle1,
-    .circle3,
-    .circle4,
-    .circle5,
-    .circle7,
-    .circle9,
-    .circle12 {
-      stroke: ${tempColor}40;
-    }
-
-    .circle2,
-    .circle11,
-    .circle13 {
-      stroke: ${tempColor};
-    }
-
-    .circle1,
-    .circle4,
-    .circle5,
-    .circle7,
-    .circle10,
-    .circle12 {
-      stroke-width: 2px;
-    }
-
-    .circle2,
-    .circle6,
-    .circle8,
-    .circle11 {
-      stroke-width: 4px;
-    }
-
-    .circle5,
-    .circle6 {
-      stroke-dasharray: 23%;
-    }
-
-    .circle2 {
-      stroke-dasharray: 10%, 1%;
-      transform: rotate(2deg);
-      ${isAnimationActive && 'animation: continuousRotation 200s linear alternate infinite;'}
-    }
-
-    .circle3 {
-      stroke-width: 1.5%;
-      stroke-dasharray: 1%;
-      ${isAnimationActive && 'animation: opacityFlux 30s linear alternate infinite;'}
-
-      ${mediumUp} { stroke-dasharray: .3%; }
-    }
-
-    .circle5 {
-      transform: rotate(-51deg);
-    }
-
-    .circle6 {
-      stroke: ${tempColor};
-      ${isAnimationActive && 'animation: alternatingRataion 30s linear alternate-reverse infinite;'}
-    }
-
-    .circle8 {
-      stroke: ${tempColor};
-      stroke-dasharray: 21%;
-      ${isAnimationActive && 'animation: continuousRotation 200s linear alternate-reverse infinite;'}
-    }
-    
-    .circle9 {
-      stroke-width: 5%;
-      stroke-dasharray: .8%;
-      ${isAnimationActive && 'animation: opacityFlux 30s 2s linear alternate-reverse infinite;'}
-
-      ${mediumUp} { stroke-dasharray: .48%; }
-    }
-
-    .circle10 {
-      stroke: ${tempColor}40;
-    }
-
-    .circle11 {
-      stroke: ${tempColor};
-      stroke-dasharray: 8% 82%;
-      ${isAnimationActive && 'animation: alternatingRataion 200s linear alternate infinite;'}
-    }
-
-    .circle12 {
-      stroke-dasharray: 35% 75%;
-      transform: rotate(61deg);
-    }
-    
-    .circle13 {
-      stroke-width: 2%;
-      stroke-dasharray: 15% 96%;
-      transform: rotate(-13deg);
-      ${isAnimationActive && 'animation: alternatingRataion 100s linear alternate-reverse infinite;'}
-    }
-
-    @keyframes loadSvg {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes continuousRotation {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(1800deg); }
-    }
-
-    @keyframes alternatingRataion {
-      0% { transform: rotate(0deg); }
-      10% { transform: rotate(-90deg); }
-      20% { transform: rotate(45deg); }
-      30% { transform: rotate(-180deg); }
-      40% { transform: rotate(45deg); }
-      50% { transform: rotate(-20deg); }
-      60% { transform: rotate(180deg); }
-      70% { transform: rotate(-90deg); }
-      80% { transform: rotate(220deg); }
-      90% { transform: rotate(-360deg); }
-      100% { transform: rotate(0deg); }
-    }
-
-    @keyframes opacityFlux {
-      0% { stroke: ${tempColor}40; }
-      10% { stroke: ${tempColor}80; }
-      20% { stroke: ${tempColor}40; }
-      30% { stroke: ${tempColor}BF; }
-      40% { stroke: ${tempColor}40; }
-      50% { stroke: ${tempColor}66; }
-      60% { stroke: ${tempColor}40; }
-      70% { stroke: ${tempColor}; }
-      71% { stroke: ${tempColor}4D; }
-      72% { stroke: ${tempColor}; }
-      80% { stroke: ${tempColor}40; }
-      90% { stroke: ${tempColor}; }
-      100% { stroke: ${tempColor}40; }
-    }
-  `
+  const { isAnimationActive } = useContext(SettingsContext)
 
   return (
     <BackgroundSVGStyles>
