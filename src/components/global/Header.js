@@ -56,29 +56,31 @@ const HeaderStyles = styled.header`
       height: 87px;
       content: '';
     }
-
-    &::before {
-      left: -26px;
-      transform: rotate(-35deg);
-      border-left: 2px solid var(--primary-color)
-    }
     
-    &::after {
-      right: -26px;
-      transform: rotate(35deg);
-      border-right: 2px solid var(--primary-color);
+    ${mediumUp} {
+      &::before {
+        left: -26px;
+        transform: rotate(-35deg);
+        border-left: 2px solid var(--primary-color)
+      }
+      
+      &::after {
+        right: -26px;
+        transform: rotate(35deg);
+        border-right: 2px solid var(--primary-color);
+      }
     }
   }
 
   .logo-wrapper {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 41px 1fr;
     align-items: center;
     gap: var(--space-medium);
 
     span {
       font-family: var(--header-font);
-      font-size: 2.6vw;
+      font-size: 3vw;
       text-transform: uppercase;
       letter-spacing: 3px;
     
