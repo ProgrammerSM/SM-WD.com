@@ -7,9 +7,9 @@ const customJestConfig = {
     '^context(.*)$': '<rootDir>/src/context$1',
     '^data(.*)$': '<rootDir>/src/data$1',
     '^functions(.*)$': '<rootDir>/src/functions$1',
+    '^global-styles(.*)$': '<rootDir>/src/global-styles$1',
     '^hooks(.*)$': '<rootDir>/src/hooks$1',
     '^pages(.*)$': '<rootDir>/pages$1',
-    '^styles(.*)$': '<rootDir>/src/styles$1',
   },
   testEnvironment: 'jest-environment-jsdom',
 }

@@ -6,9 +6,9 @@
       "context/*": ["src/context/*"],
       "data/*": ["src/data/*"],
       "functions/*": ["src/functions/*"],
+      "global-styles/*": ["src/global-styles/*"],
       "hooks/*": ["src/hooks/*"],
       "pages/": ["pages/*"],
-      "styles/*": ["src/styles/*"]
     }
   },
 }

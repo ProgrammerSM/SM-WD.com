@@ -18,12 +18,12 @@ const Layout = ({ children }) => {
     <>
       <style>{`
         :root {
-          --primary-color:    ${theme.colors.primaryColor};
-          --font-color:       ${theme.colors.fontColor};
-          --background-color: ${theme.colors.backgroundColor};
-          --accent-Color-1:   ${theme.colors.accentColor1};
-          --accent-Color-2:   ${theme.colors.accentColor2};
-          --accent-Color-3:   ${theme.colors.accentColor3};
+          --primary-color:    ${theme.primaryColor};
+          --font-color:       ${theme.fontColor};
+          --background-color: ${theme.backgroundColor};
+          --accent-Color-1:   ${theme.accentColor1};
+          --accent-Color-2:   ${theme.accentColor2};
+          --accent-Color-3:   ${theme.accentColor3};
         }
       `}</style>
       <Header />

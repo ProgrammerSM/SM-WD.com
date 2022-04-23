@@ -1,6 +1,5 @@
 // Modules
 import styled from 'styled-components'
-import theme from 'styled-theming'
 
 // Components
 import Link from 'next/link'
@@ -8,8 +7,6 @@ import Logo from './Logo'
 
 // Data
 import { mediumUp } from 'data/media-queries'
-
-console.log(theme)
 
 const HeaderStyles = styled.header`
   position: absolute;
@@ -96,7 +93,9 @@ const Header = () => (
   <HeaderStyles>
     <div className='header-border' />
     <div className='logo-shape'>
+      {/* eslint-disable jsx-a11y/tabindex-no-positive -- needed for better UX*/}
       <Link
+        passHref
         href='/'
         tabIndex={1}
       >
@@ -109,6 +108,7 @@ const Header = () => (
           <span>Web Developer</span>
         </div>
       </Link>
+      {/* eslint-enable jsx-a11y/tabindex-no-positive -- needed for better UX*/}
     </div>
     <div className='header-border' />
   </HeaderStyles>
