@@ -115,7 +115,7 @@ const Layout = ({ children }) => {
   const { theme } = useContext(CurrentThemeContext)
   return (
     <>
-      <style>{`
+      <style jsx>{`
         :root {
           --primary-color:    ${theme.primaryColor};
           --font-color:       ${theme.fontColor};
