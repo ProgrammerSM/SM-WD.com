@@ -43,10 +43,11 @@ const FooterStyles = styled.footer`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 54px;
-    padding: var(--space-extraSmall) 0;
+    padding: var(--space-extra-small) 0;
     border-top: 2px solid var(--primary-color);
     box-shadow: inset 0 5px 5px -5px var(--primary-color);
+
+    ${mediumUp} { height: 54px; }
 
     &::before,
     &::after {
@@ -73,7 +74,9 @@ const FooterStyles = styled.footer`
 
   .copyright {
     margin: 0 var(--space-small);
-    font-size: .75rem;
+    font-size: .6rem;
+
+    ${mediumUp} { font-size: .75rem; }
 
     span {
       white-space: nowrap;

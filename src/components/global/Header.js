@@ -45,7 +45,7 @@ const HeaderStyles = styled.header`
     position: relative;
     display: flex;
     justify-content: center;
-    padding: var(--space-extraSmall) 0;
+    padding: var(--space-extra-small) 0;
     border-bottom: 2px solid var(--primary-color);
     box-shadow: inset 0 -5px 5px -5px var(--primary-color);
 

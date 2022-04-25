@@ -3,6 +3,7 @@ import GlobalContext from 'context/GlobalContext'
 
 // Global Styles
 import GlobalStyles from 'components/global/styles/GlobalStyles'
+import Layout from 'components/global/Layout'
 import Reset from 'components/global/styles/Reset'
 import Typography from 'components/global/styles/Typography'
 
@@ -15,7 +16,9 @@ const MyApp = ({
     <Typography />
     <GlobalStyles />
     <GlobalContext>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </GlobalContext>
   </>
 )

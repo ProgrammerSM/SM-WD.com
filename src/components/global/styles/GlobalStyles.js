@@ -7,14 +7,12 @@ const GlobalStyles = createGlobalStyle`
 
     --space-jumbo: 2rem;
     --space-giant: 1.75rem;
-    --space-extraLarge: 1.5rem;
+    --space-extra-Large: 1.5rem;
     --space-large: 1.25rem;
     --space-medium: 1rem;
     --space-small: .75rem;
-    --space-extraSmall: .5rem;
+    --space-extra-small: .5rem;
   }
-
-  body { overflow: hidden; }
 `
 
 export default GlobalStyles
