@@ -7,12 +7,12 @@ import {
 } from '@testing-library/react'
 
 // Components
-import HomePage from 'pages/index'
+import Footer from 'components/global/Footer'
 
 // Context
 import GlobalContext from 'context/GlobalContext'
 
-describe('home Page', () => {
+describe('Footer', () => {
   const { ResizeObserver } = window
   beforeEach(() => {
     delete window.ResizeObserver
@@ -28,14 +28,11 @@ describe('home Page', () => {
     jest.restoreAllMocks()
   })
 
-  it('should have h1', () => {
-    render(<HomePage />, { wrapper: GlobalContext })
+  it('should have copyright', () => {
+    const copyrightDate = `2021 - ${new Date().getFullYear()}`
+    render(<Footer />, { wrapper: GlobalContext })
 
-    const heading = screen.getByRole('heading', {
-      level: 1,
-      name: 'Website Coming Soon',
-    })
-
-    expect(heading).toBeInTheDocument()
+    expect(screen.getByText(`Copyright © ${copyrightDate} Sterling May.`)).toBeInTheDocument()
+    expect(screen.getByText('All rights reserved.')).toBeInTheDocument()
   })
 })

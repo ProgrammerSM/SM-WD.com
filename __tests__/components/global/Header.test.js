@@ -7,12 +7,12 @@ import {
 } from '@testing-library/react'
 
 // Components
-import HomePage from 'pages/index'
+import Header from 'components/global/Header'
 
 // Context
 import GlobalContext from 'context/GlobalContext'
 
-describe('home Page', () => {
+describe('Header', () => {
   const { ResizeObserver } = window
   beforeEach(() => {
     delete window.ResizeObserver
@@ -28,14 +28,11 @@ describe('home Page', () => {
     jest.restoreAllMocks()
   })
 
-  it('should have h1', () => {
-    render(<HomePage />, { wrapper: GlobalContext })
+  it('should have clickable logo', () => {
+    render(<Header />, { wrapper: GlobalContext })
 
-    const heading = screen.getByRole('heading', {
-      level: 1,
-      name: 'Website Coming Soon',
-    })
-
-    expect(heading).toBeInTheDocument()
+    expect(screen.getByRole('link')).toBeInTheDocument()
+    expect(screen.getByText('Sterling May')).toBeInTheDocument()
+    expect(screen.getByText('Web Developer')).toBeInTheDocument()
   })
 })
