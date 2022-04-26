@@ -27,7 +27,8 @@ const BreakpointProvider = ({ children }) => {
     tablet: false,
   })
 
-  const onResize = useCallback(width => {
+  const onResize = useCallback(() => {
+    const width = window.innerWidth
     let desktop = false
     let tablet = false
     let mobile = false

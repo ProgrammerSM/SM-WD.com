@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // Context
 import { BreakpointProvider } from './BreakpointContext'
 import { CurrentThemeProvider } from './CurrentThemeContext'
-import { SettingsProvider } from './SettingsContenxt'
+import { SettingsProvider } from './SettingsContext'
 
 // PropTypes
 const propTypes = { children: PropTypes.node }
