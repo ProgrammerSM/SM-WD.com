@@ -1,18 +1,49 @@
 {
   "private": true,
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint-errors-only": "eslint --quiet .",
+    "lint-fix": "eslint --fix .",
+    "test": "jest --watch",
+    "test:ci": "jest --ci",
+    "cypress": "cypress open",
+    "prepare": "husky install",
+    "pre-commit": "next lint --fix && git add -A ."
   },
   "dependencies": {
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "next": "^12.1.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-resize-detector": "^7.0.0",
+    "styled-components": "^5.3.5",
+    "styled-theming": "^2.2.0"
   },
   "devDependencies": {
-    "eslint": "8.9.0",
-    "eslint-config-next": "12.1.0"
+    "@babel/parser": "^7.17.3",
+    "@emotion/eslint-plugin": "^11.7.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^14.1.1",
+    "cypress": "^9.5.4",
+    "eslint": "^8.13.0",
+    "eslint-config-eslint": "^7.0.0",
+    "eslint-config-next": "^12.1.5",
+    "eslint-plugin-destructuring-newline": "0.0.2",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-jest": "^26.1.4",
+    "eslint-plugin-jest-formatting": "^3.1.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-modules-newline": "0.0.6",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-webpack-plugin": "^3.1.1",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1"
   }
 }

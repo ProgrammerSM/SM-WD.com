@@ -1,0 +1,8 @@
+.env
+.gitignore
+jsconfig.json
+next.config.js
+node_modules/
+pages/_document.js
+public/
+package*

@@ -1,8 +1,26 @@
-import '../styles/reset.css'
-import '../styles/typography.css'
+// Components
+import GlobalContext from 'context/GlobalContext'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+// Global Styles
+import GlobalStyles from 'components/global/styles/GlobalStyles'
+import Layout from 'components/global/Layout'
+import Reset from 'components/global/styles/Reset'
+import Typography from 'components/global/styles/Typography'
+
+const MyApp = ({
+  Component,
+  pageProps,
+}) => (
+  <>
+    <Reset />
+    <Typography />
+    <GlobalStyles />
+    <GlobalContext>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </GlobalContext>
+  </>
+)
 
 export default MyApp
