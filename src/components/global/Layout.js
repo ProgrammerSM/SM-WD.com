@@ -16,6 +16,9 @@ import { mediumUp } from 'data/media-queries'
 
 // Styles
 const LayoutStyles = styled.div`
+  --main-padding-top: 70px;
+  --main-padding-bottom: 54px;
+  
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -27,7 +30,7 @@ const LayoutStyles = styled.div`
   main {
     width: 100%;
     height: 100%;
-    padding: 70px var(--space-medium) 54px;
+    padding: var(--main-padding-top) var(--space-medium) var(--main-padding-bottom);
   }
 
   .left-border,
@@ -37,6 +40,8 @@ const LayoutStyles = styled.div`
     transform: translateY(-50%);
     width: var(--space-medium);
     height: 60%;
+    background-color: var(--background-color);
+    z-index: 1;
   }
 
   .left-border {
@@ -87,14 +92,20 @@ const LayoutStyles = styled.div`
   .right-border::after { transform: rotate(-145deg); }
   .right-border::before { transform: rotate(-35deg); }
 
-  .overflow {
+  .overlay {
     position: relative;
-    height: 100%;
-    margin: 0 var(--space-extra-small);
-    padding: var(--space-medium) var(--space-small) 80px;
+    height: calc(100vh - (var(--main-padding-top) + var(--main-padding-bottom)));
+    padding: var(--space-extra-small) 5px 0;
     background-color: var(--background-color);
-    overflow: hidden auto;
     z-index: 1;
+
+    ${mediumUp} { padding: var(--space-extra-small) var(--space-extra-small); }
+  }
+
+  .overflow {
+    height: 100%;
+    padding: var(--space-medium) var(--space-small) 80px;
+    overflow: hidden auto;
 
     @media screen and (min-width: 430px) { padding-bottom: 50px; }
     ${mediumUp} { padding: 65px; }
@@ -103,9 +114,14 @@ const LayoutStyles = styled.div`
       width: 5px;
       height: 5px;
       background-color: var(--accent-color-1);
+      border-radius: 5px;
     }
-    
-    &::-webkit-scrollbar-thumb { background-color: var(--accent-color-1); }
+
+    &::-webkit-scrollbar-track { border-radius: 5px; }    
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--accent-color-1);
+      border-radius: 5px;
+    }
   }
 `
 
@@ -125,15 +141,18 @@ const Layout = ({ children }) => {
           --accent-color-3:   ${theme.accentColor3};
         }
 
-        .overflow.with-theme { background-color: ${theme.backgroundColor}80; }
+        .overlay.with-theme { background-color: ${theme.backgroundColor}80; }
         .overflow.with-theme::-webkit-scrollbar { background-color: ${theme.accentColor1}26; }
       `}</style>
+
       <LayoutStyles>
         <Header />
         <div className='left-border' />
         <main>
-          <div className='overflow with-theme'>
-            {children}
+          <div className='overlay with-theme'>
+            <div className='overflow with-theme'>
+              {children}
+            </div>
           </div>
           <BackgroundSVG />
         </main>

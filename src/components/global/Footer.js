@@ -44,6 +44,7 @@ const FooterStyles = styled.footer`
     justify-content: center;
     align-items: center;
     padding: var(--space-extra-small) 0;
+    background-color: var(--background-color);
     border-top: 2px solid var(--primary-color);
     box-shadow: inset 0 5px 5px -5px var(--primary-color);
 

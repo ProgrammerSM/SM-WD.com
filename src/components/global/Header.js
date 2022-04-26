@@ -16,6 +16,7 @@ const HeaderStyles = styled.header`
   width: 100%;
   color: var(--font-color);
   text-shadow: 0 1px 3px var(--font-color);
+  z-index: 1;
 
   ${mediumUp} {
     grid-template-columns: 1fr 550px 1fr;
@@ -46,6 +47,7 @@ const HeaderStyles = styled.header`
     display: flex;
     justify-content: center;
     padding: var(--space-extra-small) 0;
+    background-color: var(--background-color);
     border-bottom: 2px solid var(--primary-color);
     box-shadow: inset 0 -5px 5px -5px var(--primary-color);
 
