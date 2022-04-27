@@ -2,10 +2,10 @@
 import GlobalContext from 'context/GlobalContext'
 
 // Global Styles
-import GlobalStyles from 'components/global/styles/GlobalStyles'
-import Layout from 'components/global/Layout'
-import Reset from 'components/global/styles/Reset'
-import Typography from 'components/global/styles/Typography'
+import GlobalStyles from 'components/styles/GlobalStyles'
+import Layout from 'components/Layout'
+import Reset from 'components/styles/Reset'
+import Typography from 'components/styles/Typography'
 
 const MyApp = ({
   Component,

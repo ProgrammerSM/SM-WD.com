@@ -7,7 +7,7 @@ import {
 } from '@testing-library/react'
 
 // Components
-import Footer from 'components/global/Footer'
+import Footer from 'components/Footer'
 
 // Context
 import GlobalContext from 'context/GlobalContext'
