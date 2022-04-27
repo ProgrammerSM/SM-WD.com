@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
 
     --space-jumbo: 2rem;
     --space-giant: 1.75rem;
-    --space-extra-Large: 1.5rem;
+    --space-extra-large: 1.5rem;
     --space-large: 1.25rem;
     --space-medium: 1rem;
     --space-small: .75rem;
