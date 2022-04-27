@@ -75,7 +75,7 @@ const FooterStyles = styled.footer`
 
   .copyright {
     margin: 0 var(--space-small);
-    font-size: .6rem;
+    font-size: 12px;
 
     ${mediumUp} { font-size: .75rem; }
 
