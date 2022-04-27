@@ -21,10 +21,10 @@ const LayoutStyles = styled.div`
   --main-padding-top: 70px;
   --main-padding-bottom: 54px;
   --menu-button-h: 10px;
-  --menu-button-v: calc(30px + 10px + 2px);
+  --menu-button-v: 60px;
 
   ${mediumUp} {
-    --menu-button-h: 15px;
+    --menu-button-h: 25px;
     --menu-button-v: 25px;
   }
   
@@ -108,16 +108,19 @@ const LayoutStyles = styled.div`
     background-color: var(--background-color);
     z-index: 1;
 
-    ${mediumUp} { padding: var(--space-extra-small) var(--space-extra-small); }
+    ${mediumUp} { padding: var(--space-extra-small); }
   }
 
   .overflow {
-    height: 100%;
-    padding: var(--space-medium) var(--space-small) 80px;
+    max-width: 1600px;
+    height: calc(100% - 70px);
+    margin: 0 auto;
+    padding: 0 var(--space-small);
     overflow: hidden auto;
 
-    @media screen and (min-width: 430px) { padding-bottom: 50px; }
-    ${mediumUp} { padding: 65px; }
+    ${mediumUp} {
+      height: calc(100% - 55px)
+    }
 
     &::-webkit-scrollbar {
       width: 5px;
