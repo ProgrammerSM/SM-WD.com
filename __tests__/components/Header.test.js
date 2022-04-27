@@ -7,7 +7,7 @@ import {
 } from '@testing-library/react'
 
 // Components
-import Header from 'components/global/Header'
+import Header from 'components/Header'
 
 // Context
 import GlobalContext from 'context/GlobalContext'
