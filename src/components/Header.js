@@ -98,8 +98,17 @@ const Header = () => (
     <div className='header-border' />
     <div className='logo-shape'>
       { }
-      <Link href='/'>
-        <a>
+      <Link
+        passHref
+        href='/'
+      >
+        {/*
+            eslint-disable-next-line
+            jsx-a11y/no-noninteractive-tabindex,
+            jsx-a11y/tabindex-no-positive
+            -- need tab index order
+          */}
+        <a tabIndex={1}>
           <div className='logo-wrapper'>
             <span>Sterling May</span>
             <Logo

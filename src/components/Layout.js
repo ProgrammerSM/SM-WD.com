@@ -7,6 +7,8 @@ import { useContext } from 'react'
 import BackgroundSVG from './BackgroundSVG'
 import Footer from './Footer'
 import Header from './Header'
+import NavigationMenu from './menu-buttons/NavigationMenuButton'
+import SettingsMenuButton from './menu-buttons/SettingsMenuButton'
 
 // Context
 import { CurrentThemeContext } from 'context/CurrentThemeContext'
@@ -18,6 +20,13 @@ import { mediumUp } from 'data/media-queries'
 const LayoutStyles = styled.div`
   --main-padding-top: 70px;
   --main-padding-bottom: 54px;
+  --menu-button-h: 10px;
+  --menu-button-v: calc(30px + 10px + 2px);
+
+  ${mediumUp} {
+    --menu-button-h: 15px;
+    --menu-button-v: 25px;
+  }
   
   position: relative;
   width: 100vw;
@@ -157,6 +166,8 @@ const Layout = ({ children }) => {
           <BackgroundSVG />
         </main>
         <div className='right-border' />
+        <NavigationMenu buttonName='menu' />
+        <SettingsMenuButton buttonName='settings' />
         <Footer />
       </LayoutStyles>
     </>

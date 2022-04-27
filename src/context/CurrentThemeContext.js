@@ -14,8 +14,8 @@ const CurrentThemeContext = createContext(currentThemeDefaultValue)
 // PropTypes
 const propTypes = { children: PropTypes.node }
 const CurrentThemeProvider = ({ children }) => {
-  const [themeName, setThemeName] = useBrowserStorage('smwdColorThemeName', 'monochrome')
-  const [customTheme, setCustomTheme] = useBrowserStorage('smwdCustomTheme', { ...themeColorGroups.monochrome })
+  const [themeName, setThemeName] = useBrowserStorage('smwdColorThemeName', 'default')
+  const [customTheme, setCustomTheme] = useBrowserStorage('smwdCustomTheme', { ...themeColorGroups.default })
   const [hasCustomTheme, setHasCustomTheme] = useBrowserStorage('smwdHasCustomTheme', false)
 
   let theme
