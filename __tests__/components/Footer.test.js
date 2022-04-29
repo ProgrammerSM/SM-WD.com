@@ -1,9 +1,8 @@
 // Modules
-import '@testing-library/jest-dom'
-import React from 'react'
 import {
   render,
   screen,
+  within,
 } from '@testing-library/react'
 
 // Components
@@ -13,26 +12,13 @@ import Footer from 'components/Footer'
 import GlobalContext from 'context/GlobalContext'
 
 describe('Footer', () => {
-  const { ResizeObserver } = window
-  beforeEach(() => {
-    delete window.ResizeObserver
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      disconnect: jest.fn(),
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-    }))
-  })
-
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver
-    jest.restoreAllMocks()
-  })
-
   it('should have copyright', () => {
-    const copyrightDate = `2021 - ${new Date().getFullYear()}`
     render(<Footer />, { wrapper: GlobalContext })
 
-    expect(screen.getByText(`Copyright © ${copyrightDate} Sterling May.`)).toBeInTheDocument()
-    expect(screen.getByText('All rights reserved.')).toBeInTheDocument()
+    const footer = screen.getByTestId('footer')
+    const copyrightDate = `2021 - ${new Date().getFullYear()}`
+
+    expect(within(footer).getByText(`Copyright © ${copyrightDate} Sterling May.`)).toBeInTheDocument()
+    expect(within(footer).getByText('All rights reserved.')).toBeInTheDocument()
   })
 })

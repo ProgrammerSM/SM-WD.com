@@ -195,7 +195,10 @@ const BackgroundSVG = () => {
         }
       `}</style>
 
-      <BackgroundSVGStyles className='background-svg'>
+      <BackgroundSVGStyles
+        className='background-svg'
+        data-testid='background-svg'
+      >
         <defs>
           <radialGradient id='highlightGradient'>
             <stop

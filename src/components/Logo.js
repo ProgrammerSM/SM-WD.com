@@ -8,17 +8,20 @@ import { CurrentThemeContext } from 'context/CurrentThemeContext'
 // PropTypes
 const propTypes = {
   height: PropTypes.number,
+  testID: PropTypes.string,
   width: PropTypes.number,
 }
 
 const Logo = ({
   height = 150,
+  testID = 'logo',
   width = 122,
 }) => {
   const { theme } = useContext(CurrentThemeContext)
 
   return (
     <svg
+      data-testid={testID}
       height={height}
       id='svg-logo'
       version='1.1'

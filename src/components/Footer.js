@@ -89,7 +89,7 @@ const Footer = () => {
   const copyrightDate = `2021 - ${new Date().getFullYear()}`
 
   return (
-    <FooterStyles>
+    <FooterStyles data-testid='footer'>
       <div className='footer-border' />
       <div className='copyright-shape'>
         <p className='copyright'>
