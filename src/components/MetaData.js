@@ -16,7 +16,7 @@ const MetaData = ({
   },
 }) => {
   const site = 'https://sm-wd.com/'
-  const canonicalURL = site + useRouter().pathname
+  const canonicalURL = site + useRouter().asPath
   const follow = content.index ? 'follow' : 'nofollow'
   const index = content.index ? 'index' : 'noindex'
 
