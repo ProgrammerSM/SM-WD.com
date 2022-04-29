@@ -1,5 +1,3 @@
-import '@testing-library/jest-dom'
-import React from 'react'
 import {
   render,
   screen,
@@ -12,25 +10,15 @@ import NavigationMenuButton from 'components/menu-buttons/NavigationMenuButton'
 import GlobalContext from 'context/GlobalContext'
 
 describe('Navigation Menu Button', () => {
-  const { ResizeObserver } = window
   beforeEach(() => {
-    delete window.ResizeObserver
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      disconnect: jest.fn(),
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-    }))
-  })
-
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver
-    jest.restoreAllMocks()
+    render(<NavigationMenuButton buttonName='menu' />, { wrapper: GlobalContext })
   })
 
   it('should have button', () => {
-    render(<NavigationMenuButton buttonName='menu' />, { wrapper: GlobalContext })
-
     expect(screen.getByRole('button')).toBeInTheDocument()
+  })
+
+  it('should be labeled with "menu"', () => {
     expect(screen.getByText('menu')).toBeInTheDocument()
   })
 })

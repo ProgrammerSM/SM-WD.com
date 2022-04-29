@@ -94,7 +94,7 @@ const HeaderStyles = styled.header`
 `
 
 const Header = () => (
-  <HeaderStyles>
+  <HeaderStyles data-testid='header'>
     <div className='header-border' />
     <div className='logo-shape'>
       { }
@@ -109,10 +109,13 @@ const Header = () => (
             -- need tab index order
           */}
         <a tabIndex={1}>
-          <div className='logo-wrapper'>
+          <div
+            className='logo-wrapper'
+          >
             <span>Sterling May</span>
             <Logo
               height={50}
+              testID='header-logo'
               width={41}
             />
             <span>Web Developer</span>

@@ -1,44 +1,59 @@
 // Modules
 import PropTypes from 'prop-types'
+import { useRouter } from 'next/router'
 
 // Components
 import Head from 'next/head'
 
 // PropTypes
-const propTypes = {}
-const MetaData = ({ content }) => (
-  <Head>
+const propTypes = { content: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])) }
+const MetaData = ({
+  content = {
+    description: 'test',
+    follow: false,
+    index: false,
+    title: 'Sterling May - Web Developer',
+  },
+}) => {
+  const site = 'https://sm-wd.com/'
+  const canonicalURL = site + useRouter().asPath
+  const follow = content.index ? 'follow' : 'nofollow'
+  const index = content.index ? 'index' : 'noindex'
 
-    <title>Sterling May - Web Developer</title>
-    <meta
-      content='Sterling May - Web Developer'
-      property='og:title'
-    />
+  return (
+    <Head>
 
-    <meta
-      content='test'
-      name='description'
-    />
-    <meta
-      content='test'
-      property='og:description'
-    />
+      <title>{content.title}</title>
+      <meta
+        content={content.title}
+        property='og:title'
+      />
 
-    <link
-      href='test.com'
-      rel='canonical'
-    />
-    <meta
-      content='test.com'
-      property='og:url'
-    />
+      <meta
+        content={content.description}
+        name='description'
+      />
+      <meta
+        content={content.description}
+        property='og:description'
+      />
 
-    <meta
-      content='noindex nofollow'
-      name='robots'
-    />
-  </Head>
-)
+      <link
+        href={canonicalURL}
+        rel='canonical'
+      />
+      <meta
+        content={canonicalURL}
+        property='og:url'
+      />
+
+      <meta
+        content={`${index} ${follow}`}
+        name='robots'
+      />
+    </Head>
+  )
+}
 
 MetaData.propTypes = propTypes
 export default MetaData
