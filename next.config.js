@@ -5,6 +5,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ['spaceholder.cc'],
+  },
   settings: {
     jest: {
       version: require('jest/package.json').version,
