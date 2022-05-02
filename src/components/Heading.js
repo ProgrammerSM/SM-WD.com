@@ -54,6 +54,23 @@ const HeadingStyles = styled.div`
     }
   }
 
+  &.no-animation {
+    opacity: 1;
+
+    .bottom-border {
+      width: 100%;
+
+      &::after { width: 60%; }
+    }
+
+    &.center .bottom-border::after {
+      left: 20%;
+      right: 20%;
+    }
+
+    &.right .bottom-border::after { left: 0; }
+  }
+
   &.animation-active {
     transition: opacity .5s linear;
 
@@ -111,7 +128,7 @@ const Heading = ({
   const headingRef = useRef()
   const { isAnimationActive } = useContext(SettingsContext)
 
-  useEffect(() => () => {
+  useEffect(() => {
     if (hasAnimatedRef.current)
       return
 
