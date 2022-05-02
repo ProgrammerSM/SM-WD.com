@@ -1,4 +1,5 @@
 // Components
+import Heading from 'components/Heading'
 import MetaData from 'components/MetaData'
 
 const Home = () => (
@@ -14,7 +15,7 @@ const Home = () => (
         width: '100%',
       }}
     >
-      <h1>Website Coming Soon</h1>
+      <Heading isCenter>Website Coming Soon</Heading>
     </div>
   </>
 )

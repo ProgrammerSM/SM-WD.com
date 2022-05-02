@@ -314,16 +314,16 @@ const Button = ({
   imageAlt,
   width,
 }) => {
+  const hasAnimatedRef = useRef(false)
+  const imageRef = useRef()
   const { theme } = useContext(CurrentThemeContext)
   const { isAnimationActive } = useContext(SettingsContext)
-  const animationRef = useRef(false)
-  const imageRef = useRef()
 
   useEffect(() => {
-    if (animationRef.current)
+    if (hasAnimatedRef.current)
       return
 
-    if (!animationRef.current) {
+    if (!hasAnimatedRef.current) {
       const imageContainter = imageRef.current
 
       if (imageContainter && isAnimationActive) {
@@ -354,10 +354,10 @@ const Button = ({
           bottomLine.classList.add('animate')
         }, 1000)
 
-        animationRef.current = true
+        hasAnimatedRef.current = true
       }
     }
-  }, [])
+  }, [isAnimationActive])
 
   const animationActiveClass = isAnimationActive
     ? 'animation-active'
