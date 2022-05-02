@@ -132,7 +132,7 @@ const Heading = ({
         hasAnimatedRef.current = true
       }
     }
-  }, [])
+  }, [isAnimationActive])
 
   const animationActiveClass = isAnimationActive
     ? 'animation-active'
