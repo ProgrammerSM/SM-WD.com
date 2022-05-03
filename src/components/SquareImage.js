@@ -323,39 +323,37 @@ const Button = ({
     if (hasAnimatedRef.current)
       return
 
-    if (!hasAnimatedRef.current) {
-      const imageContainter = imageRef.current
+    const imageContainter = imageRef.current
 
-      if (imageContainter && isAnimationActive) {
-        const topShape = imageContainter.querySelector('.top-shape')
-        const bottomShape = imageContainter.querySelector('.bottom-shape')
-        const topCorner = imageContainter.querySelector('.top-corner')
-        const bottomCorner = imageContainter.querySelector('.bottom-corner')
-        const topLine = imageContainter.querySelector('.top-line')
-        const bottomLine = imageContainter.querySelector('.bottom-line')
-        const dropShape = imageContainter.querySelector('.drop-shape')
-        const popShape = imageContainter.querySelector('.pop-shape')
+    if (imageContainter && isAnimationActive) {
+      const topShape = imageContainter.querySelector('.top-shape')
+      const bottomShape = imageContainter.querySelector('.bottom-shape')
+      const topCorner = imageContainter.querySelector('.top-corner')
+      const bottomCorner = imageContainter.querySelector('.bottom-corner')
+      const topLine = imageContainter.querySelector('.top-line')
+      const bottomLine = imageContainter.querySelector('.bottom-line')
+      const dropShape = imageContainter.querySelector('.drop-shape')
+      const popShape = imageContainter.querySelector('.pop-shape')
 
-        setTimeout(() => {
-          imageContainter.classList.add('animate')
-        }, 200)
+      setTimeout(() => {
+        imageContainter.classList.add('animate')
+      }, 200)
 
-        setTimeout(() => {
-          topShape.classList.add('animate')
-          bottomShape.classList.add('animate')
-        }, 800)
+      setTimeout(() => {
+        topShape.classList.add('animate')
+        bottomShape.classList.add('animate')
+      }, 800)
 
-        setTimeout(() => {
-          dropShape.classList.add('animate')
-          popShape.classList.add('animate')
-          topCorner.classList.add('animate')
-          bottomCorner.classList.add('animate')
-          topLine.classList.add('animate')
-          bottomLine.classList.add('animate')
-        }, 1000)
+      setTimeout(() => {
+        dropShape.classList.add('animate')
+        popShape.classList.add('animate')
+        topCorner.classList.add('animate')
+        bottomCorner.classList.add('animate')
+        topLine.classList.add('animate')
+        bottomLine.classList.add('animate')
+      }, 1000)
 
-        hasAnimatedRef.current = true
-      }
+      hasAnimatedRef.current = true
     }
   }, [isAnimationActive])
 

@@ -132,22 +132,20 @@ const Heading = ({
     if (hasAnimatedRef.current)
       return
 
-    if (!hasAnimatedRef.current) {
-      const heading = headingRef.current
+    const heading = headingRef.current
 
-      if (heading && isAnimationActive) {
-        const bottomBorder = heading.querySelector('.bottom-border')
+    if (heading && isAnimationActive) {
+      const bottomBorder = heading.querySelector('.bottom-border')
 
-        setTimeout(() => {
-          heading.classList.add('animate')
-        }, 200)
+      setTimeout(() => {
+        heading.classList.add('animate')
+      }, 200)
 
-        setTimeout(() => {
-          bottomBorder.classList.add('animate')
-        }, 800)
+      setTimeout(() => {
+        bottomBorder.classList.add('animate')
+      }, 800)
 
-        hasAnimatedRef.current = true
-      }
+      hasAnimatedRef.current = true
     }
   }, [isAnimationActive])
 

@@ -9,6 +9,7 @@ const Home = () => (
       style={{
         alignItems: 'center',
         display: 'flex',
+        flexDirection: 'column',
         height: '100%',
         justifyContent: 'center',
         textAlign: 'center',
