@@ -1,9 +1,9 @@
 // Components
-import Button from 'components/Button'
+import AnimatedContent from 'components/AnimatedContent'
 import Heading from 'components/Heading'
 import MetaData from 'components/MetaData'
-import SquareImage from 'components/SquareImage'
 
+const animatedText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue ante, blandit ac lobortis sed, tincidunt et ipsum. Integer fringilla bibendum libero, vitae tempor mauris dapibus eu. Fusce quis libero sed mauris varius sagittis. Fusce vel mi dignissim enim accumsan volutpat in vel odio. Aliquam vel purus vitae felis sagittis vestibulum eget ut nisi. Phasellus ut mattis tellus. Maecenas mattis quam vitae velit vulputate, ac imperdiet mauris fermentum. Nam tempor varius mattis.'
 const Home = () => (
   <>
     <MetaData />
@@ -19,12 +19,10 @@ const Home = () => (
       }}
     >
       <Heading isCenter>Website Coming Soon</Heading>
-      <Button>Test Button</Button>
-      <SquareImage
-        height={400}
-        image='https://spaceholder.cc/800x400'
-        imageAlt='test alt text'
-        width={800}
+      <AnimatedContent
+        as='p'
+        minHeight={67.5}
+        text={animatedText}
       />
     </div>
   </>
