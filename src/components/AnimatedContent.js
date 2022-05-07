@@ -62,7 +62,7 @@ const AnimatedContent = ({
 
     window.requestAnimationFrame(startContentAnimation)
 
-  }, [isAnimationActive])
+  }, [isAnimationActive]) /* eslint-disable-line react-hooks/exhaustive-deps -- don't need to make startContentAnimation a dependancy */
 
   return isAnimationActive || hasAnimatedRef.current ? (
     <ElementType
