@@ -18,6 +18,7 @@ const propTypes = {
     'right',
   ]),
   as: PropTypes.string.isRequired,
+  delay: PropTypes.number,
   minHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   speed: PropTypes.number,
   text: PropTypes.string.isRequired,
@@ -26,15 +27,17 @@ const propTypes = {
 const AnimatedContent = ({
   align = 'left',
   as: ElementType,
+  delay = 800,
   minHeight = 22.5,
-  speed = 500,
+  speed = 800,
   text = 'No Text Provided',
 }) => {
-  let start = performance.now()
   const textLength = text.length
   const hasAnimatedRef = useRef(false)
+  const startRef = useRef()
   const { isAnimationActive } = useContext(SettingsContext)
   const [currentContent, setCurrentContent] = useState('')
+  let start = startRef.current
   const startContentAnimation = timestamp => {
     const interval = 1000 / 60
     const printTime = interval * textLength
@@ -60,9 +63,12 @@ const AnimatedContent = ({
     if (!isAnimationActive)
       return
 
-    window.requestAnimationFrame(startContentAnimation)
+    setTimeout(() => {
+      startRef.current = performance.now()
+      window.requestAnimationFrame(startContentAnimation)
+    }, delay)
 
-  }, [isAnimationActive]) /* eslint-disable-line react-hooks/exhaustive-deps -- don't need to make startContentAnimation a dependancy */
+  }, [isAnimationActive])
 
   return isAnimationActive || hasAnimatedRef.current ? (
     <ElementType
