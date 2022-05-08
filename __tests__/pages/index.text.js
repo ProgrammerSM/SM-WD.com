@@ -31,4 +31,10 @@ describe('home Page', () => {
 
     expect(heading).toBeInTheDocument()
   })
+
+  it('should have animated content', () => {
+    render(<HomePage />, { wrapper: GlobalContext })
+
+    expect(screen.getByTestId('animated-content')).toBeInTheDocument()
+  })
 })

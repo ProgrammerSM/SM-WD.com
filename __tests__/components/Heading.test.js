@@ -11,7 +11,7 @@ import Heading from 'components/Heading'
 // Context
 import GlobalContext from 'context/GlobalContext'
 
-describe('Header', () => {
+describe('Heading', () => {
   it('should have "animated-heading"', () => {
     render(<Heading />, { wrapper: GlobalContext })
 

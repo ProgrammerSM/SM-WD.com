@@ -27,7 +27,6 @@
   },
   "plugins": [
     "destructuring-newline",
-    "@emotion",
     "eslint-comments",
     "jsx-a11y",
     "modules-newline",
@@ -445,13 +444,6 @@
     "eslint-comments/no-unused-enable": "warn",
 
     // Eslint Comments - Stylistic Rules
-    "eslint-comments/require-description": "error",
-
-    // Emotion Rules
-    "@emotion/import-from-emotion": "error",
-    "@emotion/jsx-import": "error",
-    "@emotion/no-vanilla": "error",
-    "@emotion/styled-import": "error",
-    "@emotion/syntax-preference": ["warn", "string"]
+    "eslint-comments/require-description": "error"
   }
 }
