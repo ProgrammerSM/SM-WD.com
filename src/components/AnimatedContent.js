@@ -73,13 +73,19 @@ const AnimatedContent = ({
 
   return isAnimationActive || hasAnimatedRef.current ? (
     <ElementType
+      data-testid='animated-content'
       style={{
         minHeight: `${minHeight}px`,
         textAlign: align,
         width: '100%',
       }}
     >{currentContent}</ElementType >
-  ) : <ElementType style={{ textAlign: align }}>{text}</ElementType>
+  ) : (
+    <ElementType
+      data-testid='static-content'
+      style={{ textAlign: align }}
+    >{text}</ElementType>
+  )
 }
 
 AnimatedContent.propTypes = propTypes
