@@ -13,7 +13,6 @@ const nextConfig = {
       version: require('jest/package.json').version,
     },
   },
-
 }
 
 module.exports = nextConfig
