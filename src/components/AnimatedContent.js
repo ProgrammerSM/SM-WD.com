@@ -19,7 +19,7 @@ const propTypes = {
   ]),
   as: PropTypes.string.isRequired,
   delay: PropTypes.number,
-  minHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  minHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   speed: PropTypes.number,
   text: PropTypes.string.isRequired,
 }
