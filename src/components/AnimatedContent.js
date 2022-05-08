@@ -17,26 +17,24 @@ const propTypes = {
     'left',
     'right',
   ]),
-  as: PropTypes.string.isRequired,
   delay: PropTypes.number,
-  minHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   speed: PropTypes.number,
   text: PropTypes.string.isRequired,
 }
 
 const AnimatedContent = ({
   align = 'left',
-  as: ElementType,
   delay = 800,
-  minHeight = 22.5,
   speed = 800,
   text = 'No Text Provided',
 }) => {
   const textLength = text.length
   const hasAnimatedRef = useRef(false)
   const startRef = useRef()
+  const heightRef = useRef()
   const { isAnimationActive } = useContext(SettingsContext)
   const [currentContent, setCurrentContent] = useState('')
+  const [height, setHeight] = useState(0)
   let start = startRef.current
   const startContentAnimation = timestamp => {
     const interval = 1000 / 60
@@ -71,21 +69,31 @@ const AnimatedContent = ({
     /* eslint-disable-next-line react-hooks/exhaustive-deps -- don't need startContentAnimation to be a dependant */
   }, [isAnimationActive])
 
-  return isAnimationActive && !hasAnimatedRef.current ? (
-    <ElementType
-      data-testid='animated-content'
-      style={{
-        minHeight: `${minHeight}px`,
-        textAlign: align,
-        width: '100%',
-      }}
-    >{currentContent}</ElementType >
-  ) : (
-    <ElementType
-      data-testid='static-content'
-      style={{ textAlign: align }}
-    >{text}</ElementType>
-  )
+  useEffect(() => {
+    if (heightRef.current)
+      setHeight(heightRef.current.offsetHeight)
+  }, [])
+
+  return isAnimationActive && !hasAnimatedRef.current
+    ? height ? (
+      <p
+        data-testid='animated-content'
+        style={{
+          minHeight: `${height}px`,
+          textAlign: align,
+          width: '100%',
+        }}
+      >{currentContent}</p >
+    ) : (
+      <div ref={heightRef}>
+        <p style={{ visibility: 'hidden' }}>{text}</p>
+      </div>
+    ) : (
+      <p
+        data-testid='static-content'
+        style={{ textAlign: align }}
+      >{text}</p>
+    )
 }
 
 AnimatedContent.propTypes = propTypes
