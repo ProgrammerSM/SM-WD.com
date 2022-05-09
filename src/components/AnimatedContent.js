@@ -19,7 +19,7 @@ const propTypes = {
   ]),
   delay: PropTypes.number,
   speed: PropTypes.number,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 }
 
 const AnimatedContent = ({
@@ -85,7 +85,10 @@ const AnimatedContent = ({
         }}
       >{currentContent}</p >
     ) : (
-      <div ref={heightRef}>
+      <div
+        data-testid='hidden-content'
+        ref={heightRef}
+      >
         <p style={{ visibility: 'hidden' }}>{text}</p>
       </div>
     ) : (

@@ -2,6 +2,7 @@
 import {
   render,
   screen,
+  waitFor,
 } from '@testing-library/react'
 
 // Components
@@ -32,9 +33,13 @@ describe('home Page', () => {
     expect(heading).toBeInTheDocument()
   })
 
-  it('should have animated content', () => {
+  it('should have animated content', async () => {
     render(<HomePage />, { wrapper: GlobalContext })
 
-    expect(screen.getByTestId('animated-content')).toBeInTheDocument()
+    await waitFor(() => {
+      setTimeout(() => {
+        expect(screen.getByTestId('animated-content')).toBeInTheDocument()
+      }, 100)
+    })
   })
 })
