@@ -7,23 +7,9 @@ const animatedText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. S
 const Home = () => (
   <>
     <MetaData />
-    <div
-      style={{
-        alignItems: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        justifyContent: 'center',
-        textAlign: 'center',
-        width: '100%',
-      }}
-    >
+    <div>
       <Heading isCenter>Website Coming Soon</Heading>
-      <AnimatedContent
-        as='p'
-        minHeight={67.5}
-        text={animatedText}
-      />
+      <AnimatedContent text={animatedText} />
     </div>
   </>
 )
