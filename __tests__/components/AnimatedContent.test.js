@@ -12,60 +12,70 @@ import AnimatedContent from 'components/AnimatedContent'
 import GlobalContext from 'context/GlobalContext'
 
 describe('AnimatedContent', () => {
-  it('should have animated-content', () => {
+  it('should have animated-content', async () => {
     render(<AnimatedContent as='p' />, { wrapper: GlobalContext })
-    expect(screen.getByTestId('animated-content')).toBeInTheDocument()
+    expect(screen.getByTestId('hidden-content')).toBeInTheDocument()
+
+    await waitFor(() => {
+      setTimeout(() => {
+        expect(screen.getByTestId('animated-content')).toBeInTheDocument()
+      }, 100)
+    })
   })
 
-  it('should be left aligned by default', () => {
+  it('should be left aligned by default', async () => {
     render(<AnimatedContent as='p' />, { wrapper: GlobalContext })
-    expect(screen.getByTestId('animated-content').style.textAlign).toBe('left')
+
+    await waitFor(() => {
+      setTimeout(() => {
+        expect(screen.getByTestId('animated-content').style.textAlign).toBe('left')
+      }, 100)
+    })
   })
 
-  it('should set alignment to left from props', () => {
+  it('should set alignment to left from props', async () => {
     const props = {
       align: 'left',
       as: 'p',
     }
 
     render(<AnimatedContent {...props} />, { wrapper: GlobalContext })
-    expect(screen.getByTestId('animated-content').style.textAlign).toBe('left')
+
+    await waitFor(() => {
+      setTimeout(() => {
+        expect(screen.getByTestId('animated-content').style.textAlign).toBe('left')
+      }, 100)
+    })
   })
 
-  it('should set alignment to center from props', () => {
+  it('should set alignment to center from props', async () => {
     const props = {
       align: 'center',
       as: 'p',
     }
 
     render(<AnimatedContent {...props} />, { wrapper: GlobalContext })
-    expect(screen.getByTestId('animated-content').style.textAlign).toBe('center')
+
+    await waitFor(() => {
+      setTimeout(() => {
+        expect(screen.getByTestId('animated-content').style.textAlign).toBe('center')
+      }, 100)
+    })
   })
 
-  it('should set alignment to right from props', () => {
+  it('should set alignment to right from props', async () => {
     const props = {
       align: 'right',
       as: 'p',
     }
 
     render(<AnimatedContent {...props} />, { wrapper: GlobalContext })
-    expect(screen.getByTestId('animated-content').style.textAlign).toBe('right')
-  })
 
-  it('should have min-height of 22.5 by default', () => {
-    render(<AnimatedContent as='p' />, { wrapper: GlobalContext })
-    expect(screen.getByTestId('animated-content').style.minHeight).toBe('22.5px')
-  })
-
-  it('should set min-height from props', () => {
-    const testMinHeight = 40
-    const props = {
-      as: 'p',
-      minHeight: testMinHeight,
-    }
-
-    render(<AnimatedContent {...props} />, { wrapper: GlobalContext })
-    expect(screen.getByTestId('animated-content').style.minHeight).toBe(`${testMinHeight}px`)
+    await waitFor(() => {
+      setTimeout(() => {
+        expect(screen.getByTestId('animated-content').style.textAlign).toBe('right')
+      }, 100)
+    })
   })
 
   it('should animate content in', async () => {
@@ -78,16 +88,15 @@ describe('AnimatedContent', () => {
 
     render(<AnimatedContent {...props} />, { wrapper: GlobalContext })
 
-    const initialRender = screen.queryByText(testText)
-    expect(initialRender).not.toBeInTheDocument()
-
     await waitFor(() => {
-      expect(screen.queryByText(testText)).not.toBeInTheDocument()
-      expect(screen.getByTestId('animated-content')).toHaveTextContent(partialText)
+      setTimeout(() => {
+        expect(screen.queryByText(testText)).not.toBeInTheDocument()
+        expect(screen.getByTestId('animated-content')).toHaveTextContent(partialText)
+      }, 100)
 
       setTimeout(() => {
         expect(screen.queryByText(testText)).toBeInTheDocument()
-      }, 100)
+      }, 200)
     })
   })
 
