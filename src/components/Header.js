@@ -8,6 +8,7 @@ import Logo from './Logo'
 // Data
 import { mediumUp } from 'data/media-queries'
 
+// Styles
 const HeaderStyles = styled.header`
   position: absolute;
   top: 0;
@@ -81,7 +82,6 @@ const HeaderStyles = styled.header`
     gap: var(--space-medium);
 
     span {
-      font-family: var(--header-font);
       font-size: 3vw;
       text-transform: uppercase;
       letter-spacing: 3px;
