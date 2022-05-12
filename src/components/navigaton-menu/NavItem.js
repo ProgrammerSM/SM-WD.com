@@ -110,8 +110,6 @@ const NavItem = () => {
   const breakpoints = useContext(BreakpointContext)
   const { theme } = useContext(CurrentThemeContext)
 
-  console.log(breakpoints)
-
   return (
     <NavItemStyles>
       <Link

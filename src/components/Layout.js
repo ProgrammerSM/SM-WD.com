@@ -7,10 +7,12 @@ import { useContext } from 'react'
 import BackgroundSVG from './BackgroundSVG'
 import Footer from './Footer'
 import Header from './Header'
-import NavigationMenu from './menu-buttons/NavigationMenuButton'
+import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
+import NavMenu from './navigaton-menu/NavMenu'
 import SettingsMenuButton from './menu-buttons/SettingsMenuButton'
 
 // Context
+import { ActiveMenuContext } from 'context/ActiveMenuContext'
 import { CurrentThemeContext } from 'context/CurrentThemeContext'
 
 // Data
@@ -137,10 +139,19 @@ const LayoutStyles = styled.div`
   }
 `
 
+// Variable
+const menuButtonName = 'menu'
+const settingsButtonName = 'settings'
 // Proptypes
 const propTypes = { children: PropTypes.node }
 const Layout = ({ children }) => {
+  const {
+    activeMenu,
+    isMenuActive,
+  } = useContext(ActiveMenuContext)
+
   const { theme } = useContext(CurrentThemeContext)
+
   return (
     <>
       <style>{`
@@ -163,14 +174,22 @@ const Layout = ({ children }) => {
         <main>
           <div className='overlay with-theme'>
             <div className='overflow with-theme'>
-              {children}
+              {activeMenu === menuButtonName && <NavMenu />}
+              {/* {activeMenu === settingsButtonName && <SettingsMenu />} */}
+              {!isMenuActive && children}
             </div>
           </div>
-          <BackgroundSVG />
+          {!isMenuActive && <BackgroundSVG />}
         </main>
         <div className='right-border' />
-        <NavigationMenu buttonName='menu' />
-        <SettingsMenuButton buttonName='settings' />
+        <NavigationMenuButton
+          alternateButtonName={settingsButtonName}
+          buttonName={menuButtonName}
+        />
+        <SettingsMenuButton
+          alternateButtonName={menuButtonName}
+          buttonName={settingsButtonName}
+        />
         <Footer />
       </LayoutStyles>
     </>
