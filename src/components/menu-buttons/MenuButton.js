@@ -1,8 +1,11 @@
 // Modules
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
-import { useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
+import {
+  useContext,
+  useRef,
+} from 'react'
 
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -127,6 +130,7 @@ const MenuButton = ({
   isDisabled,
   tabIndexNumber,
 }) => {
+  const menuButtonRef = useRef()
   const { isAnimationActive } = useContext(SettingsContext)
   const { theme } = useContext(CurrentThemeContext)
   let buttonColor = `${theme.primaryColor}80`
@@ -143,9 +147,9 @@ const MenuButton = ({
     buttonFontColor = `${theme.fontColor}80`
   }
 
-  const handleBtnKeyDown = event => {
-    if (event.key === 'Enter')
-      clickHandler(event.target)
+  const handleBtnKeyDown = () => {
+    if (menuButtonRef.current === 'Enter')
+      clickHandler(menuButtonRef.current)
   }
 
   return (
@@ -154,6 +158,7 @@ const MenuButton = ({
       data-active={Boolean(isActive)}
       data-testid='menu-button'
       disabled={Boolean(isDisabled)}
+      ref={menuButtonRef}
       role='button'
       tabIndex={tabIndexNumber}
       onClick={clickHandler}

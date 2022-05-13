@@ -1,4 +1,4 @@
-/* eslint-disable import/no-anonymous-default-export, sort-keys -- string values only, preferred order */
+/* eslint-disable sort-keys -- string values only, preferred order */
 export default {
   default: {
     primaryColor: '#178D9C',
@@ -25,4 +25,4 @@ export default {
     accentColor3: '#FFFFFF',
   },
 }
-/* eslint-enable import/no-anonymous-default-export, sort-keys -- string values only, preferred order */
+/* eslint-enable sort-keys -- string values only, preferred order */

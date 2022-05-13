@@ -82,10 +82,15 @@ const NavItemStyles = styled.li`
     ${mediumUp} {
       width: 215px;
       height: 125px;
+      padding: var(--space-medium) 0;
     }
   }
 
   .link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
     width: var(--space-giant);
     margin-bottom: var(--space-extra-small);
   }
@@ -98,15 +103,15 @@ const NavItemStyles = styled.li`
   }
 `
 
-// REMOVE THIS ICON
-import { faEarthAmericas } from '@fortawesome/free-solid-svg-icons'
-
 // PropTypes
 const propTypes = {}
-const NavItem = () => {
-  const icon = faEarthAmericas
-  const location = '/'
-  const title = 'Home'
+const NavItem = ({ navItemData }) => {
+  const {
+    icon,
+    name,
+    path,
+  } = navItemData
+
   const breakpoints = useContext(BreakpointContext)
   const { theme } = useContext(CurrentThemeContext)
 
@@ -114,7 +119,7 @@ const NavItem = () => {
     <NavItemStyles>
       <Link
         passHref
-        href={location}
+        href={path}
       >
         <a className='nav-link' >
           <div className='hover-box' />
@@ -127,7 +132,7 @@ const NavItem = () => {
                 <FontAwesomeIcon icon={icon} />
               </span>
             )}
-            <span className='link-title'>{title}</span>
+            <span className='link-title'>{name}</span>
           </div>
         </a>
       </Link>

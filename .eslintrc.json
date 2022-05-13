@@ -16,7 +16,14 @@
   "globals": {
     "React": "writable"
   },
-  "overrides": [],
+  "overrides": [
+    {
+      "files": ["**/data/*"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
@@ -384,6 +391,8 @@
       "prop": "parens-new-line",
       "return": "parens-new-line"
     }],
+
+    "react-hooks/exhaustive-deps": "off",
 
     // Jest
     "jest/consistent-test-it": ["error", {

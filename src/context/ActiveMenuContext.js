@@ -1,7 +1,9 @@
 // Modules
 import PropTypes from 'prop-types'
+import { useRouter } from 'next/router'
 import {
   createContext,
+  useEffect,
   useState,
 } from 'react'
 
@@ -13,6 +15,15 @@ const propTypes = { children: PropTypes.node }
 const ActiveMenuProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState('')
   const [isMenuActive, setIsMenuActive] = useState(false)
+  const router = useRouter()
+  useEffect(() => {
+    router.events.on('routeChangeStart', () => {
+      if (isMenuActive) {
+        setActiveMenu('')
+        setIsMenuActive(false)
+      }
+    })
+  }, [router])
 
   return (
     <ActiveMenuContext.Provider
