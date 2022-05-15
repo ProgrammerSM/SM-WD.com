@@ -104,7 +104,14 @@ const NavItemStyles = styled.li`
 `
 
 // PropTypes
-const propTypes = {}
+const propTypes = {
+  navItemData: PropTypes.shape({
+    icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])).isRequired,
+    name: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
+  }),
+}
+
 const NavItem = ({ navItemData }) => {
   const {
     icon,
