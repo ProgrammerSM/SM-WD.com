@@ -23,7 +23,7 @@ const NavigationMenuButtonStyles = styled.div`
 
 // PropTypes
 const propTypes = {
-  alternateButtonName: PropTypes.string.isRequired,
+  alternateButtonName: PropTypes.string,
   buttonName: PropTypes.string.isRequired,
 }
 

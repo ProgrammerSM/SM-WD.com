@@ -15,6 +15,7 @@ import GlobalContext from 'context/GlobalContext'
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
 useRouter.mockImplementation(() => ({
   asPath: '',
+  events: { on: jest.fn() },
   pathname: '',
   query: '',
   route: '/',
