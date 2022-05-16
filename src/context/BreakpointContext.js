@@ -50,7 +50,7 @@ const BreakpointProvider = ({ children }) => {
   const { ref } = useResizeDetector({ onResize })
 
   return (
-    <BreakpointContext.Provider value={[breakpoints, setBreakpoints]}>
+    <BreakpointContext.Provider value={breakpoints}>
       <div ref={ref}>
         {children}
       </div>

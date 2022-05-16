@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyles = createGlobalStyle`
   :root {
     --primary-font: 'Jura', sans-serif;
-    --header-font: 'Orbitron', sans-serif
+    --header-font: 'Orbitron', sans-serif;
 
     --space-jumbo: 2rem;
     --space-giant: 1.75rem;
