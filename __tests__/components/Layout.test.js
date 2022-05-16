@@ -1,4 +1,5 @@
 import {
+  fireEvent,
   render,
   screen,
   within,
@@ -29,6 +30,15 @@ describe('Layout', () => {
     expect(menuButtons).toHaveLength(2)
     expect(within(menuButtons[0]).getByText('menu')).toBeInTheDocument()
     expect(within(menuButtons[1]).getByText('settings')).toBeInTheDocument()
+  })
+
+  it('should render nav menu if the menu button is clicked', async () => {
+    expect(screen.queryByTestId('nav-menu')).not.toBeInTheDocument()
+
+    const menuButton = await screen.findAllByTestId('menu-button')
+    fireEvent.click(menuButton[0])
+
+    expect(screen.queryByTestId('nav-menu')).toBeInTheDocument()
   })
 
   it('should have footer', () => {

@@ -68,7 +68,7 @@ const NavMenu = () => {
   const router = useRouter()
 
   return (
-    <NavMenuStyles>
+    <NavMenuStyles data-testid='nav-menu'>
       <CloseButton />
       <ul className='nav-menu'>
         {
