@@ -1,10 +1,10 @@
 /* eslint-disable sort-keys -- string values only, preferred order */
 export default {
   default: {
-    primaryColor: '#178D9C',
-    fontColor: '#178D9C',
-    backgroundColor: '#010409',
-    accentColor1: '#E39805',
+    primaryColor: '#08ECF7',
+    fontColor: '#08ECF7',
+    backgroundColor: '#00152A',
+    accentColor1: '#1AF0FB',
     accentColor2: '#1AF0FB',
     accentColor3: '#1AF0FB',
   },

@@ -1,13 +1,14 @@
 // Modules
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import styled from 'styled-components'
 import { useContext } from 'react'
+import styled, { keyframes } from 'styled-components'
 
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // Context
 import { ActiveMenuContext } from 'context/ActiveMenuContext'
+import { SettingsContext } from 'context/SettingsContext'
 
 // Data
 import {
@@ -16,7 +17,12 @@ import {
 } from 'data/media-queries'
 
 // Styles
-const CloseButtonStyles = styled.div`
+const fadeIn = keyframes`
+  0% { opacity: 0; }  
+  100% { opacity: 1; }
+`
+
+const CloseButtonStyles = styled.div`  
   ${small} {
     position: fixed;
     bottom: 60px;
@@ -40,7 +46,11 @@ const CloseButtonStyles = styled.div`
     letter-spacing: 2px;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
-    transition: all .5s;
+    
+    &.animation-active {
+      transition: all .5s;
+      animation: ${fadeIn} 2s;
+    }
     
     &:active,
     &:focus,
@@ -64,15 +74,20 @@ const CloseButtonStyles = styled.div`
 `
 
 const CloseButton = () => {
+  const { isAnimationActive } = useContext(SettingsContext)
   const {
     setActiveMenu,
     setIsMenuActive,
   } = useContext(ActiveMenuContext)
 
+  const animationActiveClass = isAnimationActive
+    ? 'animation-active'
+    : 'no-animation'
+
   return (
     <CloseButtonStyles>
       <button
-        className='close-button'
+        className={`close-button ${animationActiveClass}`}
         onClick={() => {
           setIsMenuActive(false)
           setActiveMenu('')

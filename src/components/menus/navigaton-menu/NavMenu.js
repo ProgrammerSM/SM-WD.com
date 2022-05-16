@@ -1,10 +1,14 @@
 // Modules
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import styled, { keyframes } from 'styled-components'
 
 // Components
 import CloseButton from '../CloseButton'
 import NavItem from './NavItem'
+
+// Context
+import { SettingsContext } from 'context/SettingsContext'
 
 // Data
 import navigationMenu from 'data/navigation-menu'
@@ -35,14 +39,7 @@ const NavMenuStyles = styled.div`
   margin: 0 auto;
   padding-top: var(--space-medium);
 
-  .nav-menu {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: calc(var(--space-extra-large) + 12px);
-    
+  &.animation-active .nav-menu {
     ${small} {
       li {
         animation: ${mobileMenuExpand} .5s ease-in-out;
@@ -56,19 +53,37 @@ const NavMenuStyles = styled.div`
     }
 
     ${mediumUp} {
+      li { animation: ${mediumUpTransition} .75s ease-out; }
+    }
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--space-extra-large) + 12px);
+
+    ${mediumUp} {
       margin-top: var(--space-large);
       flex-direction: row;
-
-      li { animation: ${mediumUpTransition} .75s ease-out; }
     }
   }
 `
 
 const NavMenu = () => {
   const router = useRouter()
+  const { isAnimationActive } = useContext(SettingsContext)
+  const animationActiveClass = isAnimationActive
+    ? 'animation-active'
+    : 'no-animation'
 
   return (
-    <NavMenuStyles data-testid='nav-menu'>
+    <NavMenuStyles
+      className={animationActiveClass}
+      data-testid='nav-menu'
+    >
       <CloseButton />
       <ul className='nav-menu'>
         {
