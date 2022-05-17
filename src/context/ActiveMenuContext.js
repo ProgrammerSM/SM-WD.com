@@ -18,10 +18,8 @@ const ActiveMenuProvider = ({ children }) => {
   const router = useRouter()
   useEffect(() => {
     router.events.on('routeChangeStart', () => {
-      if (isMenuActive) {
-        setActiveMenu('')
-        setIsMenuActive(false)
-      }
+      setActiveMenu('')
+      setIsMenuActive(false)
     })
   }, [router])
 
