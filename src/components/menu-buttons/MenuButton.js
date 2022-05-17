@@ -36,14 +36,12 @@ const MenuButtonStyles = styled.div`
     height: calc(4rem + 10px);
   }
 
-  &:focus:not([disabled]),
   &:hover:not([disabled]) {
     box-shadow: 0 0 5px 2px var(--primary-color);
   }
 
-  &:focus:not([disabled]) .animated-circle,
   &:hover:not([disabled]) .animated-circle,
-  &[data-active = true] .animated-circle {
+  &[data-active = "true"]:not([disabled]) .animated-circle {
     animation-duration: 10s;
   }
 
@@ -147,8 +145,8 @@ const MenuButton = ({
     buttonFontColor = `${theme.fontColor}80`
   }
 
-  const handleBtnKeyDown = () => {
-    if (menuButtonRef.current === 'Enter')
+  const handleBtnKeyDown = event => {
+    if (event.key === 'Enter')
       clickHandler(menuButtonRef.current)
   }
 

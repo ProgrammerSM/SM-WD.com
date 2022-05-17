@@ -31,7 +31,7 @@ const mobileMenuExpand = keyframes`
 const NavMenuStyles = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
   width: 100%;
   max-width: 1000px;
@@ -42,7 +42,7 @@ const NavMenuStyles = styled.div`
   &.animation-active .nav-menu {
     ${small} {
       li {
-        animation: ${mobileMenuExpand} .5s ease-in-out;
+        animation: ${mobileMenuExpand} .4s ease-in-out;
 
         &:nth-of-type(2) { animation-delay: .1s; }
         &:nth-of-type(3) { animation-delay: .2s; }
@@ -53,7 +53,7 @@ const NavMenuStyles = styled.div`
     }
 
     ${mediumUp} {
-      li { animation: ${mediumUpTransition} .75s ease-out; }
+      li { animation: ${mediumUpTransition} .4s ease-out; }
     }
   }
 
@@ -84,7 +84,6 @@ const NavMenu = () => {
       className={animationActiveClass}
       data-testid='nav-menu'
     >
-      <CloseButton />
       <ul className='nav-menu'>
         {
           navigationMenu.map((navItem, index) => {
@@ -100,6 +99,7 @@ const NavMenu = () => {
           })
         }
       </ul>
+      <CloseButton />
     </NavMenuStyles>
   )
 }

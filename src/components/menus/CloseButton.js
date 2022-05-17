@@ -49,7 +49,7 @@ const CloseButtonStyles = styled.div`
     
     &.animation-active {
       transition: all .5s;
-      animation: ${fadeIn} 2s;
+      animation: ${fadeIn} 1.25s;
     }
     
     &:active,

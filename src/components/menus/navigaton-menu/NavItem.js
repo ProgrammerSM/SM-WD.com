@@ -70,7 +70,7 @@ const NavItemStyles = styled.li`
   }
 
   .link-content {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -87,11 +87,11 @@ const NavItemStyles = styled.li`
   }
 
   .link-icon {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    width: var(--space-giant);
+    font-size: 2rem;
     margin-bottom: var(--space-extra-small);
   }
 
