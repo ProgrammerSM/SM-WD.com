@@ -26,7 +26,7 @@ describe('Navigation Item', () => {
     expect(screen.getByRole('link')).toBeInTheDocument()
   })
 
-  it('should be have text home', () => {
+  it('should have text home', () => {
     render(<NavItem {...props} />, { wrapper: GlobalContext })
 
     expect(screen.getByRole('link', { name: 'home' })).toBeInTheDocument()
@@ -35,6 +35,6 @@ describe('Navigation Item', () => {
   it('should have href to home page', () => {
     render(<NavItem {...props} />, { wrapper: GlobalContext })
 
-    expect(screen.getByRole('link')).toHaveAttribute('href', '/')
+    expect(screen.getByRole('link', { name: 'home' })).toHaveAttribute('href', '/')
   })
 })

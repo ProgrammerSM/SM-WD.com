@@ -91,6 +91,7 @@ const NavItemStyles = styled.li`
     align-items: center;
     justify-content: center;
     flex-grow: 1;
+    width: 2rem;
     font-size: 2rem;
     margin-bottom: var(--space-extra-small);
   }

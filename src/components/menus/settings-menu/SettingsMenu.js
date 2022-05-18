@@ -22,7 +22,21 @@ const SettingMenuStyles = styled.div`
 const SettingsMenu = () => (
   <SettingMenuStyles>
     <div className='settings-container'>
-      Settings
+      <form>
+        <fieldset className='accessibility'>
+          <legend>accessibility</legend>
+          <label htmlFor='app-sound'>Sound</label>
+          <input
+            id='app-sound'
+            type='checkbox'
+          />
+          <label htmlFor='app-sound'>Animation</label>
+          <input
+            id='app-animation'
+            type='checkbox'
+          />
+        </fieldset>
+      </form>
     </div>
     <div className='close-button-container'>
       <CloseButton />
