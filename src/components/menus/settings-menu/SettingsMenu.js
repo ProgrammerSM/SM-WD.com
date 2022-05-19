@@ -1,15 +1,13 @@
 // Modules
+import dynamic from 'next/dynamic'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 // Components
+const ColorPicker = dynamic(() => import('./ColorPicker'))
 import Button from 'components/Button'
 import CloseButton from '../CloseButton'
-import {
-  HexColorInput,
-  HexColorPicker,
-} from 'react-colorful'
 
 // Data
 import themeColorGroups from 'data/themeColorGroups'
@@ -73,13 +71,9 @@ const SettingsMenu = () => {
               }
               <option value='custom'>CUSTOM</option>
             </select>
-            <HexColorPicker
+            <ColorPicker
               color={color}
-              onChange={setColor}
-            />
-            <HexColorInput
-              color={color}
-              onChange={setColor}
+              setColor={setColor}
             />
           </fieldset>
           <div className='save-button-wrapper'>
