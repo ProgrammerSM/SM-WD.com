@@ -5,16 +5,16 @@ import {
 
 const ColorPicker = ({
   color,
-  setColor,
+  onChangeEvent,
 }) => (
   <>
     <HexColorPicker
       color={color}
-      onChange={setColor}
+      onChange={onChangeEvent}
     />
     <HexColorInput
       color={color}
-      onChange={setColor}
+      onChange={onChangeEvent}
     />
   </>
 )

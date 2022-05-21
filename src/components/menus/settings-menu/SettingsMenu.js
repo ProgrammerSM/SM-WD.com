@@ -1,13 +1,21 @@
 // Modules
 import dynamic from 'next/dynamic'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
+import {
+  useContext,
+  useRef,
+  useState,
+} from 'react'
 
 // Components
 const ColorPicker = dynamic(() => import('./ColorPicker'))
 import Button from 'components/Button'
 import CloseButton from '../CloseButton'
+
+// Context
+import { CurrentThemeContext } from 'context/CurrentThemeContext'
+import { SettingsContext } from 'context/SettingsContext'
 
 // Data
 import themeColorGroups from 'data/themeColorGroups'
@@ -28,12 +36,96 @@ const SettingMenuStyles = styled.div`
 `
 
 const SettingsMenu = () => {
-  const [color, setColor] = useState('#aabbcc')
+  const {
+    isAnimationActive,
+    isSoundActive,
+    setIsAnimationActive,
+    setIsSoundActive,
+  } = useContext(SettingsContext)
+
+  const {
+    customTheme,
+    theme,
+    themeName,
+    setCustomTheme,
+    setThemeName,
+  } = useContext(CurrentThemeContext)
+
+  const previousCustomColorThemeRef = useRef(customTheme)
+  const [isCustomThemeSelected, setIsCustomThemeSelected] = useState(themeName === 'custom')
+  const [settingsColorTheme, setSettingsColorTheme] = useState(theme)
+  const [selectedCustomColorObject, setSelectedCustomColorObject] = useState({
+    color: customTheme.primaryColor,
+    colorName: 'primaryColor',
+  })
+
   const {
     handleSubmit,
     register,
     setValue,
-  } = useForm()
+  } = useForm({
+    defaultValues: {
+      appAnimation: isAnimationActive,
+      appSound: isSoundActive,
+      colorTheme: themeName,
+      customColorTheme: customTheme,
+    },
+  })
+
+  const themeChangeHandler = event => {
+    const selectedThemeName = event.target.value
+
+    if (selectedThemeName === 'custom') {
+      setSettingsColorTheme(customTheme)
+      setIsCustomThemeSelected(true)
+      return
+    }
+
+    if (isCustomThemeSelected)
+      setIsCustomThemeSelected(false)
+
+    setSettingsColorTheme(themeColorGroups[selectedThemeName].colors)
+  }
+
+  const customColorSelectionHandler = (color, colorName) => {
+    const uppercaseColor = color.toUpperCase()
+    const updatedCustomThemeObject = {
+      ...settingsColorTheme,
+      [colorName]: uppercaseColor,
+    }
+
+    setSettingsColorTheme(updatedCustomThemeObject)
+    setValue('customColorTheme', settingsColorTheme)
+  }
+
+  const resetCustomThemeHandler = () => {
+    setSettingsColorTheme(previousCustomColorThemeRef.current)
+    setSelectedCustomColorObject({
+      ...selectedCustomColorObject,
+      color: previousCustomColorThemeRef.current[selectedCustomColorObject.colorName],
+    })
+  }
+
+  const settingsSaveHandler = data => {
+    const {
+      appSound,
+      appAnimation,
+      colorTheme,
+      customColorTheme,
+    } = data
+
+    if (appSound !== isSoundActive)
+      setIsSoundActive(appSound)
+
+    if (appAnimation !== isAnimationActive)
+      setIsAnimationActive(appAnimation)
+
+    if (colorTheme !== themeName)
+      setThemeName(colorTheme)
+
+    if (customColorTheme !== customTheme)
+      setCustomTheme(customColorTheme)
+  }
 
   return (
     <SettingMenuStyles>
@@ -45,16 +137,23 @@ const SettingsMenu = () => {
             <input
               id='app-sound'
               type='checkbox'
+              {...register('appSound')}
             />
             <label htmlFor='app-sound'>Animation</label>
             <input
               id='app-animation'
               type='checkbox'
+              {...register('appAnimation')}
             />
           </fieldset>
           <fieldset>
             <legend>Theme Selection</legend>
-            <select>
+            <input
+              id='custom-colors'
+              type='hidden'
+              {...register('customColorTheme')}
+            />
+            <select {...register('colorTheme', { onChange: themeChangeHandler })} >
               {
                 Object.keys(themeColorGroups).map(key => {
                   const optionName = key.split(/(?=[A-Z])/).join(' ').toUpperCase()
@@ -71,14 +170,40 @@ const SettingsMenu = () => {
               }
               <option value='custom'>CUSTOM</option>
             </select>
-            <ColorPicker
-              color={color}
-              setColor={setColor}
-            />
+            {isCustomThemeSelected && (
+              <>
+                <button
+                  type='button'
+                  onClick={resetCustomThemeHandler}
+                >Reset</button>
+                {
+                  Object.keys(settingsColorTheme).map((key, index) => {
+                    const colorName = key.split('Color').join(' ')
+                    const formattedColorName = colorName.charAt(0).toUpperCase() + colorName.slice(1)
+
+                    return (
+                      <button
+                        key={`custom-color-button-${index}`}
+                        type='button'
+                        onClick={() => setSelectedCustomColorObject({
+                          color: settingsColorTheme[key],
+                          colorName: key,
+                        })}
+                      >{formattedColorName}</button>
+                    )
+                  })
+                }
+                <ColorPicker
+                  color={settingsColorTheme[selectedCustomColorObject.colorName]}
+                  onChangeEvent={color => customColorSelectionHandler(color, selectedCustomColorObject.colorName)}
+                />
+              </>
+            )}
           </fieldset>
           <div className='save-button-wrapper'>
             <Button
               className='save-button'
+              onClickHandler={handleSubmit(settingsSaveHandler)}
             >Save Settings</Button>
           </div>
         </form>
