@@ -1,0 +1,11 @@
+{
+  "autoImport": "ES6",
+  "quote": "single",
+  "trailingComma": true,
+  "semicolon": false,
+  "include": [
+    "pages/**/*",
+    "src/**/*"
+  ],
+  "exclude": ["node_modules"]
+}

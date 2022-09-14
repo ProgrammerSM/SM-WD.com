@@ -18,7 +18,20 @@
   },
   "overrides": [
     {
-      "files": ["**/data/*"],
+      "env": { "jest/globals": true },
+      "extends": [
+        "plugin:jest/recommended",
+        "plugin:testing-library/react"
+      ],
+      "files": ["__tests__/**/*.test.js"]
+    },
+    {
+      "env": { "cypress/globals": true },
+      "extends": ["plugin:cypress/recommended"],
+      "files": ["cypress/*"]
+    },
+    {
+      "files": ["src/data/*"],
       "rules": {
         "import/no-anonymous-default-export": "off"
       }
@@ -33,11 +46,13 @@
     "sourceType": "module"
   },
   "plugins": [
+    "cypress",
     "destructuring-newline",
     "eslint-comments",
     "jsx-a11y",
     "modules-newline",
-    "react"
+    "react",
+    "testing-library"
   ],
   "settings": {
     "react": {
