@@ -19,7 +19,6 @@ const BreakpointContext = createContext({
   setBreakpoints: () => {},
 })
 
-const propTypes = { children: PropTypes.node }
 const BreakpointProvider = ({ children }) => {
   const [breakpoints, setBreakpoints] = useState({
     desktop: true,
@@ -58,7 +57,7 @@ const BreakpointProvider = ({ children }) => {
   )
 }
 
-BreakpointProvider.propTypes = propTypes
+BreakpointProvider.propTypes = { children: PropTypes.node }
 
 export {
   BreakpointContext,

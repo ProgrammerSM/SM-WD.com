@@ -10,15 +10,13 @@ import SettingsMenuButton from 'components/menu-buttons/SettingsMenuButton'
 import GlobalContext from 'context/GlobalContext'
 
 describe('Settings Menu Button', () => {
-  beforeEach(() => {
-    render(<SettingsMenuButton buttonName='settings' />, { wrapper: GlobalContext })
-  })
-
   it('should have button', () => {
+    render(<SettingsMenuButton buttonName='settings' />, { wrapper: GlobalContext })
     expect(screen.getByRole('button')).toBeInTheDocument()
   })
 
   it('should be labeled with "settings"', () => {
+    render(<SettingsMenuButton buttonName='settings' />, { wrapper: GlobalContext })
     expect(screen.getByText('settings')).toBeInTheDocument()
   })
 })

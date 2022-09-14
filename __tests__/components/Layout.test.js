@@ -12,19 +12,18 @@ import Layout from 'components/Layout'
 import GlobalContext from 'context/GlobalContext'
 
 describe('Layout', () => {
-  beforeEach(() => {
-    render(<Layout />, { wrapper: GlobalContext })
-  })
-
   it('should have header', () => {
+    render(<Layout />, { wrapper: GlobalContext })
     expect(screen.getByTestId('header')).toBeInTheDocument()
   })
 
   it('should have background svg', () => {
+    render(<Layout />, { wrapper: GlobalContext })
     expect(screen.getByTestId('background-svg')).toBeInTheDocument()
   })
 
   it('should have menu/settings buttons', async () => {
+    render(<Layout />, { wrapper: GlobalContext })
     const menuButtons = await screen.findAllByTestId('menu-button')
 
     expect(menuButtons).toHaveLength(2)
@@ -33,15 +32,17 @@ describe('Layout', () => {
   })
 
   it('should render nav menu if the menu button is clicked', async () => {
+    render(<Layout />, { wrapper: GlobalContext })
     expect(screen.queryByTestId('nav-menu')).not.toBeInTheDocument()
 
     const menuButton = await screen.findAllByTestId('menu-button')
     fireEvent.click(menuButton[0])
 
-    expect(screen.queryByTestId('nav-menu')).toBeInTheDocument()
+    expect(screen.getByTestId('nav-menu')).toBeInTheDocument()
   })
 
   it('should have footer', () => {
+    render(<Layout />, { wrapper: GlobalContext })
     expect(screen.getByTestId('footer')).toBeInTheDocument()
   })
 })

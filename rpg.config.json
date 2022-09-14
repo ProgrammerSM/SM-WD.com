@@ -1,0 +1,17 @@
+{
+  "autoImport": "ES6",
+  "codeStyle": "default",
+  "noMergeOld": false,
+  "mergeOldIfExist": true,
+  "noShape": false,
+  "tabWidth": 2,
+  "quote": "single",
+  "trailingComma": true,
+  "semicolon": false,
+  "arrayLike": true,
+  "isRequired": false,
+  "include": [
+    "pages/**/*",
+    "src/components/**/*"
+  ]
+}

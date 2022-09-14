@@ -1,7 +1,7 @@
 // Modules
 import dynamic from 'next/dynamic'
+import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
-import styled, { keyframes } from 'styled-components'
 import {
   useContext,
   useRef,

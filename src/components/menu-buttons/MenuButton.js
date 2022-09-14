@@ -110,16 +110,6 @@ const MenuButtonStyles = styled.div`
   }
 `
 
-// PropTypes
-const propTypes = {
-  buttonText: PropTypes.string,
-  clickHandler: PropTypes.func,
-  icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])),
-  isActive: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  tabIndexNumber: PropTypes.number,
-}
-
 const MenuButton = ({
   buttonText,
   clickHandler,
@@ -189,5 +179,13 @@ const MenuButton = ({
   )
 }
 
-MenuButton.propTypes = propTypes
+MenuButton.propTypes = {
+  buttonText: PropTypes.string,
+  clickHandler: PropTypes.func,
+  icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])),
+  isActive: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  tabIndexNumber: PropTypes.number,
+}
+
 export default MenuButton

@@ -5,8 +5,6 @@ import { useRouter } from 'next/router'
 // Components
 import Head from 'next/head'
 
-// PropTypes
-const propTypes = { content: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])) }
 const MetaData = ({
   content = {
     description: 'test',
@@ -55,5 +53,6 @@ const MetaData = ({
   )
 }
 
-MetaData.propTypes = propTypes
+MetaData.propTypes = { content: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])) }
+
 export default MetaData

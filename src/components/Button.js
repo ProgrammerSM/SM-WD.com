@@ -163,17 +163,6 @@ const SciFiButton = styled.button`
   }
 `
 
-// PropTypes
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  isFail: PropTypes.bool,
-  isSubmit: PropTypes.bool,
-  isSuccess: PropTypes.bool,
-  isWarn: PropTypes.bool,
-  onClickHandler: PropTypes.func,
-}
-
 const Button = ({
   children,
   className,
@@ -245,6 +234,15 @@ const Button = ({
   )
 }
 
-Button.propTypes = propTypes
+Button.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  isFail: PropTypes.bool,
+  isSubmit: PropTypes.bool,
+  isSuccess: PropTypes.bool,
+  isWarn: PropTypes.bool,
+  onClickHandler: PropTypes.func,
+}
+
 export default Button
 

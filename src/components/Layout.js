@@ -143,8 +143,6 @@ const LayoutStyles = styled.div`
 // Variable
 const menuButtonName = 'menu'
 const settingsButtonName = 'settings'
-// Proptypes
-const propTypes = { children: PropTypes.node }
 const Layout = ({ children }) => {
   const {
     activeMenu,
@@ -197,5 +195,6 @@ const Layout = ({ children }) => {
   )
 }
 
-Layout.propTypes = propTypes
+Layout.propTypes = { children: PropTypes.node }
+
 export default Layout

@@ -300,14 +300,6 @@ const ShapeStyles = styled.div`
   }
 `
 
-// PropTypes
-const propTypes = {
-  height: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  imageAlt: PropTypes.string.isRequired,
-  width: PropTypes.number.isRequired,
-}
-
 const Button = ({
   height,
   image,
@@ -387,5 +379,11 @@ const Button = ({
   )
 }
 
-Button.propTypes = propTypes
+Button.propTypes = {
+  height: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  imageAlt: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
+}
+
 export default Button

@@ -10,19 +10,6 @@ import Layout from 'components/Layout'
 import Reset from 'components/styles/Reset'
 import Typography from 'components/styles/Typography'
 
-// PropTypes
-const propTypes = {
-  Component: PropTypes.func.isRequired,
-  pageProps: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.number,
-      PropTypes.object,
-      PropTypes.string,
-    ]),
-  ),
-}
-
 const MyApp = ({
   Component,
   pageProps,
@@ -39,5 +26,16 @@ const MyApp = ({
   </>
 )
 
-MyApp.propTypes = propTypes
+MyApp.propTypes = {
+  Component: PropTypes.func.isRequired,
+  pageProps: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.object,
+      PropTypes.string,
+    ]),
+  ).isRequired,
+}
+
 export default MyApp
