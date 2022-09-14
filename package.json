@@ -54,7 +54,7 @@
     "react-proptypes-generate": "^1.7.6"
   },
   "lint-staged": {
-    "*": [
+    "**/*.{js,jsx}": [
       "rpg-cli fix",
       "eslint --fix"
     ]
