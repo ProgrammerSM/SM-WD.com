@@ -54,13 +54,7 @@
     "react-proptypes-generate": "^1.7.6"
   },
   "lint-staged": {
-    "__tests__/**/*.{js, json)": ["eslint --fix"],
-    "cypress/**/*.{js, json)": ["eslint --fix"],
-    "pages/**/*.{js, json)": [
-      "rpg-cli fix",
-      "eslint --fix"
-    ],
-    "src/**/*.{js, json}": [
+    "*": [
       "rpg-cli fix",
       "eslint --fix"
     ]
