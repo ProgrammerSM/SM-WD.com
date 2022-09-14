@@ -54,5 +54,4 @@ const MetaData = ({
 }
 
 MetaData.propTypes = { content: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])) }
-
 export default MetaData

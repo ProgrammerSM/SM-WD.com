@@ -58,7 +58,6 @@ const BreakpointProvider = ({ children }) => {
 }
 
 BreakpointProvider.propTypes = { children: PropTypes.node }
-
 export {
   BreakpointContext,
   BreakpointProvider,
