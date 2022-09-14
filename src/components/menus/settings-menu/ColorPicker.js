@@ -1,3 +1,7 @@
+// Modules
+import PropTypes from 'prop-types'
+
+// Components
 import {
   HexColorInput,
   HexColorPicker,
@@ -18,5 +22,10 @@ const ColorPicker = ({
     />
   </>
 )
+
+ColorPicker.propTypes = {
+  color: PropTypes.any.isRequired,
+  onChangeEvent: PropTypes.any.isRequired,
+}
 
 export default ColorPicker
