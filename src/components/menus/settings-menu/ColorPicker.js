@@ -24,8 +24,8 @@ const ColorPicker = ({
 )
 
 ColorPicker.propTypes = {
-  color: PropTypes.any.isRequired,
-  onChangeEvent: PropTypes.any.isRequired,
+  color: PropTypes.string.isRequired,
+  onChangeEvent: PropTypes.func.isRequired,
 }
 
 export default ColorPicker

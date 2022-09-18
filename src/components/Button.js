@@ -22,7 +22,6 @@ const SciFiButton = styled.button`
   font-weight: bold;
   font-family: var(--header-font);
   text-transform: uppercase;
-  text-shadow: 0 1px 1px var(--font-color);
   letter-spacing: 3px;
   opacity: 0;
   box-shadow: 0;
@@ -221,7 +220,11 @@ const Button = ({
         ${isWarn ? 'warn' : ''}
       `}
       ref={buttonRef}
-      style={{ backgroundColor: `${theme.primaryColor}33` }}
+      style={{
+        backgroundColor: theme.noShine
+          ? 'transparent'
+          : `${theme.primaryColor}33`,
+      }}
       type={isSubmit ? 'submit' : 'button'}
       onClick={onClickHandler}
     >

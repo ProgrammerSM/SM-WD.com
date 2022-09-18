@@ -85,6 +85,7 @@ const MenuButtonStyles = styled.div`
   .button-text {
     display: none;
     font-size: .75rem;
+    font-weight: 600;
 
     ${mediumUp} { display: inline; }
   }
@@ -121,6 +122,7 @@ const MenuButton = ({
   const menuButtonRef = useRef()
   const { isAnimationActive } = useContext(SettingsContext)
   const { theme } = useContext(CurrentThemeContext)
+
   let buttonColor = `${theme.primaryColor}80`
   let buttonFontColor = theme.fontColor
   let buttonIcon = icon
@@ -140,6 +142,16 @@ const MenuButton = ({
       clickHandler(menuButtonRef.current)
   }
 
+  const buttonStyles = theme.noShine
+    ? {
+        background: 'transparent',
+        color: theme.fontColor,
+      }
+    : {
+        backgroundImage: `radial-gradient(circle, ${buttonColor}, transparent)`,
+        color: buttonFontColor,
+      }
+
   return (
     <MenuButtonStyles
       className={`${isAnimationActive ? 'with-animation' : ''}`}
@@ -154,10 +166,7 @@ const MenuButton = ({
     >
       <div
         className={`main-button${isActive ? ' active' : ''}`}
-        style={{
-          backgroundImage: `radial-gradient(circle, ${buttonColor}, transparent)`,
-          color: buttonFontColor,
-        }}
+        style={buttonStyles}
       >
         {icon && (
           <div className='icon'>

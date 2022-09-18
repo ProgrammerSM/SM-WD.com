@@ -36,7 +36,6 @@ const LayoutStyles = styled.div`
   height: 100vh;
   background-color: var(--background-color);
   color: var(--font-color);
-  text-shadow: 0 1px 3px var(--font-color);
   overflow: hidden;
 
   main {
