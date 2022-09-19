@@ -1,6 +1,7 @@
 // Modules
 import PropTypes from 'prop-types'
 import { useContext } from 'react'
+import { useRouter } from 'next/router'
 import styled, { keyframes } from 'styled-components'
 
 // Components
@@ -72,6 +73,7 @@ const MenuStyles = styled.div`
 `
 
 const Menu = ({ menuData }) => {
+  const router = useRouter()
   const { isAnimationActive } = useContext(SettingsContext)
   const animationActiveClass = isAnimationActive
     ? 'animation-active'
@@ -84,12 +86,17 @@ const Menu = ({ menuData }) => {
     >
       <ul className='menu'>
         {
-          menuData.map((menuItem, index) => (
-            <MenuItem
-              key={`nav-item-${index}`}
-              menuItemData={menuItem}
-            />
-          ))
+          menuData.map((menuItem, index) => {
+            if (router.pathname === menuItem.path)
+              return
+
+            return (
+              <MenuItem
+                key={`menu-item-${index}`}
+                menuItemData={menuItem}
+              />
+            )
+          })
         }
       </ul>
       <CloseButton />

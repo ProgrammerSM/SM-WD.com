@@ -6,14 +6,14 @@ import {
 } from '@testing-library/react'
 
 // Components
-import NavItem from 'components/menus/navigaton-menu/NavItem'
+import MenuItem from 'components/menus/MenuItem'
 
 // Context
 import GlobalContext from 'context/GlobalContext'
 
 describe('Navigation Item', () => {
   const props = {
-    navItemData: {
+    menuItemData: {
       icon: faEarthAmericas,
       name: 'home',
       path: '/',
@@ -21,19 +21,19 @@ describe('Navigation Item', () => {
   }
 
   it('should have link', () => {
-    render(<NavItem {...props} />, { wrapper: GlobalContext })
+    render(<MenuItem {...props} />, { wrapper: GlobalContext })
 
     expect(screen.getByRole('link')).toBeInTheDocument()
   })
 
   it('should have text home', () => {
-    render(<NavItem {...props} />, { wrapper: GlobalContext })
+    render(<MenuItem {...props} />, { wrapper: GlobalContext })
 
     expect(screen.getByRole('link', { name: 'home' })).toBeInTheDocument()
   })
 
   it('should have href to home page', () => {
-    render(<NavItem {...props} />, { wrapper: GlobalContext })
+    render(<MenuItem {...props} />, { wrapper: GlobalContext })
 
     expect(screen.getByRole('link', { name: 'home' })).toHaveAttribute('href', '/')
   })
