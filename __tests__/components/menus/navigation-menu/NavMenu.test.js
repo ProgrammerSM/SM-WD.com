@@ -5,7 +5,7 @@ import {
 } from '@testing-library/react'
 
 // Components
-import NavMenu from 'components/menus/navigaton-menu/NavMenu'
+import NavMenu from 'components/menus/NavMenu'
 
 // Context
 import GlobalContext from 'context/GlobalContext'

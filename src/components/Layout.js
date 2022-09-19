@@ -8,7 +8,7 @@ import BackgroundSVG from './BackgroundSVG'
 import Footer from './Footer'
 import Header from './Header'
 import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
-import NavMenu from './menus/navigaton-menu/NavMenu'
+import NavMenu from './menus/NavMenu'
 import SettingsMenu from './menus/settings-menu/SettingsMenu'
 import SettingsMenuButton from './menu-buttons/SettingsMenuButton'
 

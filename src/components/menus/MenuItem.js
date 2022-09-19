@@ -27,15 +27,16 @@ const focusInOut = keyframes`
   }
 `
 
-const NavItemStyles = styled.li`
-
-  .nav-link {
+const MenuItemStyles = styled.li`
+  .menu-item {
     position: relative;
     display: inline-block;
+    padding: 0;
+    background-color: transparent;
 
     &:focus,
     &:hover {
-      .link-content,
+      .menu-item-content,
       .hover-box {
         border-color: var(--accent-color-1);
       }
@@ -47,11 +48,9 @@ const NavItemStyles = styled.li`
         left: -12px;
         border-width: 4px;
       }
-
-      .link-icon { color: var(--accent-color-1); }
-      .link-title {
+      
+      .menu-item-title {
         padding: 0 var(--space-extra-small);
-        color: var(--accent-color-1);
         border-color: inherit;
         animation: ${focusInOut} 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
       }
@@ -69,7 +68,7 @@ const NavItemStyles = styled.li`
     clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
   }
 
-  .link-content {
+  .menu-item-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -86,7 +85,12 @@ const NavItemStyles = styled.li`
     }
   }
 
-  .link-icon {
+  .menu-item-icon,
+  .menu-item-title {
+    color: var(--accent-color-1);
+  }
+
+  .menu-item-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,7 +100,7 @@ const NavItemStyles = styled.li`
     margin-bottom: var(--space-extra-small);
   }
 
-  .link-title {
+  .menu-item-title {
     font-family: var(--header-font);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -104,47 +108,75 @@ const NavItemStyles = styled.li`
   }
 `
 
-const NavItem = ({ navItemData }) => {
-  const {
-    icon,
-    name,
-    path,
-  } = navItemData
-
+const MenuItem = ({
+  menuItemData,
+  onClickHandler,
+}) => {
   const breakpoints = useContext(BreakpointContext)
   const { theme } = useContext(CurrentThemeContext)
 
+  if (!menuItemData)
+    return
+
+  const {
+    icon,
+    name,
+  } = menuItemData
+
   return (
-    <NavItemStyles>
-      <Link
-        passHref
-        href={path}
-      >
-        <a className='nav-link' >
-          <div className='hover-box' />
-          <div
-            className='link-content'
-            style={{ background: `radial-gradient(circle, transparent, ${theme.primaryColor}26)` }}
+    <MenuItemStyles>
+      {menuItemData?.path
+        ? (
+          <Link
+            passHref
+            href={menuItemData.path}
           >
-            {!breakpoints.mobile && (
-              <span className='link-icon'>
-                <FontAwesomeIcon icon={icon} />
-              </span>
-            )}
-            <span className='link-title'>{name}</span>
-          </div>
-        </a>
-      </Link>
-    </NavItemStyles>
+            <a className='menu-item' >
+              <div className='hover-box' />
+              <div
+                className='menu-item-content'
+                style={{ background: `radial-gradient(circle, transparent, ${theme.primaryColor}26)` }}
+              >
+                {!breakpoints.mobile && (
+                  <span className='menu-item-icon'>
+                    <FontAwesomeIcon icon={icon} />
+                  </span>
+                )}
+                <span className='menu-item-title'>{name}</span>
+              </div>
+            </a>
+          </Link>
+        ) : (
+          <button
+            className='menu-item'
+            type='button'
+            onClick={onClickHandler}
+          >
+            <div className='hover-box' />
+            <div
+              className='menu-item-content'
+              style={{ background: `radial-gradient(circle, transparent, ${theme.primaryColor}26)` }}
+            >
+              {!breakpoints.mobile && (
+                <span className='menu-item-icon'>
+                  <FontAwesomeIcon icon={icon} />
+                </span>
+                )}
+              <span className='menu-item-title'>{name}</span>
+            </div>
+          </button>
+        )}
+    </MenuItemStyles>
   )
 }
 
-NavItem.propTypes = {
-  navItemData: PropTypes.shape({
+MenuItem.propTypes = {
+  menuItemData: PropTypes.shape({
     icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])).isRequired,
     name: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
+    path: PropTypes.string,
   }),
+  onClickHandler: PropTypes.func,
 }
 
-export default NavItem
+export default MenuItem

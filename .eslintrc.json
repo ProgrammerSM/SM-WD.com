@@ -364,7 +364,6 @@
     "react/prop-types": "warn",
     "react/self-closing-comp": "warn",
     "react/sort-prop-types": ["warn", {
-      "ignoreCase": true,
       "sortShapeProp": true
     }],
     "react/style-prop-object": "warn",
