@@ -1,4 +1,5 @@
 import {
+  faAddressCard,
   faEarthAmericas,
   faEnvelopeOpenText,
   faFileLines,
@@ -9,6 +10,11 @@ export default [
     icon: faEarthAmericas,
     name: 'home',
     path: '/',
+  },
+  {
+    icon: faAddressCard,
+    name: 'about',
+    path: '/about',
   },
   {
     icon: faFileLines,

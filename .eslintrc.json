@@ -29,12 +29,6 @@
       "env": { "cypress/globals": true },
       "extends": ["plugin:cypress/recommended"],
       "files": ["cypress/*"]
-    },
-    {
-      "files": ["src/data/*"],
-      "rules": {
-        "import/no-anonymous-default-export": "off"
-      }
     }
   ],
   "parserOptions": {
@@ -331,6 +325,12 @@
 
     // Destructuring Newline Rules
     "destructuring-newline/object-property-newline": "warn",
+
+    // Import Rules
+    "import/no-anonymous-default-export": ["warn", {
+      "allowArray": true,
+      "allowObject": true
+    }],
 
     // Module Newline Rules
     "modules-newline/import-declaration-newline": "warn",

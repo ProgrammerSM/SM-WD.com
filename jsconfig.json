@@ -9,6 +9,7 @@
       "global-styles/*": ["src/global-styles/*"],
       "hooks/*": ["src/hooks/*"],
       "pages/": ["pages/*"],
+      "services/*": ["src/services/*"],
     }
   },
 }
