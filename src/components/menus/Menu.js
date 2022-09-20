@@ -1,17 +1,17 @@
 // Modules
+import PropTypes from 'prop-types'
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import styled, { keyframes } from 'styled-components'
 
 // Components
-import CloseButton from '../CloseButton'
-import NavItem from './NavItem'
+import CloseButton from './CloseButton'
+import MenuItem from './MenuItem'
 
 // Context
 import { SettingsContext } from 'context/SettingsContext'
 
 // Data
-import navigationMenu from 'data/navigation-menu'
 import {
   mediumUp,
   small,
@@ -28,10 +28,10 @@ const mobileMenuExpand = keyframes`
   100% { transform: translateY(0); }
 `
 
-const NavMenuStyles = styled.div`
+const MenuStyles = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
   width: 100%;
   max-width: 1000px;
@@ -39,10 +39,10 @@ const NavMenuStyles = styled.div`
   margin: 0 auto;
   padding-top: var(--space-medium);
 
-  &.animation-active .nav-menu {
+  &.animation-active .menu {
     ${small} {
       li {
-        animation: ${mobileMenuExpand} .5s ease-in-out;
+        animation: ${mobileMenuExpand} .4s ease-in-out;
 
         &:nth-of-type(2) { animation-delay: .1s; }
         &:nth-of-type(3) { animation-delay: .2s; }
@@ -53,11 +53,11 @@ const NavMenuStyles = styled.div`
     }
 
     ${mediumUp} {
-      li { animation: ${mediumUpTransition} .75s ease-out; }
+      li { animation: ${mediumUpTransition} .4s ease-out; }
     }
   }
 
-  .nav-menu {
+  .menu {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -72,7 +72,7 @@ const NavMenuStyles = styled.div`
   }
 `
 
-const NavMenu = () => {
+const Menu = ({ menuData }) => {
   const router = useRouter()
   const { isAnimationActive } = useContext(SettingsContext)
   const animationActiveClass = isAnimationActive
@@ -80,28 +80,29 @@ const NavMenu = () => {
     : 'no-animation'
 
   return (
-    <NavMenuStyles
+    <MenuStyles
       className={animationActiveClass}
-      data-testid='nav-menu'
+      data-testid='menu'
     >
-      <CloseButton />
-      <ul className='nav-menu'>
+      <ul className='menu'>
         {
-          navigationMenu.map((navItem, index) => {
-            if (router.pathname === navItem.path)
+          menuData.map((menuItem, index) => {
+            if (router.pathname === menuItem.path)
               return
 
             return (
-              <NavItem
-                key={`nav-item-${index}`}
-                navItemData={navItem}
+              <MenuItem
+                key={`menu-item-${index}`}
+                menuItemData={menuItem}
               />
             )
           })
         }
       </ul>
-    </NavMenuStyles>
+      <CloseButton />
+    </MenuStyles>
   )
 }
 
-export default NavMenu
+Menu.propTypes = { menuData: PropTypes.arrayOf(PropTypes.object) }
+export default Menu

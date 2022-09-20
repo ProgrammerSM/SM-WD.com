@@ -21,12 +21,6 @@ const NavigationMenuButtonStyles = styled.div`
   z-index: 1;
 `
 
-// PropTypes
-const propTypes = {
-  alternateButtonName: PropTypes.string,
-  buttonName: PropTypes.string.isRequired,
-}
-
 const NavigationMenu = ({
   alternateButtonName,
   buttonName,
@@ -58,5 +52,9 @@ const NavigationMenu = ({
   )
 }
 
-NavigationMenu.propTypes = propTypes
+NavigationMenu.propTypes = {
+  alternateButtonName: PropTypes.string,
+  buttonName: PropTypes.string.isRequired,
+}
+
 export default NavigationMenu

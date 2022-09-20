@@ -36,14 +36,12 @@ const MenuButtonStyles = styled.div`
     height: calc(4rem + 10px);
   }
 
-  &:focus:not([disabled]),
   &:hover:not([disabled]) {
     box-shadow: 0 0 5px 2px var(--primary-color);
   }
 
-  &:focus:not([disabled]) .animated-circle,
   &:hover:not([disabled]) .animated-circle,
-  &[data-active = true] .animated-circle {
+  &[data-active = "true"]:not([disabled]) .animated-circle {
     animation-duration: 10s;
   }
 
@@ -87,6 +85,7 @@ const MenuButtonStyles = styled.div`
   .button-text {
     display: none;
     font-size: .75rem;
+    font-weight: 600;
 
     ${mediumUp} { display: inline; }
   }
@@ -112,16 +111,6 @@ const MenuButtonStyles = styled.div`
   }
 `
 
-// PropTypes
-const propTypes = {
-  buttonText: PropTypes.string,
-  clickHandler: PropTypes.func,
-  icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])),
-  isActive: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  tabIndexNumber: PropTypes.number,
-}
-
 const MenuButton = ({
   buttonText,
   clickHandler,
@@ -133,6 +122,7 @@ const MenuButton = ({
   const menuButtonRef = useRef()
   const { isAnimationActive } = useContext(SettingsContext)
   const { theme } = useContext(CurrentThemeContext)
+
   let buttonColor = `${theme.primaryColor}80`
   let buttonFontColor = theme.fontColor
   let buttonIcon = icon
@@ -147,10 +137,20 @@ const MenuButton = ({
     buttonFontColor = `${theme.fontColor}80`
   }
 
-  const handleBtnKeyDown = () => {
-    if (menuButtonRef.current === 'Enter')
+  const handleBtnKeyDown = event => {
+    if (event.key === 'Enter')
       clickHandler(menuButtonRef.current)
   }
+
+  const buttonStyles = theme.noShine
+    ? {
+        background: 'transparent',
+        color: theme.fontColor,
+      }
+    : {
+        backgroundImage: `radial-gradient(circle, ${buttonColor}, transparent)`,
+        color: buttonFontColor,
+      }
 
   return (
     <MenuButtonStyles
@@ -166,10 +166,7 @@ const MenuButton = ({
     >
       <div
         className={`main-button${isActive ? ' active' : ''}`}
-        style={{
-          backgroundImage: `radial-gradient(circle, ${buttonColor}, transparent)`,
-          color: buttonFontColor,
-        }}
+        style={buttonStyles}
       >
         {icon && (
           <div className='icon'>
@@ -191,5 +188,13 @@ const MenuButton = ({
   )
 }
 
-MenuButton.propTypes = propTypes
+MenuButton.propTypes = {
+  buttonText: PropTypes.string,
+  clickHandler: PropTypes.func,
+  icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])),
+  isActive: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  tabIndexNumber: PropTypes.number,
+}
+
 export default MenuButton

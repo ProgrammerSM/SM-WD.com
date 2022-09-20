@@ -22,7 +22,6 @@ const SciFiButton = styled.button`
   font-weight: bold;
   font-family: var(--header-font);
   text-transform: uppercase;
-  text-shadow: 0 1px 1px var(--font-color);
   letter-spacing: 3px;
   opacity: 0;
   box-shadow: 0;
@@ -163,18 +162,9 @@ const SciFiButton = styled.button`
   }
 `
 
-// PropTypes
-const propTypes = {
-  children: PropTypes.node,
-  isFail: PropTypes.bool,
-  isSubmit: PropTypes.bool,
-  isSuccess: PropTypes.bool,
-  isWarn: PropTypes.bool,
-  onClickHandler: PropTypes.func,
-}
-
 const Button = ({
   children,
+  className,
   isFail,
   isSubmit,
   isSuccess,
@@ -224,12 +214,17 @@ const Button = ({
     <SciFiButton
       className={`
         ${animationActiveClass}
+        ${className ? className : ''}
         ${isFail ? 'fail' : ''}
         ${isSuccess ? 'success' : ''}
         ${isWarn ? 'warn' : ''}
       `}
       ref={buttonRef}
-      style={{ backgroundColor: `${theme.primaryColor}33` }}
+      style={{
+        backgroundColor: theme.noShine
+          ? 'transparent'
+          : `${theme.primaryColor}33`,
+      }}
       type={isSubmit ? 'submit' : 'button'}
       onClick={onClickHandler}
     >
@@ -242,6 +237,15 @@ const Button = ({
   )
 }
 
-Button.propTypes = propTypes
+Button.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  isFail: PropTypes.bool,
+  isSubmit: PropTypes.bool,
+  isSuccess: PropTypes.bool,
+  isWarn: PropTypes.bool,
+  onClickHandler: PropTypes.func,
+}
+
 export default Button
 

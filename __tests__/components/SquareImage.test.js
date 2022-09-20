@@ -20,15 +20,13 @@ describe('SquareImage', () => {
     width: 500,
   }
 
-  beforeEach(() => {
-    render(<SquareImage {...props} />, { wrapper: GlobalContext })
-  })
-
   it('should contain image', () => {
+    render(<SquareImage {...props} />, { wrapper: GlobalContext })
     expect(screen.getByRole('img')).toBeInTheDocument()
   })
 
   it('should have image with correct alt text', () => {
+    render(<SquareImage {...props} />, { wrapper: GlobalContext })
     expect(screen.getByRole('img')).toHaveAttribute('alt', imageAltText)
   })
 })

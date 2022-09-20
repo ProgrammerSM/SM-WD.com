@@ -10,18 +10,6 @@ import {
 // Context
 import { SettingsContext } from 'context/SettingsContext'
 
-// PropTypes
-const propTypes = {
-  align: PropTypes.oneOf([
-    'center',
-    'left',
-    'right',
-  ]),
-  delay: PropTypes.number,
-  speed: PropTypes.number,
-  text: PropTypes.string,
-}
-
 const AnimatedContent = ({
   align = 'left',
   delay = 800,
@@ -98,5 +86,15 @@ const AnimatedContent = ({
     )
 }
 
-AnimatedContent.propTypes = propTypes
+AnimatedContent.propTypes = {
+  align: PropTypes.oneOf([
+    'center',
+    'left',
+    'right',
+  ]),
+  delay: PropTypes.number,
+  speed: PropTypes.number,
+  text: PropTypes.string,
+}
+
 export default AnimatedContent

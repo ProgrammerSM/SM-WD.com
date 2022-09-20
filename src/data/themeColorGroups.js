@@ -15,6 +15,7 @@ export default {
     accentColor1: '#000000',
     accentColor2: '#000000',
     accentColor3: '#000000',
+    noShine: true,
   },
   highContrast: {
     primaryColor: '#FFFFFF',
@@ -23,6 +24,7 @@ export default {
     accentColor1: '#FFFFFF',
     accentColor2: '#FFFFFF',
     accentColor3: '#FFFFFF',
+    noShine: true,
   },
 }
 /* eslint-enable sort-keys -- string values only, preferred order */
