@@ -8,8 +8,6 @@ import useBrowserStorage from 'hooks/useBrowserStorage'
 // Variables
 const settingsContextDefault = {}
 const SettingsContext = createContext(settingsContextDefault)
-// PropTypes
-const propTypes = { children: PropTypes.node }
 const SettingsProvider = ({ children }) => {
   const [isAnimationActive, setIsAnimationActive] = useBrowserStorage('smwdIsAnimationActive', true)
   const [isSoundActive, setIsSoundActive] = useBrowserStorage('smwdIsSoundActive', true)
@@ -28,7 +26,7 @@ const SettingsProvider = ({ children }) => {
   )
 }
 
-SettingsProvider.propTypes = propTypes
+SettingsProvider.propTypes = { children: PropTypes.node }
 export {
   SettingsContext,
   SettingsProvider,

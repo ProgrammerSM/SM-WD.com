@@ -110,14 +110,6 @@ const HeadingStyles = styled.div`
   h1, h2, h3, h4, h5 { margin-bottom: 0; }
 `
 
-// PropTypes
-const propTypes = {
-  as: PropTypes.string,
-  children: PropTypes.node,
-  isCenter: PropTypes.bool,
-  isRight: PropTypes.bool,
-}
-
 const Heading = ({
   as: ElementType = 'h1',
   children,
@@ -169,5 +161,11 @@ const Heading = ({
   )
 }
 
-Heading.propTypes = propTypes
+Heading.propTypes = {
+  as: PropTypes.string,
+  children: PropTypes.node,
+  isCenter: PropTypes.bool,
+  isRight: PropTypes.bool,
+}
+
 export default Heading

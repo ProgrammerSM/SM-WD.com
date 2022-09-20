@@ -18,7 +18,20 @@
   },
   "overrides": [
     {
-      "files": ["**/data/*"],
+      "env": { "jest/globals": true },
+      "extends": [
+        "plugin:jest/recommended",
+        "plugin:testing-library/react"
+      ],
+      "files": ["__tests__/**/*.test.js"]
+    },
+    {
+      "env": { "cypress/globals": true },
+      "extends": ["plugin:cypress/recommended"],
+      "files": ["cypress/*"]
+    },
+    {
+      "files": ["src/data/*"],
       "rules": {
         "import/no-anonymous-default-export": "off"
       }
@@ -33,11 +46,13 @@
     "sourceType": "module"
   },
   "plugins": [
+    "cypress",
     "destructuring-newline",
     "eslint-comments",
     "jsx-a11y",
     "modules-newline",
-    "react"
+    "react",
+    "testing-library"
   ],
   "settings": {
     "react": {
@@ -233,6 +248,7 @@
     "padding-line-between-statements": ["warn",
       // Always
       { "blankLine": "always", "prev": "*", "next": "class" },
+      { "blankLine": "never", "prev": "*", "next": ["cjs-export", "export"] },
       { "blankLine": "always", "prev": "singleline-const", "next": ["let", "var"] },
       { "blankLine": "always", "prev": "singleline-let", "next": ["const", "var"] },
       { "blankLine": "always", "prev": "singleline-var", "next": ["const", "let"] },
@@ -246,10 +262,9 @@
 
       // Never
       { "blankLine": "never", "prev": "directive", "next": "directive" },
-      { "blankLine": "never", "prev": "singleline-const", "next": ["singleline-const", "multiline-const"] },
-      { "blankLine": "never", "prev": "singleline-let", "next": ["singleline-let", "multiline-let"] },
-      { "blankLine": "never", "prev": "singleline-var", "next": ["singleline-var", "multiline-var"] },
-      { "blankLine": "never", "prev": ["cjs-export", "export"], "next": ["cjs-export", "export"] }
+      { "blankLine": "never", "prev": "singleline-const", "next": "singleline-const" },
+      { "blankLine": "never", "prev": "singleline-let", "next": "singleline-let" },
+      { "blankLine": "never", "prev": "singleline-var", "next": "singleline-var" }
     ],
     "prefer-exponentiation-operator": "warn",
     "prefer-object-spread": "warn",    
@@ -349,7 +364,6 @@
     "react/prop-types": "warn",
     "react/self-closing-comp": "warn",
     "react/sort-prop-types": ["warn", {
-      "ignoreCase": true,
       "sortShapeProp": true
     }],
     "react/style-prop-object": "warn",

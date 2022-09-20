@@ -10,18 +10,14 @@ import {
 // Variables
 const activeMenuDefaultValue = {}
 const ActiveMenuContext = createContext(activeMenuDefaultValue)
-// PropTypes
-const propTypes = { children: PropTypes.node }
 const ActiveMenuProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState('')
   const [isMenuActive, setIsMenuActive] = useState(false)
   const router = useRouter()
   useEffect(() => {
     router.events.on('routeChangeStart', () => {
-      if (isMenuActive) {
-        setActiveMenu('')
-        setIsMenuActive(false)
-      }
+      setActiveMenu('')
+      setIsMenuActive(false)
     })
   }, [router])
 
@@ -39,7 +35,7 @@ const ActiveMenuProvider = ({ children }) => {
   )
 }
 
-ActiveMenuProvider.propTypes = propTypes
+ActiveMenuProvider.propTypes = { children: PropTypes.node }
 export {
   ActiveMenuContext,
   ActiveMenuProvider,

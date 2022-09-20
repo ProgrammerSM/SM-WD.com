@@ -95,7 +95,7 @@ describe('AnimatedContent', () => {
       }, 100)
 
       setTimeout(() => {
-        expect(screen.queryByText(testText)).toBeInTheDocument()
+        expect(screen.getByText(testText)).toBeInTheDocument()
       }, 200)
     })
   })

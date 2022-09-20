@@ -8,7 +8,8 @@ import BackgroundSVG from './BackgroundSVG'
 import Footer from './Footer'
 import Header from './Header'
 import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
-import NavMenu from './menus/navigaton-menu/NavMenu'
+import NavMenu from './menus/NavMenu'
+// Import SettingsMenu from './menus/settings-menu/SettingsMenu'
 import SettingsMenuButton from './menu-buttons/SettingsMenuButton'
 
 // Context
@@ -35,7 +36,6 @@ const LayoutStyles = styled.div`
   height: 100vh;
   background-color: var(--background-color);
   color: var(--font-color);
-  text-shadow: 0 1px 3px var(--font-color);
   overflow: hidden;
 
   main {
@@ -142,8 +142,6 @@ const LayoutStyles = styled.div`
 // Variable
 const menuButtonName = 'menu'
 const settingsButtonName = 'settings'
-// Proptypes
-const propTypes = { children: PropTypes.node }
 const Layout = ({ children }) => {
   const {
     activeMenu,
@@ -186,15 +184,15 @@ const Layout = ({ children }) => {
           alternateButtonName={settingsButtonName}
           buttonName={menuButtonName}
         />
-        <SettingsMenuButton
+        {/* <SettingsMenuButton
           alternateButtonName={menuButtonName}
           buttonName={settingsButtonName}
-        />
+        /> */}
         <Footer />
       </LayoutStyles>
     </>
   )
 }
 
-Layout.propTypes = propTypes
+Layout.propTypes = { children: PropTypes.node }
 export default Layout

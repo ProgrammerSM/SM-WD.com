@@ -18,7 +18,7 @@ import {
 
 // Styles
 const fadeIn = keyframes`
-  0% { opacity: 0; }  
+  0% { opacity: 0; } 
   100% { opacity: 1; }
 `
 
@@ -49,7 +49,7 @@ const CloseButtonStyles = styled.div`
     
     &.animation-active {
       transition: all .5s;
-      animation: ${fadeIn} 2s;
+      animation: ${fadeIn} 1.25s;
     }
     
     &:active,

@@ -16,7 +16,6 @@ const HeaderStyles = styled.header`
   grid-template-columns: 1fr 100% 1fr;
   width: 100%;
   color: var(--font-color);
-  text-shadow: 0 1px 3px var(--font-color);
   z-index: 1;
 
   ${mediumUp} {

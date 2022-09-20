@@ -21,12 +21,6 @@ const SettingsMenuButtonStyles = styled.div`
   z-index: 1;
 `
 
-// PropTypes
-const propTypes = {
-  alternateButtonName: PropTypes.string,
-  buttonName: PropTypes.string.isRequired,
-}
-
 const SettingsMenuButton = ({
   alternateButtonName,
   buttonName,
@@ -58,5 +52,9 @@ const SettingsMenuButton = ({
   )
 }
 
-SettingsMenuButton.propTypes = propTypes
+SettingsMenuButton.propTypes = {
+  alternateButtonName: PropTypes.string,
+  buttonName: PropTypes.string.isRequired,
+}
+
 export default SettingsMenuButton

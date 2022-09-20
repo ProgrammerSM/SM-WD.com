@@ -5,13 +5,6 @@ import { useContext } from 'react'
 // Context
 import { CurrentThemeContext } from 'context/CurrentThemeContext'
 
-// PropTypes
-const propTypes = {
-  height: PropTypes.number,
-  testID: PropTypes.string,
-  width: PropTypes.number,
-}
-
 const Logo = ({
   height = 150,
   testID = 'logo',
@@ -42,5 +35,10 @@ const Logo = ({
   )
 }
 
-Logo.propTypes = propTypes
+Logo.propTypes = {
+  height: PropTypes.number,
+  testID: PropTypes.string,
+  width: PropTypes.number,
+}
+
 export default Logo
