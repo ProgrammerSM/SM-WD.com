@@ -26,9 +26,9 @@ describe('Layout', () => {
     render(<Layout />, { wrapper: GlobalContext })
     const menuButtons = await screen.findAllByTestId('menu-button')
 
-    expect(menuButtons).toHaveLength(2)
+    expect(menuButtons).toHaveLength(1)
     expect(within(menuButtons[0]).getByText('menu')).toBeInTheDocument()
-    expect(within(menuButtons[1]).getByText('settings')).toBeInTheDocument()
+    // Expect(within(menuButtons[1]).getByText('settings')).toBeInTheDocument()
   })
 
   it('should have footer', () => {

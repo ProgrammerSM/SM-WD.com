@@ -9,7 +9,7 @@ import Footer from './Footer'
 import Header from './Header'
 import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
 import NavMenu from './menus/NavMenu'
-import SettingsMenu from './menus/settings-menu/SettingsMenu'
+// Import SettingsMenu from './menus/settings-menu/SettingsMenu'
 import SettingsMenuButton from './menu-buttons/SettingsMenuButton'
 
 // Context
@@ -173,7 +173,7 @@ const Layout = ({ children }) => {
           <div className='overlay with-theme'>
             <div className='overflow with-theme'>
               {activeMenu === menuButtonName && <NavMenu />}
-              {activeMenu === settingsButtonName && <SettingsMenu />}
+              {/* {activeMenu === settingsButtonName && <SettingsMenu />} */}
               {!isMenuActive && children}
             </div>
           </div>
@@ -184,10 +184,10 @@ const Layout = ({ children }) => {
           alternateButtonName={settingsButtonName}
           buttonName={menuButtonName}
         />
-        <SettingsMenuButton
+        {/* <SettingsMenuButton
           alternateButtonName={menuButtonName}
           buttonName={settingsButtonName}
-        />
+        /> */}
         <Footer />
       </LayoutStyles>
     </>
