@@ -10,7 +10,7 @@ import Header from './Header'
 import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
 import NavMenu from './menus/NavMenu'
 // Import SettingsMenu from './menus/settings-menu/SettingsMenu'
-import SettingsMenuButton from './menu-buttons/SettingsMenuButton'
+// import SettingsMenuButton from './menu-buttons/SettingsMenuButton'
 
 // Context
 import { ActiveMenuContext } from 'context/ActiveMenuContext'
@@ -37,6 +37,21 @@ const LayoutStyles = styled.div`
   background-color: var(--background-color);
   color: var(--font-color);
   overflow: hidden;
+
+  * {
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      background-color: var(--accent-color-1);
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-track { border-radius: 5px; }    
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--accent-color-1);
+      border-radius: 5px;
+    }
+  }
 
   main {
     width: 100%;
@@ -115,26 +130,13 @@ const LayoutStyles = styled.div`
 
   .overflow {
     max-width: 1600px;
-    height: calc(100% - 70px);
+    height: calc(100% - 78px);
     margin: 0 auto;
     padding: 0 var(--space-small);
     overflow: hidden auto;
 
     ${mediumUp} {
       height: calc(100% - 55px)
-    }
-
-    &::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
-      background-color: var(--accent-color-1);
-      border-radius: 5px;
-    }
-
-    &::-webkit-scrollbar-track { border-radius: 5px; }    
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--accent-color-1);
-      border-radius: 5px;
     }
   }
 `
@@ -163,7 +165,8 @@ const Layout = ({ children }) => {
         }
 
         .overlay.with-theme { background-color: ${theme.backgroundColor}80; }
-        .overflow.with-theme::-webkit-scrollbar { background-color: ${theme.accentColor1}26; }
+        .overflow.with-theme::-webkit-scrollbar,
+        .scroller::-webkit-scrollbar { background-color: ${theme.accentColor1}26; }
       `}</style>
 
       <LayoutStyles>

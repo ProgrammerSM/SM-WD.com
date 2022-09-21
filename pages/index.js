@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 // Components
 import AnimatedContent from 'components/AnimatedContent'
-import Heading from 'components/Heading'
 import MetaData from 'components/MetaData'
+import WideContentContainer from 'components/WideContentContainer'
 
 // Services
 import { getPageContent } from 'services/contentful-service'
@@ -24,28 +24,16 @@ export const getStaticProps = async () => {
   }
 }
 
-const Home = ({ pageContent }) => {
-
-  const {
-    headingText,
-    headingType,
-    align,
-  } = pageContent
-
-  return (
-    <>
-      <MetaData />
-      <div>
-        <Heading
-          as={headingType}
-          isCenter={align === 'center'}
-          isRight={align === 'right'}
-        >{headingText}</Heading>
+const Home = ({ pageContent }) => (
+  <>
+    <MetaData />
+    <div>
+      <WideContentContainer headingData={pageContent}>
         <AnimatedContent text={animatedText} />
-      </div>
-    </>
-  )
-}
+      </WideContentContainer>
+    </div>
+  </>
+)
 
 Home.propTypes = {
   pageContent: PropTypes.shape({

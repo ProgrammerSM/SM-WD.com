@@ -204,7 +204,7 @@
     "lines-between-class-members": ["warn", "always", {
       "exceptAfterSingleLine": true
     }],
-    "multiline-comment-style": ["warn", "starred-block"],
+    "multiline-comment-style": ["warn", "separate-lines"],
     "new-cap": "warn",
     "new-parens": "warn",
     "no-array-constructor": "warn",

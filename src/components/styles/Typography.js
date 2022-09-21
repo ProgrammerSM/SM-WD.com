@@ -26,7 +26,7 @@ const Typography = createGlobalStyle`
   h3 { font-size: 1.424rem; }
   h4 { font-size: 1.266rem; }
   h5 { font-size: 1.125rem; }
-  p { margin-bottom: 1rem; }
+  p { margin: 0 0 1rem; }
   small, .text-small { font-size: 0.889rem; }
   .text-large { font-size: 2.027rem; }
   .text-jumbo { font-size: 2.281rem; }
