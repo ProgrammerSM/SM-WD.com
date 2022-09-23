@@ -1,7 +1,7 @@
 // Modules
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import React, {
+import {
   useContext,
   useEffect,
   useRef,

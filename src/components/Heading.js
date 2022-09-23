@@ -10,12 +10,19 @@ import {
 // Context
 import { SettingsContext } from 'context/SettingsContext'
 
+// Data
+import { mediumUp } from 'data/media-queries'
+
 // Styles
 const HeadingStyles = styled.div`
   position: relative;
   margin-bottom: calc(1.38rem + 10px);
-  text-align: left;
+  text-align: center;
   opacity: 0;
+
+  ${mediumUp} {
+    text-align: left;
+  }
 
   &.animate { opacity: 1; }
   &.center {
@@ -84,20 +91,33 @@ const HeadingStyles = styled.div`
   .bottom-border {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
     width: 0;
     height: 100%;
     border-bottom: 2px solid var(--primary-color);
     box-shadow: inset 0 -5px 5px -5px var(--primary-color);
+    transform: translateX(-50%);
+
+    ${mediumUp} {
+      left: 0; 
+      transform: none;
+    }
 
     &::after {
       position: absolute;
+      left: 50%;
       bottom: -10px;
       width: 0;
       height: 10px;
       border-bottom: 4px solid var(--accent-color-1);
       box-shadow: inset 0 -5px 5px -5px var(--accent-color-1);
+      transform: translateX(-50%);
       content: '';
+
+      ${mediumUp} {
+        left: 0; 
+        transform: none;
+      }
     }
 
     &.animate {
