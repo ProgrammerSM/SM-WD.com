@@ -17,7 +17,7 @@ import { SettingsContext } from 'context/SettingsContext'
 // Styles
 const WideContentContainerStyles = styled.div`
   position: relative;
-  margin: 10px 0;
+  margin: 9px 0;
 
   &.animation-active {
     .container-content-wrapper { transition: opacity .5s linear; }
@@ -45,7 +45,6 @@ const WideContentContainerStyles = styled.div`
     flex-direction: column;
     position: relative;
     max-height: calc(100vh - 231px);
-    margin: 0 2px;
     padding: var(--space-medium) var(--space-extra-large) var(--space-extra-large);
     opacity: 0;
 
@@ -90,12 +89,12 @@ const WideContentContainerStyles = styled.div`
   }
 
   .top-bottom-bar {
-    top: -10px;
-    bottom: -10px;
+    top: -9px;
+    bottom: -9px;
     left: 50%;
     width: 0;
-    border-top: 5px solid var(--accent-color-1);
-    border-bottom: 5px solid var(--accent-color-1);
+    border-top: 4px solid var(--accent-color-1);
+    border-bottom: 4px solid var(--accent-color-1);
     transform: translateX(-50%);
 
     &.animate {
@@ -114,8 +113,8 @@ const WideContentContainerStyles = styled.div`
     left: 0;
     transform: translateY(-50%);
     height: 0;
-    border-right: 5px solid var(--accent-color-1);
-    border-left: 5px solid var(--accent-color-1);
+    border-right: 4px solid var(--accent-color-1);
+    border-left: 4px solid var(--accent-color-1);
 
     &.animate {
       height: 40%;

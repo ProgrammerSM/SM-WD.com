@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 // Components
 import AnimatedContent from 'components/AnimatedContent'
 import MetaData from 'components/MetaData'
+import SquareImage from 'components/SquareImage'
 import WideContentContainer from 'components/WideContentContainer'
 
 // Services
@@ -31,6 +32,12 @@ const Home = ({ pageContent }) => (
       <WideContentContainer headingData={pageContent}>
         <AnimatedContent text={animatedText} />
       </WideContentContainer>
+      <SquareImage
+        height={200}
+        image='https://spaceholder.cc/1000x200'
+        imageAlt='testing'
+        width={1000}
+      />
     </div>
   </>
 )

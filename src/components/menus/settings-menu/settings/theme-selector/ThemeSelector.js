@@ -27,39 +27,31 @@ const ThemeSelectorStyles = styled.div`
   padding: var(--space-medium) 0;
 
   form {
-      display: flex;
-      flex-direction: column;
-      row-gap: var(--space-medium);
-      width: 100%;
-      height: 100%;
-    }
-
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--space-medium);
+    width: 100%;
+    height: 100%;
+    
     & > fieldset { width: 100%; }
-
+  
     fieldset { 
       border-color: var(--primary-color);
       box-shadow: inset 0 0 5px 1px var(--primary-color);
-
+  
       legend { background-color: var(--background-color); }
     }
+  }
 
   .theme-selection {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-
-    ${mediumUp} {
-      flex-direction: row;
-    }
   }
 
   .theme-preview-wrapper,
   .theme-selector-wrapper {
     width: 100%;
-
-    ${mediumUp} {
-      width: 50%;
-    }
   }
 
   .theme-preview-wrapper,
@@ -69,23 +61,11 @@ const ThemeSelectorStyles = styled.div`
     align-items: center;
   }
 
-  .theme-preview-wrapper {
-    height: 80px;
-
-    ${mediumUp} {
-      height: auto;
-    }
-  }
-
+  .theme-preview-wrapper { height: 80px; }
   .theme-preview {
     width: 100%;
     height: 100%;
     background-color: var(--background-color); /* change to new background */
-
-    ${mediumUp} {
-      width: 80%;
-      height: 80%;
-    }
 
     legend { margin: 0 auto; }
   }
@@ -97,11 +77,6 @@ const ThemeSelectorStyles = styled.div`
     color: var(--font-color); /* change to new font color */
     text-align: center;
     border: 2px solid var(--primary-color); /* change to new primary */
-
-    ${mediumUp} {
-      width: 60%;
-      height: 60%;
-    }
   }
 
   .theme-accent-1,
@@ -130,6 +105,25 @@ const ThemeSelectorStyles = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
+  }
+
+  ${mediumUp} {
+    .theme-selection { flex-direction: row; }
+    .theme-preview-wrapper,
+    .theme-selector-wrapper {
+      width: 50%;
+    }
+
+    .theme-preview-wrapper { height: auto; }
+    .theme-preview {
+      width: 80%;
+      height: 80%;
+    }
+
+    .theme-primary {
+      width: 60%;
+      height: 60%;
+    }
   }
 `
 

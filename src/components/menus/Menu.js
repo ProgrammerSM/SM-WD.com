@@ -39,24 +39,6 @@ const MenuStyles = styled.div`
   margin: 0 auto;
   padding-top: var(--space-medium);
 
-  &.animation-active .menu {
-    ${small} {
-      li {
-        animation: ${mobileMenuExpand} .4s ease-in-out;
-
-        &:nth-of-type(2) { animation-delay: .1s; }
-        &:nth-of-type(3) { animation-delay: .2s; }
-        &:nth-of-type(4) { animation-delay: .3s; }
-        &:nth-of-type(5) { animation-delay: .4s; }
-        &:nth-of-type(6) { animation-delay: .5s; }
-      }
-    }
-
-    ${mediumUp} {
-      li { animation: ${mediumUpTransition} .4s ease-out; }
-    }
-  }
-
   .menu {
     display: flex;
     flex-direction: column;
@@ -64,8 +46,24 @@ const MenuStyles = styled.div`
     justify-content: center;
     align-items: center;
     gap: calc(var(--space-extra-large) + 12px);
+  }
 
-    ${mediumUp} {
+  ${small} {
+    &.animation-active .menu li {
+      animation: ${mobileMenuExpand} .4s ease-in-out;
+
+      &:nth-of-type(2) { animation-delay: .1s; }
+      &:nth-of-type(3) { animation-delay: .2s; }
+      &:nth-of-type(4) { animation-delay: .3s; }
+      &:nth-of-type(5) { animation-delay: .4s; }
+      &:nth-of-type(6) { animation-delay: .5s; }
+    }
+  }
+
+  ${mediumUp} {
+    &.animation-active .menu li { animation: ${mediumUpTransition} .4s ease-out; }
+
+    .menu {
       margin-top: var(--space-large);
       flex-direction: row;
     }

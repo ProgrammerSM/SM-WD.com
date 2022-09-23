@@ -30,24 +30,10 @@ const MenuButtonStyles = styled.div`
   cursor: pointer;
 
   &.with-animation { transition: all .2s linear; }
-
-  ${mediumUp} {
-    width: calc(4rem + 10px);
-    height: calc(4rem + 10px);
-  }
-
-  &:hover:not([disabled]) {
-    box-shadow: 0 0 5px 2px var(--primary-color);
-  }
-
+  &:hover:not([disabled]) { box-shadow: 0 0 5px 2px var(--primary-color); }
   &:hover:not([disabled]) .animated-circle,
-  &[data-active = "true"]:not([disabled]) .animated-circle {
-    animation-duration: 10s;
-  }
-
-  &[disabled] .animated-circle {
-    animation-play-state: paused;
-  }
+  &[data-active = "true"]:not([disabled]) .animated-circle { animation-duration: 10s; }
+  &[disabled] .animated-circle { animation-play-state: paused; }
 
   .main-button {
     position: absolute;
@@ -66,11 +52,6 @@ const MenuButtonStyles = styled.div`
     transition: all .2s linear;
 
     &.active { font-weight: bold; }
-
-    ${mediumUp} {
-      width: 4rem;
-      height: 4rem;
-    }
   }
 
   .icon {
@@ -86,8 +67,6 @@ const MenuButtonStyles = styled.div`
     display: none;
     font-size: .75rem;
     font-weight: 600;
-
-    ${mediumUp} { display: inline; }
   }
 
   .animated-circle-svg {
@@ -108,6 +87,18 @@ const MenuButtonStyles = styled.div`
     transform-origin: center center;
 
     &.with-animation { animation: ${rotating} 200s linear infinite; }
+  }
+
+  ${mediumUp} {
+    width: calc(4rem + 10px);
+    height: calc(4rem + 10px);
+
+    .main-button {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    .button-text { display: inline; }
   }
 `
 

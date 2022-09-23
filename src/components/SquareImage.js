@@ -353,6 +353,15 @@ const Button = ({
     ? 'animation-active'
     : 'no-animation'
 
+  if (!image)
+    return <p>No Image Provided</p>
+
+  if (!width || !height)
+    return <p>No Image Size Provided</p>
+
+  if (!imageAlt)
+    return <p>No Image Alt Provided</p>
+
   return (
     <ShapeStyles
       className={animationActiveClass}

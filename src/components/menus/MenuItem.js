@@ -77,12 +77,6 @@ const MenuItemStyles = styled.li`
     height: 50px;
     border: 2px solid var(--primary-color);
     transition: all .2s;
-
-    ${mediumUp} {
-      width: 215px;
-      height: 125px;
-      padding: var(--space-medium) 0;
-    }
   }
 
   .menu-item-icon,
@@ -105,6 +99,14 @@ const MenuItemStyles = styled.li`
     text-transform: uppercase;
     letter-spacing: 2px;
     border-bottom: 1px solid transparent;
+  }
+
+  ${mediumUp} {
+    .menu-item-content {
+      width: 215px;
+      height: 125px;
+      padding: var(--space-medium) 0;
+    }
   }
 `
 

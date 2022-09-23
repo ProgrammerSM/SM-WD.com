@@ -25,11 +25,6 @@ const LayoutStyles = styled.div`
   --main-padding-bottom: 54px;
   --menu-button-h: 10px;
   --menu-button-v: 60px;
-
-  ${mediumUp} {
-    --menu-button-h: 25px;
-    --menu-button-v: 25px;
-  }
   
   position: relative;
   width: 100vw;
@@ -124,8 +119,6 @@ const LayoutStyles = styled.div`
     padding: var(--space-extra-small) 5px 0;
     background-color: var(--background-color);
     z-index: 1;
-
-    ${mediumUp} { padding: var(--space-extra-small); }
   }
 
   .overflow {
@@ -134,10 +127,14 @@ const LayoutStyles = styled.div`
     margin: 0 auto;
     padding: 0 var(--space-small);
     overflow: hidden auto;
+  }
 
-    ${mediumUp} {
-      height: calc(100% - 55px)
-    }
+  ${mediumUp} {
+    --menu-button-h: 25px;
+    --menu-button-v: 25px;
+
+    .overlay { padding: var(--space-extra-small); }
+    .overflow { height: calc(100% - 55px); }
   }
 `
 
