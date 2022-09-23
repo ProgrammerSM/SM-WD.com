@@ -315,20 +315,20 @@ const Button = ({
     if (hasAnimatedRef.current)
       return
 
-    const imageContainter = imageRef.current
+    const imageContainer = imageRef.current
 
-    if (imageContainter && isAnimationActive) {
-      const topShape = imageContainter.querySelector('.top-shape')
-      const bottomShape = imageContainter.querySelector('.bottom-shape')
-      const topCorner = imageContainter.querySelector('.top-corner')
-      const bottomCorner = imageContainter.querySelector('.bottom-corner')
-      const topLine = imageContainter.querySelector('.top-line')
-      const bottomLine = imageContainter.querySelector('.bottom-line')
-      const dropShape = imageContainter.querySelector('.drop-shape')
-      const popShape = imageContainter.querySelector('.pop-shape')
+    if (imageContainer && isAnimationActive) {
+      const topShape = imageContainer.querySelector('.top-shape')
+      const bottomShape = imageContainer.querySelector('.bottom-shape')
+      const topCorner = imageContainer.querySelector('.top-corner')
+      const bottomCorner = imageContainer.querySelector('.bottom-corner')
+      const topLine = imageContainer.querySelector('.top-line')
+      const bottomLine = imageContainer.querySelector('.bottom-line')
+      const dropShape = imageContainer.querySelector('.drop-shape')
+      const popShape = imageContainer.querySelector('.pop-shape')
 
       setTimeout(() => {
-        imageContainter.classList.add('animate')
+        imageContainer.classList.add('animate')
       }, 200)
 
       setTimeout(() => {
