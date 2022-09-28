@@ -54,8 +54,8 @@ const LayoutStyles = styled.div`
     padding: var(--main-padding-top) var(--space-medium) var(--main-padding-bottom);
   }
 
-  .left-border,
-  .right-border {
+  .layout-left-border,
+  .layout-right-border {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -65,22 +65,22 @@ const LayoutStyles = styled.div`
     z-index: 1;
   }
 
-  .left-border {
+  .layout-left-border {
     left: 0;
     border-right: 2px solid var(--primary-color);
     box-shadow: inset -5px 0 5px -5px var(--primary-color);
   }
 
-  .right-border {
+  .layout-right-border {
     right: 0;
     border-left: 2px solid var(--primary-color);
     box-shadow: inset 5px 0 5px -5px var(--primary-color);
   }
 
-  .left-border::before,
-  .right-border::before,
-  .left-border::after,
-  .right-border::after {
+  .layout-left-border::before,
+  .layout-right-border::before,
+  .layout-left-border::after,
+  .layout-right-border::after {
     position: absolute;
     width: 23px;
     height: var(--space-medium);
@@ -88,30 +88,30 @@ const LayoutStyles = styled.div`
     content: '';
   }
 
-  .left-border::before,
-  .right-border::before {
+  .layout-left-border::before,
+  .layout-right-border::before {
     top: -8px;
   }
 
-  .left-border::after,
-  .right-border::after {
+  .layout-left-border::after,
+  .layout-right-border::after {
     bottom: -8px;
   }
 
-  .left-border::before,
-  .left-border::after {
+  .layout-left-border::before,
+  .layout-left-border::after {
     left: -8px;
   }
 
-  .right-border::before,
-  .right-border::after {
+  .layout-right-border::before,
+  .layout-right-border::after {
     right: -8px;
   }
 
-  .left-border::before { transform: rotate(35deg); }
-  .left-border::after { transform: rotate(145deg); }
-  .right-border::after { transform: rotate(-145deg); }
-  .right-border::before { transform: rotate(-35deg); }
+  .layout-left-border::before { transform: rotate(35deg); }
+  .layout-left-border::after { transform: rotate(145deg); }
+  .layout-right-border::after { transform: rotate(-145deg); }
+  .layout-right-border::before { transform: rotate(-35deg); }
 
   .overlay {
     position: relative;
@@ -153,12 +153,13 @@ const Layout = ({ children }) => {
     <>
       <style>{`
         :root {
-          --primary-color:    ${theme.primaryColor};
-          --font-color:       ${theme.fontColor};
-          --background-color: ${theme.backgroundColor};
-          --accent-color-1:   ${theme.accentColor1};
-          --accent-color-2:   ${theme.accentColor2};
-          --accent-color-3:   ${theme.accentColor3};
+          --primary-color:          ${theme.primaryColor};
+          --font-color:             ${theme.fontColor};
+          --background-color:       ${theme.backgroundColor};
+          --transparent-background: ${theme.primaryColor}26;
+          --accent-color-1:         ${theme.accentColor1};
+          --accent-color-2:         ${theme.accentColor2};
+          --accent-color-3:         ${theme.accentColor3};
         }
 
         .overlay.with-theme { background-color: ${theme.backgroundColor}80; }
@@ -168,7 +169,7 @@ const Layout = ({ children }) => {
 
       <LayoutStyles>
         <Header />
-        <div className='left-border' />
+        <div className='layout-left-border' />
         <main>
           <div className='overlay with-theme'>
             <div className='overflow with-theme'>
@@ -179,7 +180,7 @@ const Layout = ({ children }) => {
           </div>
           {!isMenuActive && <BackgroundSVG />}
         </main>
-        <div className='right-border' />
+        <div className='layout-right-border' />
         <NavigationMenuButton
           alternateButtonName={settingsButtonName}
           buttonName={menuButtonName}

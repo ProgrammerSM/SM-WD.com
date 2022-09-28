@@ -16,7 +16,7 @@ import { mediumUp } from 'data/media-queries'
 // Styles
 const HeadingStyles = styled.div`
   position: relative;
-  margin-bottom: calc(1.38rem + 10px);
+  margin-bottom: calc(var(--space-standard) + 10px);
   text-align: center;
   opacity: 0;
 

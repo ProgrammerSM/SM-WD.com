@@ -8,7 +8,7 @@ import {
 } from 'react'
 
 // Components
-import Heading from './Heading'
+import Heading from '../Heading'
 
 // Context
 import { CurrentThemeContext } from 'context/CurrentThemeContext'
@@ -46,6 +46,7 @@ const WideContentContainerStyles = styled.div`
     position: relative;
     max-height: calc(100vh - 231px);
     padding: var(--space-medium) var(--space-extra-large) var(--space-extra-large);
+    background-color: var(--transparent-background);
     opacity: 0;
 
     &.animate { opacity: 1; }
@@ -133,7 +134,6 @@ const WideContentContainer = ({
 }) => {
   const hasAnimatedRef = useRef(false)
   const containerRef = useRef()
-  const { theme } = useContext(CurrentThemeContext)
   const { isAnimationActive } = useContext(SettingsContext)
 
   useEffect(() => {
@@ -176,10 +176,7 @@ const WideContentContainer = ({
       className={animationActiveClass}
       ref={containerRef}
     >
-      <div
-        className='container-content-wrapper'
-        style={{ backgroundColor: `${theme.primaryColor}26` }}
-      >
+      <div className='container-content-wrapper'>
         {headingData && (
           <div className='container-heading'>
             <Heading

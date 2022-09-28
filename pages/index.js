@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 // Components
 import AnimatedContent from 'components/AnimatedContent'
 import MetaData from 'components/MetaData'
+import SideBySide from 'components/SideBySide'
 import SquareImage from 'components/SquareImage'
-import WideContentContainer from 'components/WideContentContainer'
+import WideContentContainer from 'components/content-containers/WideContentContainer'
 
 // Services
 import { getPageContent } from 'services/contentful-service'
@@ -37,6 +38,20 @@ const Home = ({ pageContent }) => (
         image='https://spaceholder.cc/1000x200'
         imageAlt='testing'
         width={1000}
+      />
+      <SideBySide
+        column1Content={(
+          <>
+            <p>Column 1</p>
+            <p>{animatedText}</p>
+          </>
+        )}
+        column2Content={(
+          <>
+            <p>Column 2</p>
+            <p>{animatedText}</p>
+          </>
+        )}
       />
     </div>
   </>

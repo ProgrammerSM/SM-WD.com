@@ -75,6 +75,7 @@ const MenuItemStyles = styled.li`
     align-items: center;
     width: 215px;
     height: 50px;
+    background: radial-gradient(circle, transparent, var(--transparent-background));
     border: 2px solid var(--primary-color);
     transition: all .2s;
   }
@@ -135,10 +136,7 @@ const MenuItem = ({
           >
             <a className='menu-item' >
               <div className='hover-box' />
-              <div
-                className='menu-item-content'
-                style={{ background: `radial-gradient(circle, transparent, ${theme.primaryColor}26)` }}
-              >
+              <div className='menu-item-content'>
                 {!breakpoints.mobile && (
                   <span className='menu-item-icon'>
                     <FontAwesomeIcon icon={icon} />
@@ -155,10 +153,7 @@ const MenuItem = ({
             onClick={onClickHandler}
           >
             <div className='hover-box' />
-            <div
-              className='menu-item-content'
-              style={{ background: `radial-gradient(circle, transparent, ${theme.primaryColor}26)` }}
-            >
+            <div className='menu-item-content'>
               {!breakpoints.mobile && (
                 <span className='menu-item-icon'>
                   <FontAwesomeIcon icon={icon} />
