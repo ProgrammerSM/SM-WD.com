@@ -3,20 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // Styles
-const ContentContainer1 = styled.div`
+const ContentContainer1Styles = styled.div`
   position: relative;
   margin: 9px;
-  
-  .content-container-1-wrapper {
-    padding: var(--space-medium) var(--space-extra-large) var(--space-extra-large);
-    background-color: var(--transparent-background);
-  }
-  
-  .content-container-1-content {
-    > *:last-of-type {
-      margin-bottom: 0;
-    }
-  }
 
   .content-container-1-left-border,
   .content-container-1-right-border,
@@ -33,7 +22,7 @@ const ContentContainer1 = styled.div`
   .content-container-1-right-border {
     top: 0;
     bottom: 0;
-    width: 60%;
+    width: 75%;
     border-color: var(--color-primary);
   }
 
@@ -106,10 +95,10 @@ const ContentContainer1 = styled.div`
   }
 `
 
-const Column1ContentContainer = ({ children }) => (
-  <ContentContainer1>
+const ContentContainer1 = ({ children }) => (
+  <ContentContainer1Styles>
     <div className='content-container-1-wrapper'>
-      <div className='content-container-1-content scroller'>
+      <div className='content-container scroller'>
         {children}
       </div>
     </div>
@@ -121,8 +110,8 @@ const Column1ContentContainer = ({ children }) => (
       <div className='content-container-1-top-line' />
       <div className='content-container-1-left-line' />
     </div>
-  </ContentContainer1>
+  </ContentContainer1Styles>
 )
 
-Column1ContentContainer.propTypes = { children: PropTypes.any }
-export default Column1ContentContainer
+ContentContainer1.propTypes = { children: PropTypes.any }
+export default ContentContainer1

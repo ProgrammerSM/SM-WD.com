@@ -35,16 +35,13 @@ const LayoutStyles = styled.div`
 
   * {
     &::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
       background-color: var(--accent-color-1);
-      border-radius: 5px;
     }
 
-    &::-webkit-scrollbar-track { border-radius: 5px; }    
     &::-webkit-scrollbar-thumb {
       background-color: var(--accent-color-1);
-      border-radius: 5px;
     }
   }
 
@@ -127,6 +124,15 @@ const LayoutStyles = styled.div`
     margin: 0 auto;
     padding: 0 var(--space-small);
     overflow: hidden auto;
+  }
+
+  .content-container {
+    padding: var(--space-extra-large);
+    background-color: var(--transparent-background);
+
+    > *:last-of-type {
+      margin-bottom: 0;
+    }
   }
 
   ${mediumUp} {

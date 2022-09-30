@@ -45,8 +45,6 @@ const WideContentContainerStyles = styled.div`
     flex-direction: column;
     position: relative;
     max-height: calc(100vh - 231px);
-    padding: var(--space-medium) var(--space-extra-large) var(--space-extra-large);
-    background-color: var(--transparent-background);
     opacity: 0;
 
     &.animate { opacity: 1; }
@@ -176,7 +174,7 @@ const WideContentContainer = ({
       className={animationActiveClass}
       ref={containerRef}
     >
-      <div className='container-content-wrapper'>
+      <div className='container-content-wrapper content-container'>
         {headingData && (
           <div className='container-heading'>
             <Heading
