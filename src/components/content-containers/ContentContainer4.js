@@ -126,17 +126,17 @@ const ContentContainer4Styles = styled.div`
 
 const ContentContainer4 = ({ children }) => (
   <ContentContainer4Styles>
-    <div className='content-container-4-wrapper'>
-      <div className='content-container scroller'>
-        {children}
-      </div>
-    </div>
     <div className='content-container-4-border-top-shape'>
       <div className='content-container-4-left-shape-border' />
       <div className='content-container-4-center-shape' />
       <div className='content-container-4-right-shape-border' />
     </div>
     <div className='content-container-4-top-bottom-border' />
+    <div className='content-container-4-wrapper'>
+      <div className='content-container scroller'>
+        {children}
+      </div>
+    </div>
     <div className='content-container-4-left-right-border' />
     <div className='content-container-4-border-bottom-shape'>
       <div className='content-container-4-left-shape-border' />

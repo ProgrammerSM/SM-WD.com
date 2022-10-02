@@ -26,12 +26,12 @@ const TempContainerWrapper = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.38rem;
   margin-top: 2rem;
 
   & > div {
     width: 100%;
-    max-width: 480px;
+    max-width: 488px;
   }
 `
 

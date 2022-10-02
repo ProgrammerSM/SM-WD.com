@@ -86,12 +86,12 @@ const ContentContainer2Styles = styled.div`
 
 const ContentContainer2 = ({ children }) => (
   <ContentContainer2Styles>
+    <div className='content-container-2-top-corner-shape' />
     <div className='content-container-2-wrapper'>
       <div className='content-container scroller'>
         {children}
       </div>
     </div>
-    <div className='content-container-2-top-corner-shape' />
     <div className='content-container-2-bottom-corner-shape' />
   </ContentContainer2Styles>
 )

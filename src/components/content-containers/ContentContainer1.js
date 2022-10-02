@@ -97,6 +97,10 @@ const ContentContainer1Styles = styled.div`
 
 const ContentContainer1 = ({ children }) => (
   <ContentContainer1Styles>
+    <div className='content-container-1-left-border'>
+      <div className='content-container-1-top-line' />
+      <div className='content-container-1-left-line' />
+    </div>
     <div className='content-container-1-wrapper'>
       <div className='content-container scroller'>
         {children}
@@ -105,10 +109,6 @@ const ContentContainer1 = ({ children }) => (
     <div className='content-container-1-right-border'>
       <div className='content-container-1-bottom-line' />
       <div className='content-container-1-right-line' />
-    </div>
-    <div className='content-container-1-left-border'>
-      <div className='content-container-1-top-line' />
-      <div className='content-container-1-left-line' />
     </div>
   </ContentContainer1Styles>
 )

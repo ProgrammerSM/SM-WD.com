@@ -80,13 +80,13 @@ const ContentContainer3Styles = styled.div`
 
 const ContentContainer3 = ({ children }) => (
   <ContentContainer3Styles>
+    <div className='content-container-3-lower-thin-corner' />
+    <div className='content-container-3-lower-thick-corner' />
     <div className='content-container-3-wrapper'>
       <div className='content-container scroller'>
         {children}
       </div>
     </div>
-    <div className='content-container-3-lower-thin-corner' />
-    <div className='content-container-3-lower-thick-corner' />
     <div className='content-container-3-upper-thin-corner' />
     <div className='content-container-3-upper-thick-corner' />
   </ContentContainer3Styles>
