@@ -21,15 +21,20 @@ const WideContentContainerStyles = styled.div`
 
   &.animation-active {
     .container-content-wrapper { transition: opacity .5s linear; }
-    .top-bottom-bar { transition: width .2s linear .2s; }
+    .top-bar,
+    .bottom-bar { transition: width .2s linear .2s; }
     .container-top-border,
     .container-bottom-border { transition: width .2s linear, height .2s .2s linear; }
-    .container-center-border { transition: height .2s linear .2s; }
+    .left-bar,
+    .right-bar { transition: height .2s linear .2s; }
   }
 
   &.no-animation {
     .container-content-wrapper { opacity: 1; }
-    .top-bottom-bar { width: 50%; }
+    
+    .top-bar,
+    .bottom-bar { width: 50%; }
+    
     .container-top-border,
     .container-bottom-border {
       width: 100%;
@@ -37,7 +42,33 @@ const WideContentContainerStyles = styled.div`
       border-right: 2px solid var(--primary-color);
       border-left: 2px solid var(--primary-color); 
     }
-    .container-center-border { height: 40%; }
+    
+    .left-bar,
+    .right-bar { height: 40%; }
+
+    .top-bar {
+      box-shadow: inset 0 5px 5px -5px var(--accent-color-1);
+    }
+
+    .container-top-border {
+      box-shadow: inset 0 5px 5px -5px var(--primary-color);
+    }
+
+    .right-bar {
+      box-shadow: inset -5px 0 5px -5px var(--accent-color-2);
+    }
+
+    .left-bar {
+      box-shadow: inset 5px 0 5px -5px var(--accent-color-2);
+    }
+
+    .container-bottom-border {
+      box-shadow: inset 0 -5px 5px -5px var(--primary-color);
+    }
+
+    .bottom-bar {
+      box-shadow: inset 0 -5px 5px -5px var(--accent-color-1);
+    }
   }
   
   .container-content-wrapper {
@@ -64,9 +95,11 @@ const WideContentContainerStyles = styled.div`
     }
   }
 
-  .top-bottom-bar,
+  .top-bar,
+  .bottom-bar,
   .container-top-border,
-  .container-center-border,
+  .left-bar,
+  .right-bar,
   .container-bottom-border {
     position: absolute;
     z-index: -1;
@@ -87,42 +120,82 @@ const WideContentContainerStyles = styled.div`
     }
   }
 
-  .top-bottom-bar {
-    top: -9px;
-    bottom: -9px;
+  .top-bar,
+  .bottom-bar {
     left: 50%;
-    width: 0;
-    border-top: 4px solid var(--accent-color-1);
-    border-bottom: 4px solid var(--accent-color-1);
     transform: translateX(-50%);
-
+    width: 0;
+    height: 10px;
+    
     &.animate {
       width: 50%;
     }
   }
 
-  .container-top-border {
-    top: 0;
-    border-top: 2px solid var(--primary-color);
-  }
-
-  .container-center-border {
+  .left-bar,
+  .right-bar {
     top: 50%;
-    right: 0;
-    left: 0;
     transform: translateY(-50%);
+    width: 10px;
     height: 0;
-    border-right: 4px solid var(--accent-color-1);
-    border-left: 4px solid var(--accent-color-1);
 
     &.animate {
       height: 40%;
     }
   }
 
+  .top-bar {
+    top: -9px;
+    border-top: 4px solid var(--accent-color-1);
+
+    &.animate {
+      box-shadow: inset 0 5px 5px -5px var(--accent-color-1);
+    }
+  }
+  
+  .container-top-border {
+    top: 0;
+    border-top: 2px solid var(--primary-color);
+
+    &.animate {
+      box-shadow: inset 0 5px 5px -5px var(--primary-color);
+    }
+  }
+  
+  .right-bar {
+    right: 0;
+    border-right: 4px solid var(--accent-color-1);
+
+    &.animate {
+      box-shadow: inset -5px 0 5px -5px var(--accent-color-2);
+    }
+  }
+
+  .left-bar {
+    left: 0;
+    border-left: 4px solid var(--accent-color-1);
+    
+    &.animate {
+      box-shadow: inset 5px 0 5px -5px var(--accent-color-2);
+    }
+  }
+  
   .container-bottom-border {
     bottom: 0;
     border-bottom: 2px solid var(--primary-color);
+
+    &.animate {
+      box-shadow: inset 0 -5px 5px -5px var(--primary-color);
+    }
+  }
+  
+  .bottom-bar {
+    bottom: -9px;
+    border-bottom: 4px solid var(--accent-color-1);
+
+    &.animate {
+      box-shadow: inset 0 -5px 5px -5px var(--accent-color-1);
+    }
   }
 `
 
@@ -142,10 +215,12 @@ const WideContentContainer = ({
 
     if (wideContainer && isAnimationActive) {
       const containerContent = wideContainer.querySelector('.container-content-wrapper')
-      const topBottomBar = wideContainer.querySelector('.top-bottom-bar')
+      const topBar = wideContainer.querySelector('.top-bar')
       const topBorder = wideContainer.querySelector('.container-top-border')
-      const centerBorder = wideContainer.querySelector('.container-center-border')
+      const rightBar = wideContainer.querySelector('.right-bar')
+      const leftBar = wideContainer.querySelector('.left-bar')
       const bottomBorder = wideContainer.querySelector('.container-bottom-border')
+      const bottomBar = wideContainer.querySelector('.bottom-bar')
 
       setTimeout(() => {
         containerContent.classList.add('animate')
@@ -157,8 +232,10 @@ const WideContentContainer = ({
       }, 800)
 
       setTimeout(() => {
-        topBottomBar.classList.add('animate')
-        centerBorder.classList.add('animate')
+        topBar.classList.add('animate')
+        rightBar.classList.add('animate')
+        leftBar.classList.add('animate')
+        bottomBar.classList.add('animate')
       }, 1000)
     }
 
@@ -188,10 +265,12 @@ const WideContentContainer = ({
           {children}
         </div>
       </div>
-      <div className='top-bottom-bar' />
+      <div className='top-bar' />
       <div className='container-top-border' />
-      <div className='container-center-border' />
+      <div className='right-bar' />
+      <div className='left-bar' />
       <div className='container-bottom-border' />
+      <div className='bottom-bar' />
     </WideContentContainerStyles>
   )
 }

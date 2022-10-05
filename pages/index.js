@@ -52,9 +52,6 @@ const Home = ({ pageContent }) => (
   <>
     <MetaData />
     <div>
-      <WideContentContainer headingData={pageContent}>
-        <AnimatedContent text={animatedText} />
-      </WideContentContainer>
       <TempContainerWrapper>
         <ContentContainer1>
           <p>Content Container 1</p>
