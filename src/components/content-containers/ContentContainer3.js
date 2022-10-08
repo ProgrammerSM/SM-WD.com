@@ -1,6 +1,14 @@
 // Modules
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {
+  useContext,
+  useEffect,
+  useRef,
+} from 'react'
+
+// Context
+import { SettingsContext } from 'context/SettingsContext'
 
 // Styles
 const ContentContainer3Styles = styled.div`
@@ -14,6 +22,7 @@ const ContentContainer3Styles = styled.div`
   .content-container-3-upper-thin-corner::after,
   .content-container-3-upper-thick-corner {
     position: absolute;
+    z-index: -1;
   }
 
   .content-container-3-lower-thin-corner,
@@ -78,19 +87,63 @@ const ContentContainer3Styles = styled.div`
   }
 `
 
-const ContentContainer3 = ({ children }) => (
-  <ContentContainer3Styles>
-    <div className='content-container-3-lower-thin-corner' />
-    <div className='content-container-3-lower-thick-corner' />
-    <div className='content-container-3-wrapper'>
-      <div className='content-container scroller'>
-        {children}
+const ContentContainer3 = ({ children }) => {
+  const hasAnimatedRef = useRef(false)
+  const containerRef = useRef()
+  const { isAnimationActive } = useContext(SettingsContext)
+
+  useEffect(() => {
+    if (hasAnimatedRef.current)
+      return
+
+    const contentContainer3 = containerRef.current
+
+    if (contentContainer3 && isAnimationActive) {
+      const contentContainer = contentContainer3.querySelector('.content-container-3-wrapper')
+      const lowerThinCorner = contentContainer3.querySelector('.content-container-3-lower-thin-corner')
+      const upperThinCorner = contentContainer3.querySelector('.content-container-3-upper-thin-corner')
+      const lowerThickCorner = contentContainer3.querySelector('.content-container-3-lower-thick-corner')
+      const upperThickCorner = contentContainer3.querySelector('.content-container-3-upper-thick-corner')
+
+      setTimeout(() => {
+        contentContainer.classList.add('animate')
+      }, 100)
+
+      setTimeout(() => {
+        lowerThinCorner.classList.add('animate')
+        upperThinCorner.classList.add('animate')
+      }, 800)
+
+      setTimeout(() => {
+        lowerThickCorner.classList.add('animate')
+        upperThickCorner.classList.add('animate')
+      }, 1000)
+    }
+
+    hasAnimatedRef.current = true
+  }, [isAnimationActive])
+
+  const animationActiveClass = isAnimationActive
+    ? 'animation-active'
+    : 'no-animation'
+
+  return (
+    <ContentContainer3Styles
+      className={animationActiveClass}
+      ref={containerRef}
+    >
+      <div className='content-container-3-lower-thin-corner' />
+      <div className='content-container-3-lower-thick-corner' />
+      <div className='content-container-3-wrapper'>
+        <div className='content-container scroller'>
+          {children}
+        </div>
       </div>
-    </div>
-    <div className='content-container-3-upper-thin-corner' />
-    <div className='content-container-3-upper-thick-corner' />
-  </ContentContainer3Styles>
-)
+      <div className='content-container-3-upper-thin-corner' />
+      <div className='content-container-3-upper-thick-corner' />
+    </ContentContainer3Styles>
+  )
+}
 
 ContentContainer3.propTypes = { children: PropTypes.any }
 export default ContentContainer3

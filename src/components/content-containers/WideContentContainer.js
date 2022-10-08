@@ -11,7 +11,6 @@ import {
 import Heading from '../Heading'
 
 // Context
-import { CurrentThemeContext } from 'context/CurrentThemeContext'
 import { SettingsContext } from 'context/SettingsContext'
 
 // Styles
@@ -214,7 +213,7 @@ const WideContentContainer = ({
     const wideContainer = containerRef.current
 
     if (wideContainer && isAnimationActive) {
-      const containerContent = wideContainer.querySelector('.container-content-wrapper')
+      const contentContainer = wideContainer.querySelector('.container-content-wrapper')
       const topBar = wideContainer.querySelector('.top-bar')
       const topBorder = wideContainer.querySelector('.container-top-border')
       const rightBar = wideContainer.querySelector('.right-bar')
@@ -223,7 +222,7 @@ const WideContentContainer = ({
       const bottomBar = wideContainer.querySelector('.bottom-bar')
 
       setTimeout(() => {
-        containerContent.classList.add('animate')
+        contentContainer.classList.add('animate')
       }, 100)
 
       setTimeout(() => {

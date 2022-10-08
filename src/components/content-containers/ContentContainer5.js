@@ -1,6 +1,14 @@
 // Modules
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {
+  useContext,
+  useEffect,
+  useRef,
+} from 'react'
+
+// Context
+import { SettingsContext } from 'context/SettingsContext'
 
 // Styles
 const ContentContainer5Styles = styled.div`
@@ -18,6 +26,7 @@ const ContentContainer5Styles = styled.div`
   .content-container-5-lower-inner-shape::before,
   .content-container-5-lower-inner-decended-line {
     position: absolute;
+    z-index: -1;
     border-color: var(--primary-color);
   }
 
@@ -147,23 +156,71 @@ const ContentContainer5Styles = styled.div`
   }
 `
 
-const ContentContainer5 = ({ children }) => (
-  <ContentContainer5Styles>
-    <div className='content-container-5-wrapper'>
-      <div className='content-container-5-upper-corner-shape'>
-        <div className='content-container-5-upper-inner-shape' />
-        <div className='content-container-5-upper-inner-decended-line' />
+const ContentContainer5 = ({ children }) => {
+  const hasAnimatedRef = useRef(false)
+  const containerRef = useRef()
+  const { isAnimationActive } = useContext(SettingsContext)
+
+  useEffect(() => {
+    if (hasAnimatedRef.current)
+      return
+
+    const contentContainer5 = containerRef.current
+
+    if (contentContainer5 && isAnimationActive) {
+      const contentContainer = contentContainer5.querySelector('.content-container-5-wrapper')
+      const upperCornerShape = contentContainer5.querySelector('.content-container-5-upper-corner-shape')
+      const lowerCornerShape = contentContainer5.querySelector('.content-container-5-lower-corner-shape')
+      const upperInnerShape = contentContainer5.querySelector('.content-container-5-upper-inner-shape')
+      const upperInnerDecendedLine = contentContainer5.querySelector('.content-container-5-upper-inner-decended-line')
+      const lowerInnerShape = contentContainer5.querySelector('.content-container-5-lower-inner-shape')
+      const lowerInnerDecendedLine = contentContainer5.querySelector('.content-container-5-lower-inner-decended-line')
+
+      setTimeout(() => {
+        contentContainer.classList.add('animate')
+      }, 100)
+
+      setTimeout(() => {
+        upperCornerShape.classList.add('animate')
+        lowerCornerShape.classList.add('animate')
+      }, 800)
+
+      setTimeout(() => {
+        upperInnerShape.classList.add('animate')
+        lowerInnerShape.classList.add('animate')
+        upperInnerDecendedLine.classList.add('animate')
+        lowerInnerDecendedLine.classList.add('animate')
+      }, 1000)
+    }
+
+    hasAnimatedRef.current = true
+  }, [isAnimationActive])
+
+  const animationActiveClass = isAnimationActive
+    ? 'animation-active'
+    : 'no-animation'
+
+  return (
+    <ContentContainer5Styles
+      className={animationActiveClass}
+      ref={containerRef}
+    >
+      <div className='content-container-5-wrapper'>
+        <div className='content-container-5-upper-corner-shape'>
+          <div className='content-container-5-upper-inner-shape' />
+          <div className='content-container-5-upper-inner-decended-line' />
+        </div>
+        <div className='content-container scroller'>
+          {children}
+        </div>
+        <div className='content-container-5-lower-corner-shape'>
+          <div className='content-container-5-lower-inner-shape' />
+          <div className='content-container-5-lower-inner-decended-line' />
+        </div>
       </div>
-      <div className='content-container scroller'>
-        {children}
-      </div>
-      <div className='content-container-5-lower-corner-shape'>
-        <div className='content-container-5-lower-inner-shape' />
-        <div className='content-container-5-lower-inner-decended-line' />
-      </div>
-    </div>
-  </ContentContainer5Styles>
-)
+    </ContentContainer5Styles>
+  )
+}
 
 ContentContainer5.propTypes = { children: PropTypes.any }
 export default ContentContainer5

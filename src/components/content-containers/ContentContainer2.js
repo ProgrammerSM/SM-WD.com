@@ -1,6 +1,14 @@
 // Modules
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {
+  useContext,
+  useEffect,
+  useRef,
+} from 'react'
+
+// Context
+import { SettingsContext } from 'context/SettingsContext'
 
 // Styles
 const ContentContainer2Styles = styled.div`
@@ -20,6 +28,7 @@ const ContentContainer2Styles = styled.div`
   .content-container-2-top-corner-shape::before,
   .content-container-2-top-corner-shape::after {
     position: absolute;
+    z-index: -1;
   }
 
   .content-container-2-bottom-corner-shape,
@@ -84,17 +93,54 @@ const ContentContainer2Styles = styled.div`
   }
 `
 
-const ContentContainer2 = ({ children }) => (
-  <ContentContainer2Styles>
-    <div className='content-container-2-top-corner-shape' />
-    <div className='content-container-2-wrapper'>
-      <div className='content-container scroller'>
-        {children}
+const ContentContainer2 = ({ children }) => {
+  const hasAnimatedRef = useRef(false)
+  const containerRef = useRef()
+  const { isAnimationActive } = useContext(SettingsContext)
+
+  useEffect(() => {
+    if (hasAnimatedRef.current)
+      return
+
+    const contentContainer2 = containerRef.current
+
+    if (contentContainer2 && isAnimationActive) {
+      const contentContainer = contentContainer2.querySelector('.content-container-2-wrapper')
+      const topCorner = contentContainer2.querySelector('.content-container-2-top-corner-shape')
+      const bottomCorner = contentContainer2.querySelector('.content-container-2-bottom-corner-shape')
+
+      setTimeout(() => {
+        contentContainer.classList.add('animate')
+      }, 100)
+
+      setTimeout(() => {
+        topCorner.classList.add('animate')
+        bottomCorner.classList.add('animate')
+      }, 800)
+    }
+
+    hasAnimatedRef.current = true
+  }, [isAnimationActive])
+
+  const animationActiveClass = isAnimationActive
+    ? 'animation-active'
+    : 'no-animation'
+
+  return (
+    <ContentContainer2Styles
+      className={animationActiveClass}
+      ref={containerRef}
+    >
+      <div className='content-container-2-top-corner-shape' />
+      <div className='content-container-2-wrapper'>
+        <div className='content-container scroller'>
+          {children}
+        </div>
       </div>
-    </div>
-    <div className='content-container-2-bottom-corner-shape' />
-  </ContentContainer2Styles>
-)
+      <div className='content-container-2-bottom-corner-shape' />
+    </ContentContainer2Styles>
+  )
+}
 
 ContentContainer2.propTypes = { children: PropTypes.any }
 export default ContentContainer2

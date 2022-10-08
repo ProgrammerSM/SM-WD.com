@@ -1,6 +1,14 @@
 // Modules
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {
+  useContext,
+  useEffect,
+  useRef,
+} from 'react'
+
+// Context
+import { SettingsContext } from 'context/SettingsContext'
 
 // Styles
 const ContentContainer6Styles = styled.div`
@@ -15,6 +23,7 @@ const ContentContainer6Styles = styled.div`
   .content-container-6-right-border,
   .content-container-6-lower-thick-corner {
     position: absolute;
+    z-index: -1;
   }
 
   .content-container-6-left-border,
@@ -116,23 +125,69 @@ const ContentContainer6Styles = styled.div`
   }
 `
 
-const ContentContainer6 = ({ children }) => (
-  <ContentContainer6Styles>
-    <div className='content-container-6-upper-thick-corner' />
-    <div className='content-container-6-left-border'>
-      <div className='content-container-6-inner-shape' />
-    </div>
-    <div className='content-container-6-wrapper'>
-      <div className='content-container scroller'>
-        {children}
+const ContentContainer6 = ({ children }) => {
+  const hasAnimatedRef = useRef(false)
+  const containerRef = useRef()
+  const { isAnimationActive } = useContext(SettingsContext)
+
+  useEffect(() => {
+    if (hasAnimatedRef.current)
+      return
+
+    const contentContainer6 = containerRef.current
+
+    if (contentContainer6 && isAnimationActive) {
+      const contentContainer = contentContainer6.querySelector('.content-container-6-wrapper')
+      const upperThickCorner = contentContainer6.querySelector('.content-container-6-upper-thick-corner')
+      const leftBorder = contentContainer6.querySelector('.content-container-6-left-border')
+      const lowerThickCorner = contentContainer6.querySelector('.content-container-6-lower-thick-corner')
+      const rightBorder = contentContainer6.querySelector('.content-container-6-right-border')
+      const innerShape = contentContainer6.querySelector('.content-container-6-inner-shape')
+
+      setTimeout(() => {
+        contentContainer.classList.add('animate')
+      }, 100)
+
+      setTimeout(() => {
+        leftBorder.classList.add('animate')
+        rightBorder.classList.add('animate')
+      }, 800)
+
+      setTimeout(() => {
+        upperThickCorner.classList.add('animate')
+        lowerThickCorner.classList.add('animate')
+        innerShape.classList.add('animate')
+      }, 1000)
+    }
+
+    hasAnimatedRef.current = true
+  }, [isAnimationActive])
+
+  const animationActiveClass = isAnimationActive
+    ? 'animation-active'
+    : 'no-animation'
+
+  return (
+    <ContentContainer6Styles
+      className={animationActiveClass}
+      ref={containerRef}
+    >
+      <div className='content-container-6-upper-thick-corner' />
+      <div className='content-container-6-left-border'>
+        <div className='content-container-6-inner-shape' />
       </div>
-    </div>
-    <div className='content-container-6-right-border'>
-      <div className='content-container-6-inner-shape' />
-    </div>
-    <div className='content-container-6-lower-thick-corner' />
-  </ContentContainer6Styles>
-)
+      <div className='content-container-6-wrapper'>
+        <div className='content-container scroller'>
+          {children}
+        </div>
+      </div>
+      <div className='content-container-6-right-border'>
+        <div className='content-container-6-inner-shape' />
+      </div>
+      <div className='content-container-6-lower-thick-corner' />
+    </ContentContainer6Styles>
+  )
+}
 
 ContentContainer6.propTypes = { children: PropTypes.any }
 export default ContentContainer6

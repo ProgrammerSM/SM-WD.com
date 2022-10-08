@@ -1,6 +1,14 @@
 // Modules
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {
+  useContext,
+  useEffect,
+  useRef,
+} from 'react'
+
+// Context
+import { SettingsContext } from 'context/SettingsContext'
 
 // Styles
 const ContentContainer1Styles = styled.div`
@@ -16,6 +24,7 @@ const ContentContainer1Styles = styled.div`
   .content-container-1-bottom-line,
   .content-container-1-left-line {
     position: absolute;
+    z-index: -1;
   }
 
   .content-container-1-left-border,
@@ -95,23 +104,71 @@ const ContentContainer1Styles = styled.div`
   }
 `
 
-const ContentContainer1 = ({ children }) => (
-  <ContentContainer1Styles>
-    <div className='content-container-1-left-border'>
-      <div className='content-container-1-top-line' />
-      <div className='content-container-1-left-line' />
-    </div>
-    <div className='content-container-1-wrapper'>
-      <div className='content-container scroller'>
-        {children}
+const ContentContainer1 = ({ children }) => {
+  const hasAnimatedRef = useRef(false)
+  const containerRef = useRef()
+  const { isAnimationActive } = useContext(SettingsContext)
+
+  useEffect(() => {
+    if (hasAnimatedRef.current)
+      return
+
+    const contentContainer1 = containerRef.current
+
+    if (contentContainer1 && isAnimationActive) {
+      const contentContainer = contentContainer1.querySelector('.content-container-1-wrapper')
+      const leftBorder = contentContainer1.querySelector('.content-container-1-left-border')
+      const rightBorder = contentContainer1.querySelector('.content-container-1-right-border')
+      const topLine = contentContainer1.querySelector('.content-container-1-top-line')
+      const leftLine = contentContainer1.querySelector('.content-container-1-left-line')
+      const bottomLine = contentContainer1.querySelector('.content-container-1-bottom-line')
+      const rightLine = contentContainer1.querySelector('.content-container-1-right-line')
+
+      setTimeout(() => {
+        contentContainer.classList.add('animate')
+      }, 100)
+
+      setTimeout(() => {
+        leftBorder.classList.add('animate')
+        rightBorder.classList.add('animate')
+      }, 800)
+
+      setTimeout(() => {
+        topLine.classList.add('animate')
+        leftLine.classList.add('animate')
+        bottomLine.classList.add('animate')
+        rightLine.classList.add('animate')
+      }, 1000)
+    }
+
+    hasAnimatedRef.current = true
+  }, [isAnimationActive])
+
+  const animationActiveClass = isAnimationActive
+    ? 'animation-active'
+    : 'no-animation'
+
+  return (
+    <ContentContainer1Styles
+      className={animationActiveClass}
+      ref={containerRef}
+    >
+      <div className='content-container-1-left-border'>
+        <div className='content-container-1-top-line' />
+        <div className='content-container-1-left-line' />
       </div>
-    </div>
-    <div className='content-container-1-right-border'>
-      <div className='content-container-1-bottom-line' />
-      <div className='content-container-1-right-line' />
-    </div>
-  </ContentContainer1Styles>
-)
+      <div className='content-container-1-wrapper'>
+        <div className='content-container scroller'>
+          {children}
+        </div>
+      </div>
+      <div className='content-container-1-right-border'>
+        <div className='content-container-1-bottom-line' />
+        <div className='content-container-1-right-line' />
+      </div>
+    </ContentContainer1Styles>
+  )
+}
 
 ContentContainer1.propTypes = { children: PropTypes.any }
 export default ContentContainer1
