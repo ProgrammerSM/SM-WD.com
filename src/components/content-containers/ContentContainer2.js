@@ -14,10 +14,43 @@ import { SettingsContext } from 'context/SettingsContext'
 const ContentContainer2Styles = styled.div`
   position: relative;
   margin: 9px;
-  
-  .content-container-2-content {
-    > *:last-of-type {
-      margin-bottom: 0;
+
+  &.animation-active {
+    .content-container-2-wrapper { transition: opacity .5s linear; }
+
+    .content-container-2-bottom-corner-shape,
+    .content-container-2-top-corner-shape {
+      transition: width .2s .2s linear, height .2s linear;
+    }
+
+    .content-container-2-top-corner-shape::after,
+    .content-container-2-bottom-corner-shape::before {
+      transition: height .2s linear .6s;
+    }
+
+    .content-container-2-top-corner-shape::before,
+    .content-container-2-bottom-corner-shape::after {
+      transition: width .2s linear .4s;
+    }
+  }
+
+  &.no-animation {
+    .content-container-2-wrapper { opacity: 1; }
+
+    .content-container-2-bottom-corner-shape,
+    .content-container-2-top-corner-shape {
+      width: 75%;
+      height: 100%;
+    }
+
+    .content-container-2-top-corner-shape::after,
+    .content-container-2-bottom-corner-shape::before {
+      height: 20%;
+    }
+
+    .content-container-2-top-corner-shape::before,
+    .content-container-2-bottom-corner-shape::after {
+      width: 75%;
     }
   }
 
@@ -34,43 +67,62 @@ const ContentContainer2Styles = styled.div`
   .content-container-2-bottom-corner-shape,
   .content-container-2-top-corner-shape {
     top: 0;
-    width: 75%;
-    height: 100%;
+    width: 0;
+    height: 0;
+
+    &.animate {
+      width: 75%;
+      height: 100%;
+    }
   }
 
   .content-container-2-bottom-corner-shape {
-    left: 0;
-    border-bottom: solid 2px var(--primary-color);
-    border-left: solid 2px var(--primary-color);
+    left: 0;    
+
+    &.animate {
+      border-bottom: solid 2px var(--primary-color);
+      border-left: solid 2px var(--primary-color);
+
+      &::before { border-left: solid 4px; }
+      &::after { border-bottom: solid 4px; }
+    }
 
     &::before {
       top: 20px;
       left: -10px;
-      border-left: solid 4px;
     }
 
     &::after {
       bottom: -10px;
       left: -2px;
-      border-bottom: solid 4px;
     }
+  }
+
+  .content-container-2-wrapper {
+    opacity: 0;
+
+    &.animate { opacity: 1; }
   }
 
   .content-container-2-top-corner-shape {
     right: 0;
-    border-top: solid 2px var(--primary-color);
-    border-right: solid 2px var(--primary-color);
+
+    &.animate {
+      border-top: solid 2px var(--primary-color);
+      border-right: solid 2px var(--primary-color);
+
+      &::before { border-top: solid 4px; }
+      &::after { border-right: solid 4px; }
+    }
 
     &::before {
       top: -10px;
       right: -2px;
-      border-top: solid 4px;
     }
 
     &::after {
       right: -10px;
       bottom: 20px;
-      border-right: solid 4px;
     }
   }
 
@@ -83,13 +135,24 @@ const ContentContainer2Styles = styled.div`
 
   .content-container-2-top-corner-shape::after,
   .content-container-2-bottom-corner-shape::before {
-    height: 20%;
+    height: 0;
     border-color: var(--accent-color-2);
   }
+
+  .content-container-2-top-corner-shape.animate::after,
+  .content-container-2-bottom-corner-shape.animate::before {
+    height: 20%;
+  }
+  
   .content-container-2-top-corner-shape::before,
   .content-container-2-bottom-corner-shape::after {
-    width: 75%;
+    width: 0;
     border-color: var(--accent-color-1);
+  }
+
+  .content-container-2-top-corner-shape.animate::before,
+  .content-container-2-bottom-corner-shape.animate::after {
+    width: 75%;
   }
 `
 

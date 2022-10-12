@@ -15,6 +15,14 @@ const ContentContainer3Styles = styled.div`
   position: relative;
   margin: 8px 9px;
 
+  &.animation-active {
+    .content-container-3-wrapper { transition: opacity .5s linear; }
+  }
+
+  &.no-animation {
+    .content-container-3-wrapper { opacity: 1; }
+  }
+
   .content-container-3-lower-thin-corner,
   .content-container-3-lower-thin-corner::before,
   .content-container-3-lower-thick-corner,
@@ -70,6 +78,12 @@ const ContentContainer3Styles = styled.div`
       right: -10px;
       border-right: solid 4px;
     }
+  }
+
+  .content-container-3-wrapper {
+    opacity: 0;
+
+    &.animate { opacity: 1; }
   }
 
   .content-container-3-lower-thick-corner {

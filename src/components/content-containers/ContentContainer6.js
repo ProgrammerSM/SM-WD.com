@@ -15,6 +15,14 @@ const ContentContainer6Styles = styled.div`
   position: relative;
   margin: 9px;
 
+  &.animation-active {
+    .content-container-6-wrapper { transition: opacity .5s linear; }
+  }
+
+  &.no-animation {
+    .content-container-6-wrapper { opacity: 1; }
+  }
+
   .content-container-6-upper-thick-corner,
   .content-container-6-left-border,
   .content-container-6-inner-shape,
@@ -89,6 +97,12 @@ const ContentContainer6Styles = styled.div`
         left: -5px;
       }
     }
+  }
+
+  .content-container-6-wrapper {
+    opacity: 0;
+
+    &.animate { opacity: 1; }
   }
 
   .content-container-6-right-border {

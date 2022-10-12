@@ -17,6 +17,14 @@ const ContentContainer5Styles = styled.div`
   position: relative;
   margin: 9px;
 
+  &.animation-active {
+    .content-container-5-wrapper { transition: opacity .5s linear; }
+  }
+
+  &.no-animation {
+    .content-container-5-wrapper { opacity: 1; }
+  }
+
   .content-container-5-upper-corner-shape,
   .content-container-5-upper-inner-shape,
   .content-container-5-upper-inner-shape::after,
@@ -119,6 +127,12 @@ const ContentContainer5Styles = styled.div`
     &::after {
       right: 20px;
     }
+  }
+
+  .content-container-5-wrapper {
+    opacity: 0;
+
+    &.animate { opacity: 1; }
   }
 
   .content-container-5-lower-corner-shape {

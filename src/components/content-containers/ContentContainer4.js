@@ -15,6 +15,14 @@ const ContentContainer4Styles = styled.div`
   position: relative;
   margin: 9px;
 
+  &.animation-active {
+    .content-container-4-wrapper { transition: opacity .5s linear; }
+  }
+
+  &.no-animation {
+    .content-container-4-wrapper { opacity: 1; }
+  }
+
   .content-container-4-border-top-shape,
   .content-container-4-top-bottom-border,
   .content-container-4-left-right-border,
@@ -103,6 +111,12 @@ const ContentContainer4Styles = styled.div`
     border-top: solid 2px var(--primary-color);
     border-bottom: solid 2px var(--primary-color);
     transform: translateX(-50%);
+  }
+
+  .content-container-4-wrapper {
+    opacity: 0;
+
+    &.animate { opacity: 1; }
   }
 
   .content-container-4-left-right-border {
