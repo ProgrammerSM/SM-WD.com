@@ -17,10 +17,50 @@ const ContentContainer4Styles = styled.div`
 
   &.animation-active {
     .content-container-4-wrapper { transition: opacity .5s linear; }
+    .content-container-4-left-shape-border,
+    .content-container-4-center-shape,
+    .content-container-4-right-shape-border {
+      transition: width .2s linear;
+    }
+
+    .content-container-4-center-shape::before,
+    .content-container-4-center-shape::after {
+      transition: height .2s linear .2s;
+    }
+
+    .content-container-4-top-bottom-border {
+      transition: width .2s linear .6s;
+    }
+
+    .content-container-4-left-right-border {
+      transition: height .2s linear .4s;
+    }
   }
 
   &.no-animation {
     .content-container-4-wrapper { opacity: 1; }
+    .content-container-4-left-shape-border,
+    .content-container-4-center-shape,
+    .content-container-4-right-shape-border {
+      width: 100%;
+    }
+
+    .content-container-4-center-shape::before,
+    .content-container-4-center-shape::after {
+      height: 20px;
+    }
+
+    .content-container-4-top-bottom-border {
+      width: 100%;
+      border-top: solid 2px var(--primary-color);
+      border-bottom: solid 2px var(--primary-color);
+    }
+
+    .content-container-4-left-right-border {
+      height: 20%;
+      border-right: solid 4px var(--accent-color-2);
+      border-left: solid 4px var(--accent-color-2);
+    }
   }
 
   .content-container-4-border-top-shape,
@@ -35,6 +75,7 @@ const ContentContainer4Styles = styled.div`
   .content-container-4-border-bottom-shape {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
     column-gap: 10px;
     width: 100%;
     height: 20px;
@@ -51,7 +92,11 @@ const ContentContainer4Styles = styled.div`
   .content-container-4-left-shape-border,
   .content-container-4-center-shape,
   .content-container-4-right-shape-border {
-    width: 100%;
+    width: 0;
+
+    &.animate {
+      width: 100%;
+    }
   }
 
   .content-container-4-border-top-shape .content-container-4-center-shape::before,
@@ -85,10 +130,17 @@ const ContentContainer4Styles = styled.div`
   .content-container-4-center-shape {
     position: relative;
 
+    &.animate {
+      &::before,
+      &::after {
+        height: 20px;
+      }
+    }
+
     &::before,
     &::after {
       position: absolute;
-      height: 20px;
+      height: 0;
       content: '';
     }
 
@@ -107,10 +159,14 @@ const ContentContainer4Styles = styled.div`
     top: 0;
     bottom: 0;
     left: 50%;
-    width: 100%;
+    width: 0;
     border-top: solid 2px var(--primary-color);
     border-bottom: solid 2px var(--primary-color);
     transform: translateX(-50%);
+
+    &.animate {
+      width: 100%;
+    }
   }
 
   .content-container-4-wrapper {
@@ -122,10 +178,14 @@ const ContentContainer4Styles = styled.div`
   .content-container-4-left-right-border {
     top: 50%;
     width: 100%;
-    height: 20%;
+    height: 0;
     transform: translateY(-50%);
     border-right: solid 4px var(--accent-color-2);
     border-left: solid 4px var(--accent-color-2);
+
+    &.animate {
+      height: 20%;
+    }
   }
 
   .content-container-4-border-bottom-shape {
@@ -164,9 +224,9 @@ const ContentContainer4 = ({ children }) => {
       const leftRightBorder = contentContainer4.querySelector('.content-container-4-left-right-border')
       const topShape = contentContainer4.querySelector('.content-container-4-border-top-shape')
       const bottomShape = contentContainer4.querySelector('.content-container-4-border-bottom-shape')
-      const shapeLeft = contentContainer4.querySelector('.content-container-4-left-shape-border')
-      const shapeCenter = contentContainer4.querySelector('.content-container-4-center-shape')
-      const shapeRight = contentContainer4.querySelector('.content-container-4-right-shape-border')
+      const leftShapes = contentContainer4.querySelectorAll('.content-container-4-left-shape-border')
+      const centerShapes = contentContainer4.querySelectorAll('.content-container-4-center-shape')
+      const rightShapes = contentContainer4.querySelectorAll('.content-container-4-right-shape-border')
 
       setTimeout(() => {
         contentContainer.classList.add('animate')
@@ -180,9 +240,9 @@ const ContentContainer4 = ({ children }) => {
         leftRightBorder.classList.add('animate')
         topShape.classList.add('animate')
         bottomShape.classList.add('animate')
-        shapeLeft.classList.add('animate')
-        shapeCenter.classList.add('animate')
-        shapeRight.classList.add('animate')
+        leftShapes.forEach(shape => { shape.classList.add('animate') })
+        centerShapes.forEach(shape => { shape.classList.add('animate') })
+        rightShapes.forEach(shape => { shape.classList.add('animate') })
       }, 1000)
     }
 

@@ -17,10 +17,73 @@ const ContentContainer3Styles = styled.div`
 
   &.animation-active {
     .content-container-3-wrapper { transition: opacity .5s linear; }
+    .content-container-3-lower-thin-corner,
+    .content-container-3-upper-thin-corner {
+      transition: width .2s .2s linear, height .2s linear;
+    }
+
+    .content-container-3-lower-thin-corner::before,
+    .content-container-3-upper-thin-corner::after {
+      transition: height .2s linear .6s;
+    }
+
+    .content-container-3-lower-thick-corner,
+    .content-container-3-upper-thick-corner {
+      transition: width .2s .2s linear, height .2s linear;
+    }
   }
 
   &.no-animation {
     .content-container-3-wrapper { opacity: 1; }
+    .content-container-3-lower-thin-corner,
+    .content-container-3-upper-thin-corner {
+      width: 30%;
+      height: 80%;
+
+      &::before,
+      &::after {
+        height: 20%;
+      }
+    }
+
+    .content-container-3-lower-thin-corner::before,
+    .content-container-3-upper-thin-corner::after {
+      height: 20%;
+    }
+
+    .content-container-3-lower-thick-corner,
+    .content-container-3-upper-thick-corner {
+      width: 80%;
+      height: 30%;
+    }
+
+    .content-container-3-lower-thin-corner {
+      border-bottom: solid 2px;
+      border-left: solid 2px;
+
+      &::before {
+        border-left: solid 4px;
+      }
+    }
+    
+    .content-container-3-upper-thin-corner {
+      border-top: solid 2px;
+      border-right: solid 2px;
+
+      &::after {
+        border-right: solid 4px;
+      }
+    }
+
+    .content-container-3-lower-thick-corner {
+      border-top: solid 4px;
+      border-left: solid 4px;
+    }
+
+    .content-container-3-upper-thick-corner {
+      border-right: solid 4px;
+      border-bottom: solid 4px;
+    }
   }
 
   .content-container-3-lower-thin-corner,
@@ -35,48 +98,75 @@ const ContentContainer3Styles = styled.div`
 
   .content-container-3-lower-thin-corner,
   .content-container-3-upper-thin-corner {
-    width: 30%;
-    height: 80%;
+    width: 0;
+    height: 0;
     border-color: var(--primary-color);
+
+    &.animate {
+      width: 30%;
+      height: 80%;
+
+      &::before,
+      &::after {
+        height: 20%;
+      }
+    }
   }
 
   .content-container-3-lower-thin-corner::before,
   .content-container-3-upper-thin-corner::after {
-    height: 20%;
+    height: 0;
     border-color: var(--accent-color-2);
     content: "";
   }
 
   .content-container-3-lower-thick-corner,
   .content-container-3-upper-thick-corner {
-    width: 80%;
-    height: 30%;
+    width: 0;
+    height: 0;
     border-color: var(--accent-color-1);
+
+    &.animate {
+      width: 80%;
+      height: 30%;
+    }
   }
   
   .content-container-3-lower-thin-corner {
     bottom: 0;
     left: 0;
-    border-bottom: solid 2px;
-    border-left: solid 2px;
+
+    &.animate {
+      border-bottom: solid 2px;
+      border-left: solid 2px;
+
+      &::before {
+        border-left: solid 4px;
+      }
+    }
 
     &::before {
       bottom: 20px;
       left: -10px;
-      border-left: solid 4px;
     }
   }
 
   .content-container-3-upper-thin-corner {
     top: 0;
     right: 0;
-    border-top: solid 2px;
-    border-right: solid 2px;
+
+    &.animate {
+      border-top: solid 2px;
+      border-right: solid 2px;
+
+      &::after {
+        border-right: solid 4px;
+      }
+    }
 
     &::after {
       top: 20px;
       right: -10px;
-      border-right: solid 4px;
     }
   }
 
@@ -89,15 +179,21 @@ const ContentContainer3Styles = styled.div`
   .content-container-3-lower-thick-corner {
     top: -8px;
     left: -8px;
-    border-top: solid 4px;
-    border-left: solid 4px;
+
+    &.animate {
+      border-top: solid 4px;
+      border-left: solid 4px;
+    }
   }
 
   .content-container-3-upper-thick-corner {
     right: -8px;
     bottom: -8px;
-    border-right: solid 4px;
-    border-bottom: solid 4px;
+
+    &.animate {
+      border-right: solid 4px;
+      border-bottom: solid 4px;
+    }
   }
 `
 

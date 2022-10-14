@@ -52,6 +52,22 @@ const ContentContainer2Styles = styled.div`
     .content-container-2-bottom-corner-shape::after {
       width: 75%;
     }
+
+    .content-container-2-top-corner-shape {
+      border-top: solid 2px var(--primary-color);
+      border-right: solid 2px var(--primary-color);
+
+      &::before { border-top: solid 4px; }
+      &::after { border-right: solid 4px; }
+    }
+    
+    .content-container-2-bottom-corner-shape {
+      border-bottom: solid 2px var(--primary-color);
+      border-left: solid 2px var(--primary-color);
+      
+      &::before { border-left: solid 4px; }
+      &::after { border-bottom: solid 4px; }
+    }
   }
 
   .content-container-2-bottom-corner-shape,
