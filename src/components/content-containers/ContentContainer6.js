@@ -17,10 +17,75 @@ const ContentContainer6Styles = styled.div`
 
   &.animation-active {
     .content-container-6-wrapper { transition: opacity .5s linear; }
+    .content-container-6-upper-thick-corner,
+    .content-container-6-lower-thick-corner {
+      transition: width .2s .4s linear, height .2s .2s linear;
+    }
+
+    .content-container-6-left-border,
+    .content-container-6-right-border {
+      transition: width .2s linear, height .2s linear;
+    }
+
+    .content-container-6-inner-shape {
+      transition: height .2s .2s linear;
+      
+      &::before,
+      &::after {
+        transition: width .2s .4s linear;
+      }
+    }
   }
 
   &.no-animation {
     .content-container-6-wrapper { opacity: 1; }
+    .content-container-6-upper-thick-corner,
+    .content-container-6-lower-thick-corner {
+      width: 40%;
+      height: 10%;
+    }
+
+    .content-container-6-left-border,
+    .content-container-6-right-border {
+      width: 20%;
+      height: 100%;
+    }
+
+    .content-container-6-upper-thick-corner {
+      border-top: solid 4px;
+      border-right: solid 4px;
+    }
+
+    .content-container-6-left-border {
+      border-top: solid 2px;
+      border-left: solid 2px;
+
+      .content-container-6-inner-shape { border-right: solid 2px; }
+    }
+
+    .content-container-6-right-border {
+      border-right: solid 2px;
+      border-bottom: solid 2px;
+
+      .content-container-6-inner-shape { border-left: solid 2px; }
+    }
+
+    .content-container-6-inner-shape {
+      height: 80%;
+      
+      &::before,
+      &::after {
+        width: 19px;
+      }
+
+      &::before { border-top: solid 2px; }
+      &::after { border-bottom: solid 2px; }
+    }
+
+    .content-container-6-lower-thick-corner {
+      border-bottom: solid 4px;
+      border-left: solid 4px;
+    }
   }
 
   .content-container-6-upper-thick-corner,
@@ -44,15 +109,25 @@ const ContentContainer6Styles = styled.div`
 
   .content-container-6-upper-thick-corner,
   .content-container-6-lower-thick-corner {
-    width: 40%;
-    height: 10%;
+    width: 0;
+    height: 0;
     border-color: var(--accent-color-1);
+    
+    &.animate {
+      width: 40%;
+      height: 10%;
+    }
   }
 
   .content-container-6-left-border,
   .content-container-6-right-border {
-    width: 20%;
-    height: 100%;
+    width: 0;
+    height: 0;
+
+    &.animate {
+      width: 20%;
+      height: 100%;
+    }
   }
 
   .content-container-6-left-border .content-container-6-inner-shape::before,
@@ -67,31 +142,30 @@ const ContentContainer6Styles = styled.div`
     transform: rotate(-35deg);
   }
 
-  .content-container-6-inner-shape::before,
-  .content-container-6-inner-shape::after {
-    width: 19px;
-    height: 10px;
-    content: '';
-  }
-
   .content-container-6-upper-thick-corner {
     top: -8px;
     right: -8px;
-    border-top: solid 4px;
-    border-right: solid 4px;
+
+    &.animate {
+      border-top: solid 4px;
+      border-right: solid 4px;
+    }
   }
 
   .content-container-6-left-border {
     top: 0;
     left: 0;
-    border-top: solid 2px;
-    border-left: solid 2px;
+
+    &.animate {
+      border-top: solid 2px;
+      border-left: solid 2px;
+    }
 
     .content-container-6-inner-shape {
       top: 0;
       left: 0;
-      border-right: solid 2px;
 
+      &.animate { border-right: solid 2px; }
       &::before,
       &::after {
         left: -5px;
@@ -108,14 +182,17 @@ const ContentContainer6Styles = styled.div`
   .content-container-6-right-border {
     right: 0;
     bottom: 0;
-    border-right: solid 2px;
-    border-bottom: solid 2px;
+
+    &.animate {
+      border-right: solid 2px;
+      border-bottom: solid 2px;
+    }
 
     .content-container-6-inner-shape {
       right: 0;
       bottom: 0;
-      border-left: solid 2px;
 
+      &.animate { border-left: solid 2px; }
       &::before,
       &::after {
         right: -5px;
@@ -125,17 +202,36 @@ const ContentContainer6Styles = styled.div`
 
   .content-container-6-inner-shape {
     width: 15px;
-    height: 80%;
+    height: 0;
 
-    &::before { border-top: solid 2px; }
-    &::after { border-bottom: solid 2px; }
+    &.animate {
+      height: 80%;
+      
+      &::before,
+      &::after {
+        width: 19px;
+      }
+
+      &::before { border-top: solid 2px; }
+      &::after { border-bottom: solid 2px; }
+    }
+
+    &::before,
+    &::after {
+      width: 0;
+      height: 10px;
+      content: '';
+    }
   }
 
   .content-container-6-lower-thick-corner {
     bottom: -8px;
     left: -8px;
-    border-bottom: solid 4px;
-    border-left: solid 4px;
+
+    &.animate {
+      border-bottom: solid 4px;
+      border-left: solid 4px;
+    }
   }
 `
 
@@ -156,7 +252,7 @@ const ContentContainer6 = ({ children }) => {
       const leftBorder = contentContainer6.querySelector('.content-container-6-left-border')
       const lowerThickCorner = contentContainer6.querySelector('.content-container-6-lower-thick-corner')
       const rightBorder = contentContainer6.querySelector('.content-container-6-right-border')
-      const innerShape = contentContainer6.querySelector('.content-container-6-inner-shape')
+      const innerShapes = contentContainer6.querySelectorAll('.content-container-6-inner-shape')
 
       setTimeout(() => {
         contentContainer.classList.add('animate')
@@ -165,12 +261,12 @@ const ContentContainer6 = ({ children }) => {
       setTimeout(() => {
         leftBorder.classList.add('animate')
         rightBorder.classList.add('animate')
+        innerShapes.forEach(shape => { shape.classList.add('animate') })
       }, 800)
 
       setTimeout(() => {
         upperThickCorner.classList.add('animate')
         lowerThickCorner.classList.add('animate')
-        innerShape.classList.add('animate')
       }, 1000)
     }
 
