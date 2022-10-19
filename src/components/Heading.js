@@ -16,51 +16,11 @@ import { mediumUp } from 'data/media-queries'
 // Styles
 const HeadingStyles = styled.div`
   position: relative;
-  margin-bottom: calc(1.38rem + 10px);
+  margin-bottom: calc(var(--space-standard) + 10px);
   text-align: center;
   opacity: 0;
 
-  ${mediumUp} {
-    text-align: left;
-  }
-
   &.animate { opacity: 1; }
-  &.center {
-    text-align: center;
-    
-    .bottom-border {
-      left: 50%;
-      right: 50%;
-
-      &::after {
-        left: 50%;
-        right: 50%;
-      }
-
-      &.animate {
-        left: 0;
-        right: 0;
-        
-        &::after {
-          left: 20%;
-          right: 20%;
-        }
-      }
-    }
-  }
-
-  &.right {
-    text-align: right;
-    
-    .bottom-border {
-      left: 100%;
-      right: 0;
-      
-      &::after { right: 0; }
-      &.animate { left: 0; }
-    }
-  }
-
   &.no-animation {
     opacity: 1;
 
@@ -69,22 +29,15 @@ const HeadingStyles = styled.div`
 
       &::after { width: 60%; }
     }
-
-    &.center .bottom-border::after {
-      left: 20%;
-      right: 20%;
-    }
-
-    &.right .bottom-border::after { left: 0; }
   }
 
   &.animation-active {
     transition: opacity .5s linear;
 
     .bottom-border {
-      transition: all .4s linear;
+      transition: width .4s linear;
 
-      &::after { transition: all .6s .2s linear; }
+      &::after { transition: width .6s .2s linear; }
     }
   }
 
@@ -98,11 +51,6 @@ const HeadingStyles = styled.div`
     box-shadow: inset 0 -5px 5px -5px var(--primary-color);
     transform: translateX(-50%);
 
-    ${mediumUp} {
-      left: 0; 
-      transform: none;
-    }
-
     &::after {
       position: absolute;
       left: 50%;
@@ -113,11 +61,6 @@ const HeadingStyles = styled.div`
       box-shadow: inset 0 -5px 5px -5px var(--accent-color-1);
       transform: translateX(-50%);
       content: '';
-
-      ${mediumUp} {
-        left: 0; 
-        transform: none;
-      }
     }
 
     &.animate {
@@ -128,6 +71,67 @@ const HeadingStyles = styled.div`
   }
 
   h1, h2, h3, h4, h5 { margin-bottom: 0; }
+
+  ${mediumUp} {
+    text-align: left;
+
+    .bottom-border {
+      left: 0;
+      transform: none;
+
+      &::after {
+        left: 0;
+        transform: none;
+      }
+    }
+
+    &.center {
+      text-align: center;
+
+      .bottom-border {
+        left: 50%;
+        transform: translateX(-50%);
+
+        &::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
+
+    &.right {
+      text-align: right;
+
+      .bottom-border {
+        right: 0;
+        left: unset;
+        transform: none;
+
+        &::after {
+          right: 0;
+          left: unset;
+          transform: none;
+        }
+      }
+    }
+
+    &.no-animation {
+      .bottom-border::after {
+        left: 0; 
+        transform: none;
+      }
+
+      &.center .bottom-border::after {
+        left: 20%;
+      }
+
+      &.right .bottom-border::after {
+        left: unset;
+        right: 0;
+        transform: none;
+      }
+    }
+  }
 `
 
 const Heading = ({
@@ -167,11 +171,7 @@ const Heading = ({
 
   return (
     <HeadingStyles
-      className={`
-        ${animationActiveClass}
-        ${isCenter ? ' center' : ''}
-        ${isRight ? ' right' : ''}
-      `}
+      className={`${animationActiveClass}${isCenter ? ' center' : ''}${isRight ? ' right' : ''}`}
       data-testid='animated-heading'
       ref={headingRef}
     >

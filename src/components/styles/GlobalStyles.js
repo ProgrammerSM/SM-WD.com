@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
     --space-large: 1.25rem;
     --space-medium: 1rem;
     --space-small: .75rem;
+    --space-standard: 1.38rem;
     --space-extra-small: .5rem;
   }
 `

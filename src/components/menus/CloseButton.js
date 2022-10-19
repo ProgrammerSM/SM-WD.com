@@ -22,21 +22,7 @@ const fadeIn = keyframes`
   100% { opacity: 1; }
 `
 
-const CloseButtonStyles = styled.div`  
-  ${small} {
-    position: fixed;
-    bottom: 60px;
-    right: 39px;
-    left: 39px;
-    padding: 10px 0;
-    background-color: var(--background-color);
-    z-index: 2;
-  }
-
-  ${mediumUp} {
-    margin-left: auto;
-  }
-
+const CloseButtonStyles = styled.div`
   .close-button {
     display: flex;
     align-items: center;
@@ -58,8 +44,6 @@ const CloseButtonStyles = styled.div`
       color: var(--accent-color-1);
       border-color: inherit;
     }
-
-    ${small} { margin: 0 auto; }
   }
 
   .button-text {
@@ -71,6 +55,23 @@ const CloseButtonStyles = styled.div`
     display: flex;
     width: var(--space-medium);
   }
+  
+  ${small} {
+    position: fixed;
+    bottom: 60px;
+    right: 39px;
+    left: 39px;
+    padding: 10px 0;
+    background-color: var(--background-color);
+    z-index: 2;
+    
+    .close-button { margin: 0 auto; }
+  }  
+
+  ${mediumUp} {
+    margin-left: auto;
+  }
+
 `
 
 const CloseButton = () => {
