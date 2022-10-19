@@ -11,14 +11,14 @@ import {
 import Image from 'next/image'
 
 // Context
-import { CurrentThemeContext } from 'context/CurrentThemeContext'
 import { SettingsContext } from 'context/SettingsContext'
 
 // Styles
 const ShapeStyles = styled.div`
   position: relative;
   display: inline-block;
-  margin: calc(1.38rem + 8px) 8px;
+  margin: calc(var(--space-standard) + 8px) 8px;
+  background-color: var(--transparent-background);
   opacity: 0;
 
   &.animate { opacity: 1; }
@@ -308,7 +308,6 @@ const Button = ({
 }) => {
   const hasAnimatedRef = useRef(false)
   const imageRef = useRef()
-  const { theme } = useContext(CurrentThemeContext)
   const { isAnimationActive } = useContext(SettingsContext)
 
   useEffect(() => {
@@ -353,11 +352,19 @@ const Button = ({
     ? 'animation-active'
     : 'no-animation'
 
+  if (!image)
+    return <p>No Image Provided</p>
+
+  if (!width || !height)
+    return <p>No Image Size Provided</p>
+
+  if (!imageAlt)
+    return <p>No Image Alt Provided</p>
+
   return (
     <ShapeStyles
       className={animationActiveClass}
       ref={imageRef}
-      style={{ backgroundColor: `${theme.primaryColor}26` }}
     >
       <div className='top-shape'>
         <div className='top-line' />

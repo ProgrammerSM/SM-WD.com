@@ -100,8 +100,6 @@ const BackgroundSVGStyles = styled.svg`
   .circle3 {
     stroke-width: 1.5%;
     stroke-dasharray: 1%;
-
-    ${mediumUp} { stroke-dasharray: .3%; }
   }
 
   .circle5 {
@@ -120,8 +118,6 @@ const BackgroundSVGStyles = styled.svg`
   .circle9 {
     stroke-width: 5%;
     stroke-dasharray: .8%;
-
-    ${mediumUp} { stroke-dasharray: .48%; }
   }
 
   .circle10 {
@@ -142,6 +138,11 @@ const BackgroundSVGStyles = styled.svg`
     stroke-width: 2%;
     stroke-dasharray: 15% 96%;
     transform: rotate(-13deg);
+  }
+
+  ${mediumUp} {
+    .circle3 {  stroke-dasharray: .3%; }
+    .circle9 { stroke-dasharray: .48%; }
   }
 `
 
