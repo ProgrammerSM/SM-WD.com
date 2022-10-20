@@ -16,7 +16,9 @@ const isDev = process.env.NODE_ENV === 'development'
 const ContactForm = () => {
   const nameRegEx = /^[A-Za-zÀ-ÿ-,.']+$/
   const [recaptchaValue, setRecaptchaValue] = useState(null)
+
   const {
+    formState: { errors },
     register,
     handleSubmit,
   } = useForm()
@@ -69,6 +71,9 @@ const ContactForm = () => {
               required: true,
             })}
           />
+          {errors['First Name']?.type === 'maxLength' && <p role='alert'>Character limit exceeded</p>}
+          {errors['First Name']?.type === 'pattern' && <p role='alert'>Enter valid first name</p>}
+          {errors['First Name']?.type === 'required' && <p role='alert'>First name is required</p>}
         </div>
 
         <div>
@@ -81,6 +86,8 @@ const ContactForm = () => {
               pattern: nameRegEx,
             })}
           />
+          {errors['Last Name']?.type === 'maxLength' && <p role='alert'>Character limit exceeded</p>}
+          {errors['Last Name']?.type === 'pattern' && <p role='alert'>Enter valid last Name</p>}
         </div>
 
         <div>
@@ -93,6 +100,8 @@ const ContactForm = () => {
               required: true,
             })}
           />
+          {errors['Email']?.type === 'pattern' && <p role='alert'>Enter valid email</p>}
+          {errors['Email']?.type === 'required' && <p role='alert'>Email is required</p>}
         </div>
 
         <div>
@@ -101,11 +110,26 @@ const ContactForm = () => {
             id='message'
             {...register('Message', { required: true })}
           />
+          {errors['Message']?.type === 'required' && <p role='alert'>Message is required</p>}
         </div>
 
-        {!isDev && (
+        {isDev ? (
+          <div
+            style={{
+              alignItems: 'center',
+              border: 'solid 2px var(--primary-color)',
+              display: 'flex',
+              height: '78px',
+              justifyContent: 'center',
+              width: '304px',
+            }}
+          >
+            <p style={{ margin: 0 }}>reCaptcha Goes Here</p>
+          </div>
+        ) : (
           <ReCAPTCHA
             sitekey={process.env.CONTACT_FORM_RECAPTCHA_KEY}
+            size='compact'
             onChange={setRecaptchaValue}
           />
         )}
