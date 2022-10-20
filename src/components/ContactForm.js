@@ -57,6 +57,12 @@ const ContactForm = () => {
       name='sm-wd-contact'
       onSubmit={handleSubmit(onSubmit)}
     >
+      <input
+        type='hidden'
+        value='New Contact Submission from {{Email}}'
+        {...register('Subject')}
+      />
+
       <fieldset>
         <div>
           <label htmlFor='first_name'>First Name</label>
