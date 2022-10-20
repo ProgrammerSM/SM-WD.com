@@ -1,5 +1,7 @@
+import ContactForm from 'components/ContactForm'
+
 const contact = () => (
-  <div>contact</div>
+  <ContactForm />
 )
 
 export default contact

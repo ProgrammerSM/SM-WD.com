@@ -6,6 +6,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  env: {
+    FORMSPREE_CONTACT_FORM: process.env.FORMSPREE_CONTACT_FORM
+  },
   images: {
     domains: ['spaceholder.cc'],
   },
