@@ -162,7 +162,7 @@ const Layout = ({ children }) => {
           --primary-color:          ${theme.primaryColor};
           --font-color:             ${theme.fontColor};
           --background-color:       ${theme.backgroundColor};
-          --transparent-background: ${theme.primaryColor}26;
+          --transparent-background: ${theme.primaryColor}33;
           --accent-color-1:         ${theme.accentColor1};
           --accent-color-2:         ${theme.accentColor2};
           --accent-color-3:         ${theme.accentColor3};
