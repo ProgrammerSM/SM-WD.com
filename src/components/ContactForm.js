@@ -225,7 +225,7 @@ const ContactFormStyles = styled.div`
 const isProduction = process.env.NODE_ENV === 'production'
 
 const ContactForm = () => {
-  const nameRegEx = /^[A-Za-zÀ-ÿ-,.']+$/
+  const nameRegEx = /^[A-Za-zÀ-ÿ-,.' ]+$/
   const recaptchaRef = useRef()
   const router = useRouter()
 
