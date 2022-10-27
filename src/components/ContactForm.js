@@ -31,18 +31,23 @@ const ContactFormStyles = styled.div`
   ${largeUp} { --left-shape-width: 25%; }
   
   fieldset {
-    padding: 2rem 0 2.5rem;
+    padding: 2rem 0;
     border: none;
+
+    &.have-errors {
+      padding-bottom: 0;
+    }
   }
   
   .field-wrapper {
     position: relative;
     display: flex;
     align-items: flex-end;
-    margin-bottom: 4.2rem;
+    margin-bottom: 2rem;
     margin-left: auto;
 
     &:last-of-type { margin-bottom: 0; }
+    &.has-error { margin-bottom: 3.6rem; }
   }
   
   .field-left-shape {
@@ -81,22 +86,18 @@ const ContactFormStyles = styled.div`
   input,
   textarea {
     width: var(--field-width);
-    height: 60px;
+    height: 50px;
     margin-left: auto;
-    padding: 20px 20px var(--space-extra-small) var(--space-extra-small);
+    padding: 20px 20px calc(var(--space-extra-small) - 5px) calc(var(--space-extra-small) - 2px);
     background: var(--transparent-background);
     color: var(--font-color);
-    font-size: 1.2rem;
+    font-size: 1rem;
     border: solid 2px var(--primary-color);
-
-    &:focus ~ .field-angle-border {
-      display: none;
-    }
 
     &:focus ~ label,
     &.valid ~ label {
-      top: -26px;
-      font-size: 1rem;
+      top: -21px;
+      font-size: .8rem;
 
       .field-type { margin-top: 4px; }
     }
@@ -124,6 +125,7 @@ const ContactFormStyles = styled.div`
   }
 
   .field-angle-border {
+    display: none;
     position: absolute;
     right: -14px;
     bottom: -12px;
@@ -136,10 +138,10 @@ const ContactFormStyles = styled.div`
 
   label {
     position: absolute;
-    top: 2px;
+    top: 4px;
     left: var(--left-shape-width);
     padding-left: var(--space-extra-small);
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
     font-family: var(--header-font);
     transition: all .2s linear;
@@ -154,7 +156,7 @@ const ContactFormStyles = styled.div`
 
   .error {
     position: absolute;
-    top: calc(100% + 5px);
+    top: calc(100% + 2.5px);
     left: var(--left-shape-width);
     margin: 0 var(--space-extra-small);
     color: red;
@@ -162,22 +164,60 @@ const ContactFormStyles = styled.div`
     font-weight: 600;
   }
 
-  button[type='submit'] { margin: 9px auto 0; }
+  button[type='submit'] { margin: 0 auto; }
 
   ${mediumUp} {
-    .field-wrapper { margin-bottom: 4.5rem; }
+    fieldset { padding-bottom: 3.75rem; }
+    
+    .field-wrapper {
+      margin-bottom: 3.5rem; 
+
+      &.has-error { margin-bottom: 4.5rem; }
+    }
+    
     .field-left-shape { display: flex; }
+    .field-angle-border { display: block; }
 
     input,
     textarea {
+      height: 60px;
+      padding-left: var(--space-extra-small);
+      padding-bottom: var(--space-extra-small);
+      font-size: 1.2rem;
       border-left: none;
+
+      &:focus ~ .field-angle-border {
+        display: none;
+      }
+
+      &:focus ~ label,
+      &.valid ~ label {
+        top: -26px;
+        font-size: 1rem;
+
+        .field-type { margin-top: 3px; }
+      }
     }
 
-    .error { font-size: inherit; }
+    label {
+      top: 2px;
+      font-size: 1.5rem;
+    }
+
+    .error {
+      top: calc(100% + 5px);
+      font-size: inherit;
+    }
   }
 
   ${largeUp} {
-    .field-wrapper { margin-bottom: 3rem; }
+    fieldset.have-errors { padding-bottom: .25rem; }
+    
+    .field-wrapper {
+      margin-bottom: 3.5rem;
+
+      &.has-error { margin-bottom: 3.5rem; }
+    }
   }
 `
 
@@ -191,8 +231,8 @@ const ContactForm = () => {
 
   const {
     formState: { errors },
-    register,
     handleSubmit,
+    register,
     watch,
   } = useForm()
 
@@ -249,8 +289,8 @@ const ContactForm = () => {
         name='sm-wd-contact'
         onSubmit={handleSubmit(onSubmit)}
       >
-        <fieldset>
-          <div className='field-wrapper'>
+        <fieldset className={`${errors?.['Message'] ? 'have-errors' : ''}`}>
+          <div className={`field-wrapper${errors?.['Name'] ? ' has-error' : ''}`}>
             <div className='field-left-shape'>
               <div className='shape-lines' />
               <div className='shape-lines' />
@@ -265,82 +305,41 @@ const ContactForm = () => {
               <div className='shape-lines' />
             </div>
             <input
-              className={allWatch?.['First Name'] && 'valid'}
+              className={allWatch?.['Name'] && 'valid'}
               id='first_name'
               type='text'
-              {...register('First Name', {
+              {...register('Name', {
                 maxLength: 80,
                 pattern: nameRegEx,
                 required: true,
               })}
             />
             <div className='field-angle-border' />
-            <label htmlFor='first_name'>First Name <span className='field-type'>required</span></label>
+            <label htmlFor='first_name'>Name <span className='field-type'>required</span></label>
 
-            {errors['First Name']?.type === 'maxLength' && (
+            {errors['Name']?.type === 'maxLength' && (
               <p
                 className='error'
                 role='alert'
               >Character limit exceeded</p>
             )}
 
-            {errors['First Name']?.type === 'pattern' && (
+            {errors['Name']?.type === 'pattern' && (
               <p
                 className='error'
                 role='alert'
-              >Enter valid first name</p>
+              >Enter valid name</p>
             )}
 
-            {errors['First Name']?.type === 'required' && (
+            {errors['Name']?.type === 'required' && (
               <p
                 className='error'
                 role='alert'
-              >First name is required</p>
-            )}
-          </div>
-
-          <div className='field-wrapper'>
-            <div className='field-left-shape'>
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-              <div className='shape-lines' />
-            </div>
-            <input
-              className={allWatch?.['Last Name'] && 'valid'}
-              id='last_name'
-              type='text'
-              {...register('Last Name', {
-                maxLength: 100,
-                pattern: nameRegEx,
-              })}
-            />
-            <div className='field-angle-border' />
-            <label htmlFor='last_name'>Last Name <span className='field-type'>optional</span></label>
-
-            {errors['Last Name']?.type === 'maxLength' && (
-              <p
-                className='error'
-                role='alert'
-              >Character limit exceeded</p>
-            )}
-
-            {errors['Last Name']?.type === 'pattern' && (
-              <p
-                className='error'
-                role='alert'
-              >Enter valid last Name</p>
+              >Name is required</p>
             )}
           </div>
 
-          <div className='field-wrapper'>
+          <div className={`field-wrapper${errors?.['Email'] ? ' has-error' : ''}`}>
             <div className='field-left-shape'>
               <div className='shape-lines' />
               <div className='shape-lines' />
@@ -381,7 +380,7 @@ const ContactForm = () => {
             )}
           </div>
 
-          <div className='field-wrapper'>
+          <div className={`field-wrapper${errors?.['Message'] ? ' has-error' : ''}`}>
             <div className='field-left-shape'>
               <div className='shape-lines' />
               <div className='shape-lines' />
