@@ -18,6 +18,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@formspree/react": "^2.4.0",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -26,6 +27,7 @@
     "react": "^18.2.0",
     "react-colorful": "^5.6.1",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.35.0",
     "react-resize-detector": "^7.1.2",
     "styled-components": "^5.3.5"
