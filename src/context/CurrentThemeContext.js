@@ -1,9 +1,13 @@
 // Modules
+import convert from 'color-convert'
 import { createContext } from 'react'
 import PropTypes from 'prop-types'
 
 // Data
 import themeColorGroups from 'data/themeColorGroups'
+
+// Functions
+import findHslErrorColor from 'functions/findErrorColor'
 
 // Hooks
 import useBrowserStorage from 'hooks/useBrowserStorage'
@@ -17,9 +21,13 @@ const CurrentThemeProvider = ({ children }) => {
   const [hasCustomTheme, setHasCustomTheme] = useBrowserStorage('smwdHasCustomTheme', false)
 
   let theme
-  if (themeName === 'custom')
-    theme = customTheme
-  else
+  if (themeName === 'custom') {
+    const errorColor = `#${convert.hsl.hex(findHslErrorColor(customTheme.primaryColor))}`
+    theme = {
+      ...customTheme,
+      errorColor,
+    }
+  } else
     theme = themeColorGroups[themeName]
 
   return (
