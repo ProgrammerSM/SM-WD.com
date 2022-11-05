@@ -159,7 +159,7 @@ const ContactFormStyles = styled.div`
     top: calc(100% + 2.5px);
     left: var(--left-shape-width);
     margin: 0 var(--space-extra-small);
-    color: red;
+    color: var(--error-color);
     font-size: .89rem;
     font-weight: 600;
   }
@@ -309,7 +309,7 @@ const ContactForm = () => {
               id='first_name'
               type='text'
               {...register('Name', {
-                maxLength: 80,
+                maxLength: 160,
                 pattern: nameRegEx,
                 required: true,
               })}

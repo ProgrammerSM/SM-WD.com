@@ -160,6 +160,7 @@ const Layout = ({ children }) => {
       <style>{`
         :root {
           --primary-color:          ${theme.primaryColor};
+          --error-color:            ${theme.errorColor};
           --font-color:             ${theme.fontColor};
           --background-color:       ${theme.backgroundColor};
           --transparent-background: ${theme.primaryColor}33;
