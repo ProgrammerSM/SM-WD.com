@@ -22,7 +22,7 @@ const CurrentThemeProvider = ({ children }) => {
 
   let theme
   if (themeName === 'custom') {
-    const errorColor = `#${convert.hsl.hex(findHslErrorColor(customTheme.primaryColor))}`
+    const errorColor = `#${convert.hsl.hex(findHslErrorColor(customTheme.backgroundColor))}`
     theme = {
       ...customTheme,
       errorColor,
