@@ -7,6 +7,9 @@ import {
   useState,
 } from 'react'
 
+// Data
+import { toNumber } from 'data/media-queries'
+
 // Variables
 const BreakpointContext = createContext({
   breakpoints: {
@@ -32,9 +35,9 @@ const BreakpointProvider = ({ children }) => {
     let tablet = false
     let mobile = false
 
-    if (width >= 1025)
+    if (width >= toNumber.desktop)
       desktop = true
-    else if (width >= 641 && width <= 1024)
+    else if (width >= toNumber.tablet && width <= toNumber.tabletMax)
       tablet = true
     else
       mobile = true

@@ -29,11 +29,11 @@ const ContactPageStyles = styled.div`
   }
 `
 
-const contact = () => (
+const Contact = () => (
   <ContactPageStyles>
     <div>test section</div>
     <ContactForm />
   </ContactPageStyles>
 )
 
-export default contact
+export default Contact

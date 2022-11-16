@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 // Components
 
-const about = () => (
-  <div>about</div>
+const About = () => (
+  <div>About</div>
 )
 
-about.propTypes = {}
-export default about
+About.propTypes = {}
+export default About

@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import BackgroundSVG from './BackgroundSVG'
 import Footer from './Footer'
 import Header from './Header'
+import Loading from './Loading'
 import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
 import NavMenu from './menus/NavMenu'
 // Import SettingsMenu from './menus/settings-menu/SettingsMenu'
@@ -15,6 +16,7 @@ import NavMenu from './menus/NavMenu'
 // Context
 import { ActiveMenuContext } from 'context/ActiveMenuContext'
 import { CurrentThemeContext } from 'context/CurrentThemeContext'
+import { LoadingContext } from 'context/LoadingContext'
 
 // Data
 import { mediumUp } from 'data/media-queries'
@@ -153,6 +155,7 @@ const Layout = ({ children }) => {
     isMenuActive,
   } = useContext(ActiveMenuContext)
 
+  const { loading: { isLoading }} = useContext(LoadingContext)
   const { theme } = useContext(CurrentThemeContext)
 
   return (
@@ -184,6 +187,7 @@ const Layout = ({ children }) => {
               {/* {activeMenu === settingsButtonName && <SettingsMenu />} */}
               {!isMenuActive && children}
             </div>
+            {isLoading && <Loading />}
           </div>
           {!isMenuActive && <BackgroundSVG />}
         </main>
