@@ -7,7 +7,7 @@ const client = createClient({
 })
 
 const getPageContent = async entryId => {
-  const content = await client.getEntry(entryId)
+  const content = await client.getEntry(entryId, { include: 10 })
   return content.fields
 }
 

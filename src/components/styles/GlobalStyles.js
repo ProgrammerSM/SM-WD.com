@@ -14,6 +14,8 @@ const GlobalStyles = createGlobalStyle`
     --space-standard: 1.38rem;
     --space-extra-small: .5rem;
   }
+
+  .aria-describedBy { display: hidden; }
 `
 
 export default GlobalStyles

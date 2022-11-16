@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { ActiveMenuProvider } from './ActiveMenuContext'
 import { BreakpointProvider } from './BreakpointContext'
 import { CurrentThemeProvider } from './CurrentThemeContext'
+import { LoadingProvider } from './LoadingContext'
 import { SettingsProvider } from './SettingsContext'
 
 const GlobalContext = ({ children }) => (
@@ -12,7 +13,9 @@ const GlobalContext = ({ children }) => (
     <CurrentThemeProvider>
       <SettingsProvider>
         <ActiveMenuProvider>
-          {children}
+          <LoadingProvider>
+            {children}
+          </LoadingProvider>
         </ActiveMenuProvider>
       </SettingsProvider>
     </CurrentThemeProvider>

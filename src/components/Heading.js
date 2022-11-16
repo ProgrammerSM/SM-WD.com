@@ -48,7 +48,7 @@ const HeadingStyles = styled.div`
     width: 0;
     height: 100%;
     border-bottom: 2px solid var(--primary-color);
-    box-shadow: inset 0 -5px 5px -5px var(--primary-color);
+    /* box-shadow: inset 0 -5px 5px -5px var(--primary-color); */
     transform: translateX(-50%);
 
     &::after {
@@ -58,7 +58,7 @@ const HeadingStyles = styled.div`
       width: 0;
       height: 10px;
       border-bottom: 4px solid var(--accent-color-1);
-      box-shadow: inset 0 -5px 5px -5px var(--accent-color-1);
+      /* box-shadow: inset 0 -5px 5px -5px var(--accent-color-1); */
       transform: translateX(-50%);
       content: '';
     }

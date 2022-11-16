@@ -19,8 +19,6 @@ const ContentStyles = styled.div`
   ul, ol, dl {
     margin: var(--space-medium);
     padding-left: var(--space-medium);
-    
-    ul, ol, dl { margin: 0; }
   }
   
   a {

@@ -1,5 +1,5 @@
-const thankYou = () => (
+const ThankYou = () => (
   <div>thank you</div>
 )
 
-export default thankYou
+export default ThankYou
