@@ -1,7 +1,9 @@
 // Modules
-import PropTypes from 'prop-types'
+import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import html2Canvas from 'html2canvas'
 import JsPDF from 'jspdf'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   useContext,
@@ -9,8 +11,19 @@ import {
   useState,
 } from 'react'
 
+// Components
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 // Context
+import { BreakpointContext } from 'context/BreakpointContext'
 import { LoadingContext } from 'context/LoadingContext'
+
+// Data
+import {
+  largeUp,
+  medium,
+  mediumUp,
+} from 'data/media-queries'
 
 // Services
 import { getPageContent } from 'services/contentful-service'
@@ -40,43 +53,94 @@ const ResumeStyles = styled.div`
     position: relative;
     margin-bottom: 5px;
 
-    &::before {
+    &::before,
+    &::after {
       position: absolute;
       top: 10px;
-      left: -20px;
       transform: translateY(-50%);
-      content: '◦'
+    }
+
+    &::before {
+      left: -20px;
+      content: '⚬';
     }
   }
 
   .resume-columns {
     display: flex;
-    gap: var(--space-jumbo);
+    flex-direction: column-reverse;
     margin-bottom: var(--space-extra-large);
   }
 
-  .skills-wrapper { width: 25%; }
+  .skills-wrapper,
+  .experience-wrapper { width: 100%; }  
+  .company-details { margin-bottom: 0; }
+  .company { font-size: 1.1rem; }
+  .role { font-style: italic; }
 
-  .skills {
-    height: 95%;
-    border-right: 1px solid;
+  ${medium} {
+    .skills ul {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      column-gap: var(--space-medium);
+      padding-left: 0;
+
+      
+      li::before { content: ''; }
+      li:not(:last-of-type)::after {
+        right: -22px;
+        content: '⚬';
+      }
+    }
   }
 
-  .experience-wrapper { width: 75%; }
-
-  .company-details {
-    margin-bottom: 0;
+  ${mediumUp} {
+    .skills li { margin-right: var(--space-medium); }
   }
 
-  .company {
-    font-size: 1.1rem;
+  ${largeUp} {
+    .resume-columns {
+      flex-direction: row;
+      gap: var(--space-jumbo);
+    }
+    
+    .skills-wrapper { width: 25%; }
+    .skills {
+      height: 100%;
+      border-right: 1px solid;
+
+      ul {
+        display: block;
+        padding-left: var(--space-medium);
+
+        li {          
+          &::before { content: '⚬'; }
+          &:not(:last-of-type)::after { content: ''; }
+        }
+      }
+    }
+    
+    .experience-wrapper { width: 75%; }
+  }
+`
+
+const ResumeButtons = styled.div`
+  position: absolute;
+  top: .85rem;
+  right: 1.5rem;
+  display: flex;
+  gap: var(--space-large);
+
+  a,
+  button {
+    padding: 0;
   }
 
-  .role {
-    font-style: italic;
-  }
-
-  
+  button { background-color: transparent; }  
+  .icon { color: var(--font-color); }
+  .pdf { font-size: 1.76rem; }
+  .linkedIn { font-size: 2rem; }
 `
 
 export const getStaticProps = async () => {
@@ -93,6 +157,7 @@ export const getStaticProps = async () => {
 }
 
 const Resume = ({ pageContent }) => {
+  const breakpoints = useContext(BreakpointContext)
   const { setLoading } = useContext(LoadingContext)
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
   const resumeRef = useRef()
@@ -126,6 +191,8 @@ const Resume = ({ pageContent }) => {
   }
 
   const {
+    linkedInProfileLink: { fields: { linkUrl }},
+    resumePdfButton: { fields: { buttonOrLinkTitle }},
     summarySection: {
       fields: {
         resumeSummarySectionTitle,
@@ -152,8 +219,32 @@ const Resume = ({ pageContent }) => {
         backgroundColor: 'var(--transparent-background)',
         border: '2px solid var(--primary-color)',
         padding: '.75rem 1.5rem',
+        position: 'relative',
       }}
     >
+      <ResumeButtons>
+        {breakpoints.desktop && (
+          <button
+            aria-label={buttonOrLinkTitle}
+            title={buttonOrLinkTitle}
+            type='button'
+            onClick={resumeClickHandler}
+          >
+            <span className='icon pdf'>
+              <FontAwesomeIcon icon={faFilePdf} />
+            </span>
+          </button>
+        )}
+        <a
+          href={linkUrl}
+          rel='noreferrer'
+          target='_blank'
+        >
+          <span className='icon linkedIn'>
+            <FontAwesomeIcon icon={faLinkedin} />
+          </span>
+        </a>
+      </ResumeButtons>
       <ResumeStyles ref={resumeRef}>
         <div style={isGeneratingPDF ? generatingStyles : {}}>
           {isGeneratingPDF && <h1>Sterling May</h1>}
@@ -218,8 +309,8 @@ const Resume = ({ pageContent }) => {
                       }
                     `}</p>
                     <ul>
-                      {experienceDetail.map((experienceDetail, index) => (
-                        <li key={`experience-detail-${index}`}>{experienceDetail}</li>
+                      {experienceDetail.map((experience, experienceIndex) => (
+                        <li key={`experience-detail-${experienceIndex}`}>{experience}</li>
                       ))}
                     </ul>
                   </div>
@@ -229,12 +320,9 @@ const Resume = ({ pageContent }) => {
           </div>
         </div>
       </ResumeStyles>
-      <button
-        type='button'
-        onClick={resumeClickHandler}
-      >Print Resume</button>
     </div>
   )
 }
 
-Resume.propTypes = { pageContent: PropTypes.any }export default Resume
+Resume.propTypes = { pageContent: PropTypes.any }
+export default Resume
