@@ -165,12 +165,16 @@ export const getStaticProps = async () => {
 }
 
 const Resume = ({ pageContent }) => {
+  const monthStarted = 11
   const yearStarted = 2015
   const currentDate = new Date()
   const currentMonth = currentDate.getMonth() + 1
   const currentYear = currentDate.getFullYear()
 
   let yearsWorked = currentYear - yearStarted
+
+  if (currentMonth < monthStarted)
+    yearsWorked = `over ${yearsWorked - 1}`
 
   if (currentMonth === 12)
     yearsWorked = `over ${yearsWorked}`
