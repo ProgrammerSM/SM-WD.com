@@ -37,6 +37,12 @@ const generatingStyles = {
 }
 
 const ResumeStyles = styled.div`
+  &.other-work-experience {
+    .experience:last-of-type .duration {
+      margin-bottom: .5rem;
+    }
+  }
+  
   h1 {
     padding-bottom: var(--space-extra-small);
     border-bottom: 2px solid;
@@ -46,6 +52,7 @@ const ResumeStyles = styled.div`
   
   ul {
     margin: var(--space-medium);
+    margin-bottom: 0;
     padding-left: var(--space-medium);
   }
 
@@ -68,7 +75,7 @@ const ResumeStyles = styled.div`
 
   .resume-columns {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     margin-bottom: var(--space-extra-large);
   }
 
@@ -96,6 +103,7 @@ const ResumeStyles = styled.div`
   }
 
   ${mediumUp} {
+    ul { margin-bottom: var(--space-medium); }
     .skills li { margin-right: var(--space-medium); }
   }
 
@@ -157,6 +165,16 @@ export const getStaticProps = async () => {
 }
 
 const Resume = ({ pageContent }) => {
+  const yearStarted = 2015
+  const currentDate = new Date()
+  const currentMonth = currentDate.getMonth() + 1
+  const currentYear = currentDate.getFullYear()
+
+  let yearsWorked = currentYear - yearStarted
+
+  if (currentMonth === 12)
+    yearsWorked = `over ${yearsWorked}`
+
   const breakpoints = useContext(BreakpointContext)
   const { setLoading } = useContext(LoadingContext)
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
@@ -177,7 +195,6 @@ const Resume = ({ pageContent }) => {
           const imgData = canvas.toDataURL('image/png')
           const pdf = new JsPDF()
           pdf.addImage(imgData, 'JPEG', 0, 0)
-          // Pdf.output('dataurlnewwindow')
           pdf.save('sterling-may-resume.pdf')
         })
         .finally(() => {
@@ -191,7 +208,14 @@ const Resume = ({ pageContent }) => {
   }
 
   const {
+    isLooking,
     linkedInProfileLink: { fields: { linkUrl }},
+    otherWorkExperienceSection: {
+      fields: {
+        workExperience: otherWorkExperience,
+        workExperienceSectionTitle: otherWorkExperienceTitle,
+      },
+    },
     resumePdfButton: { fields: { buttonOrLinkTitle }},
     summarySection: {
       fields: {
@@ -223,7 +247,7 @@ const Resume = ({ pageContent }) => {
       }}
     >
       <ResumeButtons>
-        {breakpoints.desktop && (
+        {(isLooking && breakpoints.desktop) && (
           <button
             aria-label={buttonOrLinkTitle}
             title={buttonOrLinkTitle}
@@ -250,9 +274,10 @@ const Resume = ({ pageContent }) => {
           {isGeneratingPDF && <h1>Sterling May</h1>}
           <h4>{resumeSummarySectionTitle}</h4>
           <ul>
-            {summaryDetails.map((summaryItem, index) => (
-              <li key={`summary-item-${index}`}>{summaryItem}</li>
-            ))}
+            {summaryDetails.map((summaryItem, index) => {
+              const summaryText = summaryItem.replace('[Years]', yearsWorked)
+              return <li key={`summary-item-${index}`}>{summaryText}</li>
+            })}
           </ul>
           <div className='resume-columns'>
             <div className='skills-wrapper'>
@@ -320,9 +345,54 @@ const Resume = ({ pageContent }) => {
           </div>
         </div>
       </ResumeStyles>
+      <ResumeStyles className='other-work-experience'>
+        <h4>{otherWorkExperienceTitle}</h4>
+        {otherWorkExperience.map((workExperiencObject, index) => {
+          const {
+            companyName,
+            positionTitle,
+            workExperienceDuration: {
+              fields: {
+                currentPosition,
+                endMonth,
+                endYear,
+                startMonth,
+                startYear,
+              },
+            },
+            workExperienceLocation: {
+              fields: {
+                city,
+                state,
+              },
+            },
+          } = workExperiencObject.fields
+
+          return (
+            <div
+              className='experience'
+              key={`work-experience-${index}`}
+            >
+              <p className='company-details'>
+                <strong
+                  className='company'
+                  style={isGeneratingPDF ? { color: 'blue' } : {}}
+                >{companyName} - {city}, {state}</strong>
+                <span className='role'> — {positionTitle}</span>
+              </p>
+              <p className='duration'>{`
+                ${startMonth} ${startYear} - ${currentPosition
+                  ? 'Current'
+                  : `${endMonth} ${endYear}`
+                }
+              `}</p>
+            </div>
+          )
+        })}
+      </ResumeStyles>
     </div>
   )
 }
 
-Resume.propTypes = { pageContent: PropTypes.any }
+Resume.propTypes = { pageContent: PropTypes.shape({ isLooking: PropTypes.any }) }
 export default Resume
