@@ -1,6 +1,9 @@
 // Modules
 import '@testing-library/jest-dom'
+import { defaultFallbackInView } from 'react-intersection-observer'
 import React from 'react' // eslint-disable-line no-unused-vars -- Need to import as global level for tests
+
+defaultFallbackInView(true)
 
 jest.mock('next/router', () => ({
   useRouter() {
