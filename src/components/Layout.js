@@ -1,12 +1,16 @@
 // Modules
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useContext } from 'react'
+import {
+  useContext,
+  useState,
+} from 'react'
 
 // Components
 import BackgroundSVG from './BackgroundSVG'
 import Footer from './Footer'
 import Header from './Header'
+import { InView } from 'react-intersection-observer'
 import Loading from './Loading'
 import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
 import NavMenu from './menus/NavMenu'
@@ -115,17 +119,29 @@ const LayoutStyles = styled.div`
   .overlay {
     position: relative;
     height: calc(100vh - (var(--main-padding-top) + var(--main-padding-bottom)));
-    padding: var(--space-extra-small) 5px 0;
+    padding: calc(var(--space-extra-small) - 2px) 5px 0;
     background-color: var(--background-color);
     z-index: 1;
   }
 
   .overflow {
+    position: relative;
     max-width: 1600px;
     height: calc(100% - 78px);
     margin: 0 auto;
     padding: 0 var(--space-small);
     overflow: hidden auto;
+
+    & > hr {
+      position: sticky;
+      width: 90%;
+      height: 2px;
+      margin: 0 auto;
+      border: none;
+
+      &.layout-top-border { top: 0; }
+      &.layout-bottom-border { bottom: 0; }
+    }
   }
 
   .content-container {
@@ -141,7 +157,7 @@ const LayoutStyles = styled.div`
     --menu-button-h: 25px;
     --menu-button-v: 25px;
 
-    .overlay { padding: var(--space-extra-small); }
+    .overlay { padding: calc(var(--space-extra-small) - 2px) var(--space-extra-small); }
     .overflow { height: calc(100% - 55px); }
   }
 `
@@ -149,12 +165,15 @@ const LayoutStyles = styled.div`
 // Variable
 const menuButtonName = 'menu'
 const settingsButtonName = 'settings'
+const borderGradient = 'linear-gradient(to right, transparent, var(--primary-color), transparent)'
 const Layout = ({ children }) => {
   const {
     activeMenu,
     isMenuActive,
   } = useContext(ActiveMenuContext)
 
+  const [isTopInView, setIsTopInView] = useState(true)
+  const [isBottomInView, setIsBottomInView] = useState(false)
   const { loading: { isLoading }} = useContext(LoadingContext)
   const { theme } = useContext(CurrentThemeContext)
 
@@ -183,9 +202,29 @@ const Layout = ({ children }) => {
         <main>
           <div className='overlay with-theme'>
             <div className='overflow with-theme'>
+              <hr
+                className='layout-top-border'
+                style={{ background: !isTopInView ? borderGradient : 'transparent' }}
+              />
               {activeMenu === menuButtonName && <NavMenu />}
               {/* {activeMenu === settingsButtonName && <SettingsMenu />} */}
-              {!isMenuActive && children}
+              {!isMenuActive && (
+                <>
+                  <InView
+                    as='div'
+                    onChange={inView => setIsTopInView(inView)}
+                  />
+                  {children}
+                  <InView
+                    as='div'
+                    onChange={inView => setIsBottomInView(inView)}
+                  />
+                </>
+              )}
+              <hr
+                className='layout-bottom-border'
+                style={{ background: !isBottomInView ? borderGradient : 'transparent' }}
+              />
             </div>
             {isLoading && <Loading />}
           </div>
