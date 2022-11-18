@@ -1,10 +1,13 @@
 // Modules
-import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import html2Canvas from 'html2canvas'
 import JsPDF from 'jspdf'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {
+  faEnvelopeOpenText,
+  faFilePdf,
+} from '@fortawesome/free-solid-svg-icons'
 import {
   useContext,
   useRef,
@@ -12,7 +15,9 @@ import {
 } from 'react'
 
 // Components
+import Banner from 'components/content-containers/Banner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Link from 'next/link'
 
 // Context
 import { BreakpointContext } from 'context/BreakpointContext'
@@ -135,20 +140,37 @@ const ResumeStyles = styled.div`
 
 const ResumeButtons = styled.div`
   position: absolute;
-  top: .85rem;
-  right: 1.5rem;
+  top: 1rem;
+  right: 1rem;
   display: flex;
-  gap: var(--space-large);
+  flex-direction: column;
+  gap: var(--space-medium);
 
   a,
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
   }
 
   button { background-color: transparent; }  
   .icon { color: var(--font-color); }
-  .pdf { font-size: 1.76rem; }
-  .linkedIn { font-size: 2rem; }
+  .contact, .linkedIn { font-size: 1.2rem; }
+
+  ${mediumUp} {
+    top: .85rem;
+    right: 1.5rem;
+    flex-direction: row;
+    gap: var(--space-large);
+    
+    .contact,
+    .pdf {
+      font-size: 1.75rem;
+    }
+    
+    .linkedIn { font-size: 2rem; }
+  }
 `
 
 export const getStaticProps = async () => {
@@ -212,25 +234,31 @@ const Resume = ({ pageContent }) => {
   }
 
   const {
-    isLooking,
-    linkedInProfileLink: { fields: { linkUrl }},
+    contactLink: { fields: { buttonOrLinkTitle: contactLinkTitle }},
+    linkedInProfileLink: {
+      fields: {
+        linkUrl,
+        buttonOrLinkTitle: linkedInProfileTitle,
+      },
+    },
     otherWorkExperienceSection: {
       fields: {
         workExperience: otherWorkExperience,
         workExperienceSectionTitle: otherWorkExperienceTitle,
       },
     },
-    resumePdfButton: { fields: { buttonOrLinkTitle }},
-    summarySection: {
-      fields: {
-        resumeSummarySectionTitle,
-        summaryDetails,
-      },
-    },
+    resumePdfButton: { fields: { buttonOrLinkTitle: pdfTitle }},
+    shared: { fields: { isLooking }},
     skillsSection: {
       fields: {
         skills,
         skillsSectionTitle,
+      },
+    },
+    summarySection: {
+      fields: {
+        resumeSummarySectionTitle,
+        summaryDetails,
       },
     },
     workExperienceSection: {
@@ -242,161 +270,198 @@ const Resume = ({ pageContent }) => {
   } = pageContent
 
   return (
-    <div
-      style={{
-        backgroundColor: 'var(--transparent-background)',
-        border: '2px solid var(--primary-color)',
-        padding: '.75rem 1.5rem',
-        position: 'relative',
-      }}
-    >
-      <ResumeButtons>
-        {(isLooking && breakpoints.desktop) && (
-          <button
-            aria-label={buttonOrLinkTitle}
-            title={buttonOrLinkTitle}
-            type='button'
-            onClick={resumeClickHandler}
+    <>
+      {(!isLooking && pageContent?.resumeBanner) && (
+        <Banner
+          heading={pageContent?.resumeBanner?.fields?.bannerHeading}
+          message={pageContent?.resumeBanner?.fields?.bannerMessage}
+        />
+      )}
+      <div
+        style={{
+          backgroundColor: 'var(--transparent-background)',
+          border: '2px solid var(--primary-color)',
+          padding: '.75rem 1.5rem',
+          position: 'relative',
+        }}
+      >
+        <ResumeButtons>
+          {isLooking && (
+            <>
+              <Link
+                passHref
+                href='/contact'
+              >
+                <a
+                  aria-label={contactLinkTitle}
+                  title={contactLinkTitle}
+                >
+                  <span className='icon contact'>
+                    <FontAwesomeIcon icon={faEnvelopeOpenText} />
+                  </span>
+                </a>
+              </Link>
+              {breakpoints.desktop && (
+                <button
+                  aria-label={pdfTitle}
+                  title={pdfTitle}
+                  type='button'
+                  onClick={resumeClickHandler}
+                >
+                  <span className='icon pdf'>
+                    <FontAwesomeIcon icon={faFilePdf} />
+                  </span>
+                </button>
+              )}
+            </>
+          )}
+          <a
+            aria-label={linkedInProfileTitle}
+            href={linkUrl}
+            rel='noreferrer'
+            target='_blank'
+            title={linkedInProfileTitle}
           >
-            <span className='icon pdf'>
-              <FontAwesomeIcon icon={faFilePdf} />
+            <span className='icon linkedIn'>
+              <FontAwesomeIcon icon={faLinkedin} />
             </span>
-          </button>
-        )}
-        <a
-          href={linkUrl}
-          rel='noreferrer'
-          target='_blank'
-        >
-          <span className='icon linkedIn'>
-            <FontAwesomeIcon icon={faLinkedin} />
-          </span>
-        </a>
-      </ResumeButtons>
-      <ResumeStyles ref={resumeRef}>
-        <div style={isGeneratingPDF ? generatingStyles : {}}>
-          {isGeneratingPDF && <h1>Sterling May</h1>}
-          <h4>{resumeSummarySectionTitle}</h4>
-          <ul>
-            {summaryDetails.map((summaryItem, index) => {
-              const summaryText = summaryItem.replace('[Years]', yearsWorked)
-              return <li key={`summary-item-${index}`}>{summaryText}</li>
-            })}
-          </ul>
-          <div className='resume-columns'>
-            <div className='skills-wrapper'>
-              <div className='skills'>
-                <h4>{skillsSectionTitle}</h4>
-                <ul>
-                  {skills.map((skillsItem, index) => (
-                    <li key={`skills-item-${index}`}>{skillsItem}</li>
-                  ))}
-                </ul>
+          </a>
+        </ResumeButtons>
+        <ResumeStyles ref={resumeRef}>
+          <div style={isGeneratingPDF ? generatingStyles : {}}>
+            {isGeneratingPDF && <h1>Sterling May</h1>}
+            <h4>{resumeSummarySectionTitle}</h4>
+            <ul>
+              {summaryDetails.map((summaryItem, index) => {
+                const summaryText = summaryItem.replace('[Years]', yearsWorked)
+                return <li key={`summary-item-${index}`}>{summaryText}</li>
+              })}
+            </ul>
+            <div className='resume-columns'>
+              <div className='skills-wrapper'>
+                <div className='skills'>
+                  <h4>{skillsSectionTitle}</h4>
+                  <ul>
+                    {skills.map((skillsItem, index) => (
+                      <li key={`skills-item-${index}`}>{skillsItem}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className='experience-wrapper'>
+                <h4>{workExperienceSectionTitle}</h4>
+                {workExperience.map((workExperiencObject, index) => {
+                  const {
+                    companyName,
+                    experienceDetail,
+                    positionTitle,
+                    workExperienceDuration: {
+                      fields: {
+                        currentPosition,
+                        endMonth,
+                        endYear,
+                        startMonth,
+                        startYear,
+                      },
+                    },
+                    workExperienceLocation: {
+                      fields: {
+                        city,
+                        state,
+                      },
+                    },
+                  } = workExperiencObject.fields
+
+                  return (
+                    <div
+                      className='experience'
+                      key={`work-experience-${index}`}
+                    >
+                      <p className='company-details'>
+                        <strong
+                          className='company'
+                          style={isGeneratingPDF ? { color: 'blue' } : {}}
+                        >{companyName} - {city}, {state}</strong>
+                        <span className='role'> — {positionTitle}</span>
+                      </p>
+                      <p className='duration'>{`
+                        ${startMonth} ${startYear} - ${currentPosition
+                          ? 'Current'
+                          : `${endMonth} ${endYear}`
+                        }
+                      `}</p>
+                      <ul>
+                        {experienceDetail.map((experience, experienceIndex) => (
+                          <li key={`experience-detail-${experienceIndex}`}>{experience}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                })}
               </div>
             </div>
-
-            <div className='experience-wrapper'>
-              <h4>{workExperienceSectionTitle}</h4>
-              {workExperience.map((workExperiencObject, index) => {
-                const {
-                  companyName,
-                  experienceDetail,
-                  positionTitle,
-                  workExperienceDuration: {
-                    fields: {
-                      currentPosition,
-                      endMonth,
-                      endYear,
-                      startMonth,
-                      startYear,
-                    },
-                  },
-                  workExperienceLocation: {
-                    fields: {
-                      city,
-                      state,
-                    },
-                  },
-                } = workExperiencObject.fields
-
-                return (
-                  <div
-                    className='experience'
-                    key={`work-experience-${index}`}
-                  >
-                    <p className='company-details'>
-                      <strong
-                        className='company'
-                        style={isGeneratingPDF ? { color: 'blue' } : {}}
-                      >{companyName} - {city}, {state}</strong>
-                      <span className='role'> — {positionTitle}</span>
-                    </p>
-                    <p className='duration'>{`
-                      ${startMonth} ${startYear} - ${currentPosition
-                        ? 'Current'
-                        : `${endMonth} ${endYear}`
-                      }
-                    `}</p>
-                    <ul>
-                      {experienceDetail.map((experience, experienceIndex) => (
-                        <li key={`experience-detail-${experienceIndex}`}>{experience}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              })}
-            </div>
           </div>
-        </div>
-      </ResumeStyles>
-      <ResumeStyles className='other-work-experience'>
-        <h4>{otherWorkExperienceTitle}</h4>
-        {otherWorkExperience.map((workExperiencObject, index) => {
-          const {
-            companyName,
-            positionTitle,
-            workExperienceDuration: {
-              fields: {
-                currentPosition,
-                endMonth,
-                endYear,
-                startMonth,
-                startYear,
+        </ResumeStyles>
+        <ResumeStyles className='other-work-experience'>
+          <h4>{otherWorkExperienceTitle}</h4>
+          {otherWorkExperience.map((workExperiencObject, index) => {
+            const {
+              companyName,
+              positionTitle,
+              workExperienceDuration: {
+                fields: {
+                  currentPosition,
+                  endMonth,
+                  endYear,
+                  startMonth,
+                  startYear,
+                },
               },
-            },
-            workExperienceLocation: {
-              fields: {
-                city,
-                state,
+              workExperienceLocation: {
+                fields: {
+                  city,
+                  state,
+                },
               },
-            },
-          } = workExperiencObject.fields
+            } = workExperiencObject.fields
 
-          return (
-            <div
-              className='experience'
-              key={`work-experience-${index}`}
-            >
-              <p className='company-details'>
-                <strong
-                  className='company'
-                  style={isGeneratingPDF ? { color: 'blue' } : {}}
-                >{companyName} - {city}, {state}</strong>
-                <span className='role'> — {positionTitle}</span>
-              </p>
-              <p className='duration'>{`
-                ${startMonth} ${startYear} - ${currentPosition
-                  ? 'Current'
-                  : `${endMonth} ${endYear}`
-                }
-              `}</p>
-            </div>
-          )
-        })}
-      </ResumeStyles>
-    </div>
+            return (
+              <div
+                className='experience'
+                key={`work-experience-${index}`}
+              >
+                <p className='company-details'>
+                  <strong
+                    className='company'
+                    style={isGeneratingPDF ? { color: 'blue' } : {}}
+                  >{companyName} - {city}, {state}</strong>
+                  <span className='role'> — {positionTitle}</span>
+                </p>
+                <p className='duration'>{`
+                  ${startMonth} ${startYear} - ${currentPosition
+                    ? 'Current'
+                    : `${endMonth} ${endYear}`
+                  }
+                `}</p>
+              </div>
+            )
+          })}
+        </ResumeStyles>
+      </div>
+    </>
   )
 }
 
-Resume.propTypes = { pageContent: PropTypes.shape({ isLooking: PropTypes.any }) }
+Resume.propTypes = {
+  pageContent: PropTypes.shape({
+    resumeBanner: PropTypes.shape({
+      fields: PropTypes.shape({
+        bannerHeading: PropTypes.any,
+        bannerMessage: PropTypes.any,
+      }),
+    }),
+  }),
+}
+
 export default Resume
