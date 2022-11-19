@@ -15,6 +15,7 @@ const ContactPageStyles = styled.div`
   align-items: center;
   gap: var(--space-large);
   min-height: 100%;
+  margin: -2px 0;
 
   & > div {
     width: 100%;
