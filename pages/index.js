@@ -28,13 +28,11 @@ export const getStaticProps = async () => {
 const Home = ({ pageContent }) => (
   <>
     <MetaData />
-    <div>
-      <ContentContainer4>
-        <AnimatedContent
-          content={animatedText}
-        />
-      </ContentContainer4>
-    </div>
+    <ContentContainer4>
+      <AnimatedContent
+        content={animatedText}
+      />
+    </ContentContainer4>
   </>
 )
 
