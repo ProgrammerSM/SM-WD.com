@@ -144,6 +144,15 @@ const LayoutStyles = styled.div`
     }
   }
 
+  /* .watch-top,
+  .watch-bottom {
+    width: 100%;
+    margin: 0;
+  }
+
+  .watch-top { margin-bottom: -2px; }
+  .watch-bottom { margin-top: -2px; } */
+
   .content-container {
     padding: var(--space-extra-large);
     background-color: var(--transparent-background);
@@ -202,29 +211,31 @@ const Layout = ({ children }) => {
         <main>
           <div className='overlay with-theme'>
             <div className='overflow with-theme'>
-              <hr
-                className='layout-top-border'
-                style={{ background: !isTopInView ? borderGradient : 'transparent' }}
-              />
               {activeMenu === menuButtonName && <NavMenu />}
               {/* {activeMenu === settingsButtonName && <SettingsMenu />} */}
               {!isMenuActive && (
                 <>
+                  <hr
+                    className='layout-top-border'
+                    style={{ background: !isTopInView ? borderGradient : 'transparent' }}
+                  />
                   <InView
                     as='div'
+                    className='watch-top'
                     onChange={inView => setIsTopInView(inView)}
                   />
                   {children}
                   <InView
                     as='div'
+                    className='watch-bottom'
                     onChange={inView => setIsBottomInView(inView)}
+                  />
+                  <hr
+                    className='layout-bottom-border'
+                    style={{ background: !isBottomInView ? borderGradient : 'transparent' }}
                   />
                 </>
               )}
-              <hr
-                className='layout-bottom-border'
-                style={{ background: !isBottomInView ? borderGradient : 'transparent' }}
-              />
             </div>
             {isLoading && <Loading />}
           </div>
