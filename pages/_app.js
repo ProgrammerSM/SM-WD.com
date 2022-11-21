@@ -1,8 +1,13 @@
 // Modules
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config } from '@fortawesome/fontawesome-svg-core'
 import PropTypes from 'prop-types'
 
 // Components
 import GlobalContext from 'context/GlobalContext'
+
+// Config
+config.autoAddCss = false
 
 // Global Styles
 import GlobalStyles from 'components/styles/GlobalStyles'
