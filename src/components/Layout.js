@@ -144,15 +144,6 @@ const LayoutStyles = styled.div`
     }
   }
 
-  /* .watch-top,
-  .watch-bottom {
-    width: 100%;
-    margin: 0;
-  }
-
-  .watch-top { margin-bottom: -2px; }
-  .watch-bottom { margin-top: -2px; } */
-
   .content-container {
     padding: var(--space-extra-large);
     background-color: var(--transparent-background);
@@ -221,13 +212,11 @@ const Layout = ({ children }) => {
                   />
                   <InView
                     as='div'
-                    className='watch-top'
                     onChange={inView => setIsTopInView(inView)}
                   />
                   {children}
                   <InView
                     as='div'
-                    className='watch-bottom'
                     onChange={inView => setIsBottomInView(inView)}
                   />
                   <hr
