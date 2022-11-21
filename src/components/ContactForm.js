@@ -164,9 +164,19 @@ const ContactFormStyles = styled.div`
     font-weight: 600;
   }
 
-  button[type='submit'] { margin: 0 auto; }
+  .submit-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  ${mediumUp} {
+    & > div:first-of-type,
+    & > div:last-of-type {
+      flex-grow: 1;
+    }
+  }
+
+  ${mediumUp} {    
+    
     fieldset { padding-bottom: 3.75rem; }
     
     .field-wrapper {
@@ -208,6 +218,46 @@ const ContactFormStyles = styled.div`
       top: calc(100% + 5px);
       font-size: inherit;
     }
+
+    .left-circuit-line {
+      position: relative;
+      border-top: 2px solid var(--primary-color);
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: '';
+      }
+
+      &::before {
+        bottom: 417px;
+        left: -3px;
+        width: 8px;
+        height: 8px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+      }
+
+      &::after {
+        bottom: 0;
+        left: 0;
+        height: 420px;
+        border-left: 2px solid var(--primary-color);
+      }
+    }
+
+    .submit-button-wrapper {
+      width: 265px;
+      margin: 0 auto;
+      padding: var(--space-medium);
+      border: 2px solid var(--primary-color);
+      clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+      transition: clip-path .2s;
+
+      &:hover {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 20%, 100% 80%, 100% 100%, 0% 100%, 0% 80%, 0% 20%);
+      }
+    }
   }
 
   ${largeUp} {
@@ -218,6 +268,8 @@ const ContactFormStyles = styled.div`
 
       &.has-error { margin-bottom: 3.5rem; }
     }
+
+    .left-circuit-line::before { bottom: 412px; }
   }
 `
 
@@ -286,6 +338,7 @@ const ContactForm = () => {
   return (
     <ContactFormStyles>
       <form
+        className='sm-wd-contact'
         name='sm-wd-contact'
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -418,9 +471,15 @@ const ContactForm = () => {
             />
           )}
         </fieldset>
-        <Button
-          isSubmit
-        >Submit</Button>
+        <div className='submit-button-container'>
+          <div className='left-circuit-line' />
+          <div className='submit-button-wrapper'>
+            <Button
+              isSubmit
+            >Submit</Button>
+          </div>
+          <div />
+        </div>
       </form>
     </ContactFormStyles>
   )

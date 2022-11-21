@@ -24,6 +24,8 @@ import { BreakpointContext } from 'context/BreakpointContext'
 import { LoadingContext } from 'context/LoadingContext'
 
 // Data
+import { pageContentEntryIds } from 'data/page-content-ids'
+import { sharedData } from 'data/shared-data'
 import {
   largeUp,
   medium,
@@ -175,8 +177,8 @@ const ResumeButtons = styled.div`
 
 export const getStaticProps = async () => {
 
-  const pageContent = await getPageContent('R1gur8BkliujKaWku2pCS')
-  const revalidate = (60 * 60) * 24
+  const pageContent = await getPageContent(pageContentEntryIds.resume)
+  const revalidate = sharedData.revalidationRate
 
   return {
     props: {
