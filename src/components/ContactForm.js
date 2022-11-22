@@ -266,6 +266,7 @@ const ContactFormStyles = styled.div`
     .field-wrapper {
       margin-bottom: 3.5rem;
 
+      &:last-of-type { margin-bottom: 0; }
       &.has-error { margin-bottom: 3.5rem; }
     }
 
