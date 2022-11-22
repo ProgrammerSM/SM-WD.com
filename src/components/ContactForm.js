@@ -46,7 +46,7 @@ const ContactFormStyles = styled.div`
     margin-bottom: 2rem;
     margin-left: auto;
 
-    &:last-of-type { margin-bottom: 0; }
+    &.last { margin-bottom: 0; }
     &.has-error { margin-bottom: 3.6rem; }
   }
   
@@ -175,8 +175,7 @@ const ContactFormStyles = styled.div`
     }
   }
 
-  ${mediumUp} {    
-    
+  ${mediumUp} {   
     fieldset { padding-bottom: 3.75rem; }
     
     .field-wrapper {
@@ -266,7 +265,6 @@ const ContactFormStyles = styled.div`
     .field-wrapper {
       margin-bottom: 3.5rem;
 
-      &:last-of-type { margin-bottom: 0; }
       &.has-error { margin-bottom: 3.5rem; }
     }
 
@@ -434,7 +432,7 @@ const ContactForm = () => {
             )}
           </div>
 
-          <div className={`field-wrapper${errors?.['Message'] ? ' has-error' : ''}`}>
+          <div className={`field-wrapper last${errors?.['Message'] ? ' has-error' : ''}`}>
             <div className='field-left-shape'>
               <div className='shape-lines' />
               <div className='shape-lines' />
