@@ -197,7 +197,7 @@ const Layout = ({ children }) => {
       `}</style>
 
       <LayoutStyles>
-        <Header />
+        <Header isLoading={false} />
         <div className='layout-left-border' />
         <main>
           <div className='overlay with-theme'>

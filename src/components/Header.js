@@ -1,8 +1,10 @@
 // Modules
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // Components
 import Link from 'next/link'
+import LoadingLogo from './LoadingLogo'
 import Logo from './Logo'
 
 // Data
@@ -93,7 +95,7 @@ const HeaderStyles = styled.header`
   }
 `
 
-const Header = () => (
+const Header = ({ isLoading }) => (
   <HeaderStyles data-testid='header'>
     <div className='header-border' />
     <div className='logo-shape'>
@@ -113,11 +115,20 @@ const Header = () => (
             className='logo-wrapper'
           >
             <span>Sterling May</span>
-            <Logo
-              height={50}
-              testID='header-logo'
-              width={41}
-            />
+            {isLoading
+              ? (
+                <LoadingLogo
+                  height={50}
+                  width={41}
+                />
+              )
+              : (
+                <Logo
+                  height={50}
+                  testID='header-logo'
+                  width={41}
+                />
+              )}
             <span>Web Developer</span>
           </div>
         </a>
@@ -127,4 +138,4 @@ const Header = () => (
   </HeaderStyles>
 )
 
-export default Header
+Header.propTypes = { isLoading: PropTypes.any }export default Header
