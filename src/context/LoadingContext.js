@@ -9,16 +9,20 @@ import {
 const loadingDefaultValue = {}
 const LoadingContext = createContext(loadingDefaultValue)
 const LoadingProvider = ({ children }) => {
-  const [loading, setLoading] = useState({
+  const [isHeaderLoadingActive, setIsHeaderLoadingActive] = useState(false)
+  const [loadingOverlay, setLoadingOverlay] = useState({
+    isComplete: false,
     isLoading: false,
-    loadingMessage: 'Loading',
+    loadingMessage: 'loading',
   })
 
   return (
     <LoadingContext.Provider
       value={{
-        loading,
-        setLoading,
+        isHeaderLoadingActive,
+        loadingOverlay,
+        setIsHeaderLoadingActive,
+        setLoadingOverlay,
       }}
     >
       {children}
