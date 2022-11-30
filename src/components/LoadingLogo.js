@@ -1,13 +1,18 @@
 // Modules
 import PropTypes from 'prop-types'
-import styled, { keyframes } from 'styled-components'
+import styled, {
+  css,
+  keyframes,
+} from 'styled-components'
 import {
   useContext,
   useEffect,
   useRef,
+  useState,
 } from 'react'
 
 // Context
+import { LoadingContext } from 'context/LoadingContext'
 import { SettingsContext } from 'context/SettingsContext'
 
 // Sytles
@@ -39,19 +44,11 @@ const LoadingLogoStyles = styled.svg`
   .outer-circle {
     transform: rotate(45deg);
     stroke-dasharray: 144.51326206513048 144.51326206513048;
-
-    &.animate {
-      animation: ${outerRotate} 2s .2s linear infinite;
-    }
   }
 
   .inner-circle {
     transform: rotate(-45deg);
     stroke-dasharray: 109.95574287564276 109.95574287564276;
-    
-    &.animate {
-      animation: ${innerRotate} 2s .2s linear infinite reverse;
-    }
   }
 
   .s-bar-top,
@@ -59,35 +56,34 @@ const LoadingLogoStyles = styled.svg`
   .m-bar {
     height: 8%;
     fill: var(--primary-color);
-    transition: width .2s linear;
+    transition: width .1s linear;
   }
 
   .s-bar-top {
     width: 55%;
     transform: rotate(225.1deg);
-
-    &.animate {
-      width: 32%;
-    }
   }
 
   .s-bar-bottom {
     width: 45%;
     transform: rotate(45deg);
-
-    &.animate {
-      width: 23%;
-    }
   }
 
   .m-bar {
     width: 42%;
     transform: rotate(-45deg);
-
-    &.animate {
-      width: 32.2%;
-    }
   }
+
+  ${props => {
+    if (props.isAnimationActive)
+      return css`
+        .outer-circle.animate { animation: ${outerRotate} 2s .1s linear infinite;}
+        .inner-circle.animate { animation: ${innerRotate} 2s .1s linear infinite reverse; }
+        .s-bar-top.animate { width: 32%; }
+        .s-bar-bottom.animate { width: 23%; }
+        .m-bar.animate { width: 32.2%; }
+      `
+  }}
 `
 
 const circlePosition = 100
@@ -96,22 +92,29 @@ const LoadingLogo = ({
   width = '100%',
 }) => {
   const animatedLogoRef = useRef()
-  const hasAnimatedRef = useRef(false)
   const { isAnimationActive } = useContext(SettingsContext)
+  const { isHeaderLoadingActive } = useContext(LoadingContext)
+  const [animationType, setAnimationType] = useState('')
 
   useEffect(() => {
-    if (hasAnimatedRef.current)
+    if (!isAnimationActive)
       return
 
     const animatedLogo = animatedLogoRef.current
 
-    if (animatedLogo && isAnimationActive) {
-      const outerCircle = animatedLogo.querySelector('.outer-circle')
-      const innerCircle = animatedLogo.querySelector('.inner-circle')
-      const sBarTop = animatedLogo.querySelector('.s-bar-top')
-      const sBarBottom = animatedLogo.querySelector('.s-bar-bottom')
-      const mbar = animatedLogo.querySelector('.m-bar')
+    if (!animatedLogo) {
+      console.error('Could not identify logo')
+      return
+    }
 
+    const outerCircle = animatedLogo.querySelector('.outer-circle')
+    const innerCircle = animatedLogo.querySelector('.inner-circle')
+    const sBarTop = animatedLogo.querySelector('.s-bar-top')
+    const sBarBottom = animatedLogo.querySelector('.s-bar-bottom')
+    const mbar = animatedLogo.querySelector('.m-bar')
+
+    if (isHeaderLoadingActive && (!animationType || animationType === 'initial position')) {
+      setAnimationType('rotating')
       sBarTop.classList.add('animate')
       sBarBottom.classList.add('animate')
       mbar.classList.add('animate')
@@ -119,16 +122,21 @@ const LoadingLogo = ({
       innerCircle.classList.add('animate')
     }
 
-    hasAnimatedRef.current = true
-  }, [isAnimationActive])
+    if (!isHeaderLoadingActive && animationType === 'rotating') {
+      setAnimationType('initial position')
+      sBarTop.classList.remove('animate')
+      sBarBottom.classList.remove('animate')
+      mbar.classList.remove('animate')
+      outerCircle.classList.remove('animate')
+      innerCircle.classList.remove('animate')
+    }
 
-  const animationActiveClass = isAnimationActive
-    ? 'animation-active'
-    : 'no-animation'
+  }, [isAnimationActive, isHeaderLoadingActive])
 
   return (
     <LoadingLogoStyles
       height={height}
+      isAnimationActive={isAnimationActive}
       ref={animatedLogoRef}
       viewBox='0 0 200 200'
       width={width}
@@ -168,8 +176,8 @@ const LoadingLogo = ({
 }
 
 LoadingLogo.propTypes = {
-  height: PropTypes.string,
-  width: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
 }
 
 export default LoadingLogo

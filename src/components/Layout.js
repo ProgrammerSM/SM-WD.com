@@ -1,8 +1,11 @@
 // Modules
+import NProgress from 'nprogress'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
 import {
   useContext,
+  useEffect,
   useState,
 } from 'react'
 
@@ -11,7 +14,7 @@ import BackgroundSVG from './BackgroundSVG'
 import Footer from './Footer'
 import Header from './Header'
 import { InView } from 'react-intersection-observer'
-import Loading from './Loading'
+import LoadingOverlay from './LoadingOverlay'
 import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
 import NavMenu from './menus/NavMenu'
 // Import SettingsMenu from './menus/settings-menu/SettingsMenu'
@@ -167,15 +170,47 @@ const menuButtonName = 'menu'
 const settingsButtonName = 'settings'
 const borderGradient = 'linear-gradient(to right, transparent, var(--primary-color), transparent)'
 const Layout = ({ children }) => {
+  const [isTopInView, setIsTopInView] = useState(true)
+  const [isBottomInView, setIsBottomInView] = useState(false)
+  const router = useRouter()
+  const { theme } = useContext(CurrentThemeContext)
+
   const {
     activeMenu,
     isMenuActive,
   } = useContext(ActiveMenuContext)
 
-  const [isTopInView, setIsTopInView] = useState(true)
-  const [isBottomInView, setIsBottomInView] = useState(false)
-  const { loading: { isLoading }} = useContext(LoadingContext)
-  const { theme } = useContext(CurrentThemeContext)
+  const {
+    loadingOverlay: { isLoading },
+    setIsHeaderLoadingActive,
+  } = useContext(LoadingContext)
+
+  NProgress.configure({
+    parent: '#js-nprogress',
+    showSpinner: false,
+  })
+
+  const handleRouteStart = () => {
+    setIsHeaderLoadingActive(true)
+    NProgress.start()
+  }
+
+  const handleRouteDone = () => {
+    setIsHeaderLoadingActive(false)
+    NProgress.done()
+  }
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', handleRouteStart)
+    router.events.on('routeChangeComplete', handleRouteDone)
+    router.events.on('routeChangeError', handleRouteDone)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteStart)
+      router.events.off('routeChangeComplete', handleRouteDone)
+      router.events.off('routeChangeError', handleRouteDone)
+    }
+  }, [router])
 
   return (
     <>
@@ -197,7 +232,7 @@ const Layout = ({ children }) => {
       `}</style>
 
       <LayoutStyles>
-        <Header isLoading={false} />
+        <Header />
         <div className='layout-left-border' />
         <main>
           <div className='overlay with-theme'>
@@ -226,7 +261,7 @@ const Layout = ({ children }) => {
                 </>
               )}
             </div>
-            {isLoading && <Loading />}
+            {isLoading && <LoadingOverlay />}
           </div>
           {!isMenuActive && <BackgroundSVG />}
         </main>

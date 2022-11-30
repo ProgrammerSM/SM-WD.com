@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -204,21 +205,25 @@ const Resume = ({ pageContent }) => {
     yearsWorked = `over ${yearsWorked}`
 
   const breakpoints = useContext(BreakpointContext)
-  const { setLoading } = useContext(LoadingContext)
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
+  const {
+    loadingOverlay,
+    setLoadingOverlay,
+  } = useContext(LoadingContext)
+
   const resumeRef = useRef()
+  const hasCompletedRef = useRef(false)
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
 
-  const resumeClickHandler = () => {
-    const resume = resumeRef.current
-    setLoading({
-      isLoading: true,
-      loadingMessage: 'Generating PDF',
-    })
+  useEffect(() => {
+    if (loadingOverlay.isComplete)
+      hasCompletedRef.current = true
+  }, [loadingOverlay])
 
-    setIsGeneratingPDF(true)
-
-    setTimeout(() => {
-      html2Canvas(resume, { scale: 1 })
+  const checkFlag = () => {
+    if (!hasCompletedRef.current)
+      setTimeout(checkFlag, 50)
+    else
+      html2Canvas(resumeRef.current, { scale: 1 })
         .then(canvas => {
           const imgData = canvas.toDataURL('image/png')
           const pdf = new JsPDF()
@@ -226,13 +231,25 @@ const Resume = ({ pageContent }) => {
           pdf.save('sterling-may-resume.pdf')
         })
         .finally(() => {
+          hasCompletedRef.current = false
           setIsGeneratingPDF(false)
-          setLoading({
+          setLoadingOverlay({
+            isComplete: false,
             loading: false,
             loadingMessage: 'Loading',
           })
         })
-    }, 100)
+  }
+
+  const resumeClickHandler = () => {
+    setLoadingOverlay({
+      isComplete: false,
+      isLoading: true,
+      loadingMessage: 'Generating PDF',
+    })
+
+    setIsGeneratingPDF(true)
+    checkFlag()
   }
 
   const {

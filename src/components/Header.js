@@ -57,6 +57,14 @@ const HeaderStyles = styled.header`
     }
   }
 
+  .nprogress {
+    position: absolute;
+    top: 0;
+    height: 4px;
+    width: 100%;
+    z-index: 3;
+  }
+
   .logo-wrapper {
     display: grid;
     grid-template-columns: 1fr 41px 1fr;
@@ -91,11 +99,17 @@ const HeaderStyles = styled.header`
       }
     }
 
-    .logo-wrapper span {  font-size: 1rem;}
+    .logo-wrapper span { font-size: 1rem; }
+
+    .nprogress {
+      top: unset;
+      bottom: 4px;
+      width: calc(100% - 20px);
+    }
   }
 `
 
-const Header = ({ isLoading }) => (
+const Header = () => (
   <HeaderStyles data-testid='header'>
     <div className='header-border' />
     <div className='logo-shape'>
@@ -115,27 +129,22 @@ const Header = ({ isLoading }) => (
             className='logo-wrapper'
           >
             <span>Sterling May</span>
-            {isLoading
-              ? (
-                <LoadingLogo
-                  height={50}
-                  width={41}
-                />
-              )
-              : (
-                <Logo
-                  height={50}
-                  testID='header-logo'
-                  width={41}
-                />
-              )}
+            <LoadingLogo
+              height={50}
+              width={41}
+            />
             <span>Web Developer</span>
           </div>
         </a>
       </Link>
+      <div
+        className='nprogress'
+        id='js-nprogress'
+      />
     </div>
     <div className='header-border' />
   </HeaderStyles>
 )
 
-Header.propTypes = { isLoading: PropTypes.any }export default Header
+Header.propTypes = { isLoading: PropTypes.any }
+export default Header
