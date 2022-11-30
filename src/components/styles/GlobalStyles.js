@@ -16,6 +16,23 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .aria-describedBy { display: hidden; }
+  #nprogress { pointer-events: none; }
+  #nprogress .bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-color);
+    z-index: 1;
+  }
+
+  .nprogress-custom-parent {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .nprogress-custom-parent #nprogress .bar { position: absolute; }
 `
 
 export default GlobalStyles
