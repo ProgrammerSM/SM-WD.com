@@ -135,6 +135,7 @@ const LoadingLogo = ({
 
   return (
     <LoadingLogoStyles
+      data-testid='header-logo'
       height={height}
       isAnimationActive={isAnimationActive}
       ref={animatedLogoRef}
