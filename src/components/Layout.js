@@ -74,13 +74,11 @@ const LayoutStyles = styled.div`
   .layout-left-border {
     left: 0;
     border-right: 2px solid var(--primary-color);
-    box-shadow: inset -5px 0 5px -5px var(--primary-color);
   }
 
   .layout-right-border {
     right: 0;
     border-left: 2px solid var(--primary-color);
-    box-shadow: inset 5px 0 5px -5px var(--primary-color);
   }
 
   .layout-left-border::before,
@@ -172,6 +170,7 @@ const borderGradient = 'linear-gradient(to right, transparent, var(--primary-col
 const Layout = ({ children }) => {
   const [isTopInView, setIsTopInView] = useState(true)
   const [isBottomInView, setIsBottomInView] = useState(false)
+  const [isContactPage, setIsContactPage] = useState(false)
   const router = useRouter()
   const { theme } = useContext(CurrentThemeContext)
 
@@ -201,6 +200,12 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
+    if (router.pathname === '/contact')
+      setIsContactPage(true)
+
+    if (router.pathname !== '/contact' && isContactPage)
+      setIsContactPage(false)
+
     router.events.on('routeChangeStart', handleRouteStart)
     router.events.on('routeChangeComplete', handleRouteDone)
     router.events.on('routeChangeError', handleRouteDone)
@@ -263,7 +268,7 @@ const Layout = ({ children }) => {
             </div>
             {isLoading && <LoadingOverlay />}
           </div>
-          {!isMenuActive && <BackgroundSVG />}
+          {(!isMenuActive && !isContactPage) && <BackgroundSVG />}
         </main>
         <div className='layout-right-border' />
         <NavigationMenuButton
