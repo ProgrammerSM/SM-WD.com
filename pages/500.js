@@ -5,6 +5,7 @@ import styled from 'styled-components'
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
+import StyledLink from 'components/StyledLink'
 
 // Data
 import { mediumUp } from 'data/media-queries'
@@ -30,18 +31,6 @@ const ErrorPageStyles = styled.div`
   .error-icon { font-size: 15vw; }
   .error-message-title { font-size: 12vw; }
 
-  .home-page-link {
-    border-top: 2px solid var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
-    transition: all .1s linear;
-
-    &:focus,
-    &:hover {
-      font-weight: bold;
-      transform: scale(1.1);
-    }
-  }
-
   ${mediumUp} {
     .error-message { font-size: 1.5rem; }
     .error-icon { font-size: 5rem; }
@@ -60,8 +49,8 @@ const ErrorPage = () => (
       <span className='error-message-title'>FATAL ERROR</span>
       <span>a server error has occured, please return to a safer area</span>
     </p>
-    <Link href='/'>
-      <a className='home-page-link'>- Home Page -</a>
+    <Link href='/' >
+      <a className='styled-link'>- Home Page -</a>
     </Link>
   </ErrorPageStyles>
 )

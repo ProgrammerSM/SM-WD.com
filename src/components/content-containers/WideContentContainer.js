@@ -8,6 +8,7 @@ import {
 } from 'react'
 
 // Components
+import AnimatedContent from 'components/AnimatedContent'
 import Heading from '../Heading'
 
 // Context
@@ -199,6 +200,7 @@ const WideContentContainerStyles = styled.div`
 `
 
 const WideContentContainer = ({
+  align,
   children,
   headingData,
 }) => {
@@ -255,13 +257,16 @@ const WideContentContainer = ({
           <div className='container-heading'>
             <Heading
               as={headingData.headingType}
-              isCenter={headingData.align === 'center'}
-              isRight={headingData.align === 'right'}
+              isCenter={headingData.align === 'center' || align === 'center'}
+              isRight={headingData.align === 'right' || align === 'right'}
             >{headingData.headingText}</Heading>
           </div>
         )}
         <div className='container-content scroller'>
-          {children}
+          <AnimatedContent
+            align={align}
+            content={children}
+          />
         </div>
       </div>
       <div className='top-bar' />
@@ -275,6 +280,7 @@ const WideContentContainer = ({
 }
 
 WideContentContainer.propTypes = {
+  align: PropTypes.string,
   children: PropTypes.node,
   headingData: PropTypes.shape({
     align: PropTypes.string,
