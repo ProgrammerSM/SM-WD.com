@@ -10,7 +10,6 @@ import ContentContainer1 from 'components/content-containers/ContentContainer1'
 import ContentContainer2 from 'components/content-containers/ContentContainer2'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import StyledLink from 'components/StyledLink'
 import WideContentContainer from 'components/content-containers/WideContentContainer'
 
 // Data
