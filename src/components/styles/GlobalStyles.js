@@ -33,6 +33,19 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .nprogress-custom-parent #nprogress .bar { position: absolute; }
+
+  .styled-link {
+    padding: var(--space-extra-small);
+    border-top: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    transition: all .1s linear;
+  
+    &:focus,
+    &:hover {
+      font-weight: bold;
+      transform: scale(1.1);
+    }
+  }
 `
 
 export default GlobalStyles
