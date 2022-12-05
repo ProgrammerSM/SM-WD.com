@@ -51,6 +51,7 @@ export const getStaticProps = async () => {
     props: {
       pageContent,
       revalidate,
+      showBgSvg: false,
     },
   }
 }
