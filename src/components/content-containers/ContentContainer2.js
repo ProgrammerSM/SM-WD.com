@@ -14,6 +14,7 @@ import { SettingsContext } from 'context/SettingsContext'
 const ContentContainer2Styles = styled.div`
   position: relative;
   margin: 9px;
+  flex-grow: 1;
 
   &.animation-active {
     .content-container-2-wrapper { transition: opacity .5s linear; }

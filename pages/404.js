@@ -5,6 +5,7 @@ import styled from 'styled-components'
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
+import StyledLink from 'components/StyledLink'
 
 // Data
 import { mediumUp } from 'data/media-queries'
@@ -33,18 +34,6 @@ const NotFoundStyles = styled.div`
     font-family: var(--header-font);
   }
 
-  .home-page-link {
-    border-top: 2px solid var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
-    transition: all .1s linear;
-
-    &:focus,
-    &:hover {
-      font-weight: bold;
-      transform: scale(1.1);
-    }
-  }
-
   ${mediumUp} {
     .not-found-message { font-size: 1.5rem; }
     .not-found-icon { font-size: 5rem; }
@@ -63,8 +52,8 @@ const NotFound = () => (
       <span className='not-found-message-title'>404</span>
       <span>system route failure, please return to known location</span>
     </p>
-    <Link href='/'>
-      <a className='home-page-link'>- Home Page -</a>
+    <Link href='/' >
+      <a className='styled-link'>- Home Page -</a>
     </Link>
   </NotFoundStyles>
 )
