@@ -5,7 +5,6 @@ import styled from 'styled-components'
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import StyledLink from 'components/StyledLink'
 
 // Data
 import { mediumUp } from 'data/media-queries'
