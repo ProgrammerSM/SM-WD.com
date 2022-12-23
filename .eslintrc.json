@@ -16,7 +16,21 @@
   "globals": {
     "React": "writable"
   },
-  "overrides": [],
+  "overrides": [
+    {
+      "env": { "jest/globals": true },
+      "extends": [
+        "plugin:jest/recommended",
+        "plugin:testing-library/react"
+      ],
+      "files": ["__tests__/**/*.test.js"]
+    },
+    {
+      "env": { "cypress/globals": true },
+      "extends": ["plugin:cypress/recommended"],
+      "files": ["cypress/*"]
+    }
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
@@ -26,12 +40,13 @@
     "sourceType": "module"
   },
   "plugins": [
+    "cypress",
     "destructuring-newline",
-    "@emotion",
     "eslint-comments",
     "jsx-a11y",
     "modules-newline",
-    "react"
+    "react",
+    "testing-library"
   ],
   "settings": {
     "react": {
@@ -189,7 +204,7 @@
     "lines-between-class-members": ["warn", "always", {
       "exceptAfterSingleLine": true
     }],
-    "multiline-comment-style": ["warn", "starred-block"],
+    "multiline-comment-style": ["warn", "separate-lines"],
     "new-cap": "warn",
     "new-parens": "warn",
     "no-array-constructor": "warn",
@@ -227,6 +242,7 @@
     "padding-line-between-statements": ["warn",
       // Always
       { "blankLine": "always", "prev": "*", "next": "class" },
+      { "blankLine": "never", "prev": "*", "next": ["cjs-export", "export"] },
       { "blankLine": "always", "prev": "singleline-const", "next": ["let", "var"] },
       { "blankLine": "always", "prev": "singleline-let", "next": ["const", "var"] },
       { "blankLine": "always", "prev": "singleline-var", "next": ["const", "let"] },
@@ -240,10 +256,9 @@
 
       // Never
       { "blankLine": "never", "prev": "directive", "next": "directive" },
-      { "blankLine": "never", "prev": "singleline-const", "next": ["singleline-const", "multiline-const"] },
-      { "blankLine": "never", "prev": "singleline-let", "next": ["singleline-let", "multiline-let"] },
-      { "blankLine": "never", "prev": "singleline-var", "next": ["singleline-var", "multiline-var"] },
-      { "blankLine": "never", "prev": ["cjs-export", "export"], "next": ["cjs-export", "export"] }
+      { "blankLine": "never", "prev": "singleline-const", "next": "singleline-const" },
+      { "blankLine": "never", "prev": "singleline-let", "next": "singleline-let" },
+      { "blankLine": "never", "prev": "singleline-var", "next": "singleline-var" }
     ],
     "prefer-exponentiation-operator": "warn",
     "prefer-object-spread": "warn",    
@@ -257,7 +272,11 @@
       "natural": true
     }],
     "sort-vars": "warn",
-    "space-before-function-paren": ["warn", "never"],
+    "space-before-function-paren": ["warn", {
+      "anonymous": "always", 
+      "named": "never", 
+      "asyncArrow": "always"
+    }],
     "space-in-parens": "warn",
     "space-infix-ops": "warn",
     "space-unary-ops": "warn",
@@ -307,6 +326,12 @@
     // Destructuring Newline Rules
     "destructuring-newline/object-property-newline": "warn",
 
+    // Import Rules
+    "import/no-anonymous-default-export": ["warn", {
+      "allowArray": true,
+      "allowObject": true
+    }],
+
     // Module Newline Rules
     "modules-newline/import-declaration-newline": "warn",
     "modules-newline/export-declaration-newline": "warn",
@@ -339,7 +364,6 @@
     "react/prop-types": "warn",
     "react/self-closing-comp": "warn",
     "react/sort-prop-types": ["warn", {
-      "ignoreCase": true,
       "sortShapeProp": true
     }],
     "react/style-prop-object": "warn",
@@ -381,6 +405,8 @@
       "prop": "parens-new-line",
       "return": "parens-new-line"
     }],
+
+    "react-hooks/exhaustive-deps": "off",
 
     // Jest
     "jest/consistent-test-it": ["error", {
@@ -441,13 +467,6 @@
     "eslint-comments/no-unused-enable": "warn",
 
     // Eslint Comments - Stylistic Rules
-    "eslint-comments/require-description": "error",
-
-    // Emotion Rules
-    "@emotion/import-from-emotion": "error",
-    "@emotion/jsx-import": "error",
-    "@emotion/no-vanilla": "error",
-    "@emotion/styled-import": "error",
-    "@emotion/syntax-preference": ["warn", "string"]
+    "eslint-comments/require-description": "error"
   }
 }

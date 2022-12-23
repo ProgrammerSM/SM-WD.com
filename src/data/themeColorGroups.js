@@ -1,20 +1,33 @@
-/* eslint-disable import/no-anonymous-default-export, sort-keys -- string values only, preferred order */
+/* eslint-disable sort-keys -- string values only, preferred order */
 export default {
+  default: {
+    primaryColor: '#08ECF7',
+    errorColor: '#F70808',
+    fontColor: '#08ECF7',
+    backgroundColor: '#00152A',
+    accentColor1: '#1AF0FB',
+    accentColor2: '#1AF0FB',
+    accentColor3: '#1AF0FB',
+  },
   monochrome: {
-    primaryColor: '#FEFFFF',
-    fontColor: '#FEFFFF',
-    backgroundColor: '#19202A',
-    accentColor1: '#0096D1',
-    accentColor2: '#37D5E0',
-    accentColor3: '#C3F3FF',
+    primaryColor: '#000000',
+    errorColor: '#FF0000',
+    fontColor: '#000000',
+    backgroundColor: '#FFFFFF',
+    accentColor1: '#000000',
+    accentColor2: '#000000',
+    accentColor3: '#000000',
+    noShine: true,
   },
   highContrast: {
     primaryColor: '#FFFFFF',
+    errorColor: '#FF0000',
     fontColor: '#FFFFFF',
     backgroundColor: '#000000',
     accentColor1: '#FFFFFF',
     accentColor2: '#FFFFFF',
     accentColor3: '#FFFFFF',
+    noShine: true,
   },
 }
-/* eslint-enable import/no-anonymous-default-export, sort-keys -- string values only, preferred order */
+/* eslint-enable sort-keys -- string values only, preferred order */
