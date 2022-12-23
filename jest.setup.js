@@ -1,0 +1,37 @@
+// Modules
+import '@testing-library/jest-dom'
+import { defaultFallbackInView } from 'react-intersection-observer'
+import React from 'react' // eslint-disable-line no-unused-vars -- Need to import as global level for tests
+
+defaultFallbackInView(true)
+
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      asPath: '',
+      events: {
+        off: jest.fn(),
+        on: jest.fn(),
+      },
+      pathname: '',
+      query: '',
+      route: '',
+    }
+  },
+}))
+
+const { ResizeObserver } = window
+beforeEach(() => {
+  delete window.ResizeObserver
+  window.ResizeObserver = jest.fn()
+    .mockImplementation(() => ({
+      disconnect: jest.fn(),
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+    }))
+})
+
+afterEach(() => {
+  window.ResizeObserver = ResizeObserver
+  jest.restoreAllMocks()
+})

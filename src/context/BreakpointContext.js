@@ -7,6 +7,9 @@ import {
   useState,
 } from 'react'
 
+// Data
+import { toNumber } from 'data/media-queries'
+
 // Variables
 const BreakpointContext = createContext({
   breakpoints: {
@@ -19,7 +22,6 @@ const BreakpointContext = createContext({
   setBreakpoints: () => {},
 })
 
-const propTypes = { children: PropTypes.node }
 const BreakpointProvider = ({ children }) => {
   const [breakpoints, setBreakpoints] = useState({
     desktop: true,
@@ -33,9 +35,9 @@ const BreakpointProvider = ({ children }) => {
     let tablet = false
     let mobile = false
 
-    if (width >= 1025)
+    if (width >= toNumber.desktop)
       desktop = true
-    else if (width >= 641 && width <= 1024)
+    else if (width >= toNumber.tablet && width <= toNumber.tabletMax)
       tablet = true
     else
       mobile = true
@@ -50,7 +52,7 @@ const BreakpointProvider = ({ children }) => {
   const { ref } = useResizeDetector({ onResize })
 
   return (
-    <BreakpointContext.Provider value={[breakpoints, setBreakpoints]}>
+    <BreakpointContext.Provider value={breakpoints}>
       <div ref={ref}>
         {children}
       </div>
@@ -58,8 +60,7 @@ const BreakpointProvider = ({ children }) => {
   )
 }
 
-BreakpointProvider.propTypes = propTypes
-
+BreakpointProvider.propTypes = { children: PropTypes.node }
 export {
   BreakpointContext,
   BreakpointProvider,

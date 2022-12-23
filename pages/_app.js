@@ -1,14 +1,20 @@
 // Modules
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import { Analytics } from '@vercel/analytics/react'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import PropTypes from 'prop-types'
 
 // Components
 import GlobalContext from 'context/GlobalContext'
 
+// Config
+config.autoAddCss = false
+
 // Global Styles
-import GlobalStyles from 'components/global/styles/GlobalStyles'
-import Layout from 'components/global/Layout'
-import Reset from 'components/global/styles/Reset'
-import Typography from 'components/global/styles/Typography'
+import GlobalStyles from 'components/styles/GlobalStyles'
+import Layout from 'components/Layout'
+import Reset from 'components/styles/Reset'
+import Typography from 'components/styles/Typography'
 
 const MyApp = ({
   Component,
@@ -26,5 +32,17 @@ const MyApp = ({
     <Analytics />
   </>
 )
+
+MyApp.propTypes = {
+  Component: PropTypes.func.isRequired,
+  pageProps: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.object,
+      PropTypes.string,
+    ]),
+  ).isRequired,
+}
 
 export default MyApp

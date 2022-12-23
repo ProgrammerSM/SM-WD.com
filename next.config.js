@@ -1,16 +1,18 @@
-/** @type {import('next').NextConfig} */
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
-  meta: {},
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
   },
-  settings: {
-    jest: {
-      version: require('jest/package.json').version,
-    },
+  env: {
+    CONTACT_FORM_RECAPTCHA_KEY: process.env.CONTACT_FORM_RECAPTCHA_KEY,
+    FORMSPREE_CONTACT_FORM: process.env.FORMSPREE_CONTACT_FORM
   },
-
+  images: {
+    domains: ['spaceholder.cc'],
+  },
 }
 
 module.exports = nextConfig
