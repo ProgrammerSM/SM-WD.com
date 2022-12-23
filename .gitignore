@@ -24,5 +24,9 @@ npm-debug.log*
 .env.test.local
 .env.production.local
 
+# Sentry
+.sentryclirc
+
 # vercel
 .vercel
+
