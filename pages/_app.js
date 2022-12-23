@@ -1,5 +1,6 @@
 // Modules
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { Analytics } from '@vercel/analytics/react'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import PropTypes from 'prop-types'
 
@@ -28,6 +29,7 @@ const MyApp = ({
         <Component {...pageProps} />
       </Layout>
     </GlobalContext>
+    <Analytics />
   </>
 )
 
