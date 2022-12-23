@@ -1,3 +1,6 @@
+// Modules
+import { Analytics } from '@vercel/analytics/react'
+
 // Components
 import GlobalContext from 'context/GlobalContext'
 
@@ -20,6 +23,7 @@ const MyApp = ({
         <Component {...pageProps} />
       </Layout>
     </GlobalContext>
+    <Analytics />
   </>
 )
 
