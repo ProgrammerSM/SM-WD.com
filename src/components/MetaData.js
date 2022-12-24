@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 const MetaData = ({ data }) => {
+  const isProduction = process.env.VERCEL_ENV === 'production'
   const router = useRouter()
   const site = 'https://sm-wd.com/'
   let canonicalURL = site
@@ -14,12 +15,22 @@ const MetaData = ({ data }) => {
     canonicalURL = site + router.asPath
 
   const description = data?.pageDescription || 'Temporary page description.'
-  const follow = data?.isFollow ? 'follow' : 'nofollow'
-  const index = data?.isIndex ? 'index' : 'noindex'
   const ogImage = data?.ogImage?.fields?.file?.url || '/images/fallback-images/sm-wd-icon.svg'
   const ogImageHeight = data?.ogImage?.fields?.file?.details?.image?.height || 400
   const ogImageWidth = data?.ogImage?.fields?.file?.details?.image?.width || 400
   const title = data?.pageTitle || 'Sterling May - Web Developer'
+
+  const follow = isProduction
+    ? data?.isFollow
+      ? 'follow'
+      : 'nofollow'
+    : 'nofollow'
+
+  const index = isProduction
+    ? data?.isIndex
+      ? 'index'
+      : 'noindex'
+    : 'noindex'
 
   return (
     <Head>
