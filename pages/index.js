@@ -1,27 +1,28 @@
 // Modules
 import PropTypes from 'prop-types'
 
-// Components
-import MetaData from 'components/MetaData'
+// Data
+import { pageContentEntryIds } from 'data/page-content-ids'
+import { pageRevalidate } from 'data/page-revalidate'
 
 // Services
 import { getPageContent } from 'services/contentful-service'
 
 export const getStaticProps = async () => {
 
-  const pageContent = await getPageContent('2dvhMSJAAU0REAkU9JEe6p')
-  const revalidate = (60 * 60) * 24
+  const pageContent = await getPageContent(pageContentEntryIds.home)
 
   return {
     props: {
-      pageContent,
-      revalidate,
+      metaData: pageContent?.homePageMetaData?.fields,
+      pageContent: {},
+      revalidate: pageRevalidate.home,
     },
   }
 }
 
 const Home = ({ pageContent }) => (
-  <MetaData />
+  <div>Home Page</div>
 )
 
 Home.propTypes = {
@@ -29,6 +30,7 @@ Home.propTypes = {
     align: PropTypes.string,
     headingText: PropTypes.string,
     headingType: PropTypes.string,
+    homePageMetaData: PropTypes.shape({ fields: PropTypes.object }),
   }),
 }
 

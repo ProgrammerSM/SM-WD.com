@@ -15,6 +15,7 @@ import Footer from './Footer'
 import Header from './Header'
 import { InView } from 'react-intersection-observer'
 import LoadingOverlay from './LoadingOverlay'
+import MetaData from 'components/MetaData'
 import NavigationMenuButton from './menu-buttons/NavigationMenuButton'
 import NavMenu from './menus/NavMenu'
 // Import SettingsMenu from './menus/settings-menu/SettingsMenu'
@@ -168,6 +169,7 @@ const menuButtonName = 'menu'
 const settingsButtonName = 'settings'
 const borderGradient = 'linear-gradient(to right, transparent, var(--primary-color), transparent)'
 const Layout = ({ children }) => {
+  const metaData = children?.props?.metaData
   const [isTopInView, setIsTopInView] = useState(true)
   const [isBottomInView, setIsBottomInView] = useState(false)
   const router = useRouter()
@@ -228,6 +230,8 @@ const Layout = ({ children }) => {
         .overflow.with-theme::-webkit-scrollbar,
         .scroller::-webkit-scrollbar { background-color: ${theme.accentColor1}26; }
       `}</style>
+
+      <MetaData data={metaData} />
 
       <LayoutStyles>
         <Header />

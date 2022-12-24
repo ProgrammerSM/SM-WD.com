@@ -37,7 +37,15 @@ const ErrorPageStyles = styled.div`
   }
 `
 
-export const getStaticProps = () => ({ props: { showBgSvg: false }})
+export const getStaticProps = () => ({
+  props: {
+    metaData: {
+      pageDescription: 'An error was encountered.',
+      pageTitle: 'Error Encountered',
+    },
+    showBgSvg: false,
+  },
+})
 
 const ErrorPage = () => (
   <ErrorPageStyles>

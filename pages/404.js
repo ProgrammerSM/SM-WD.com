@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Head from 'next/head'
 import Link from 'next/link'
 
 // Data
@@ -40,7 +41,15 @@ const NotFoundStyles = styled.div`
   }
 `
 
-export const getStaticProps = () => ({ props: { showBgSvg: false }})
+export const getStaticProps = () => ({
+  props: {
+    metaData: {
+      pageDescription: '404 page not found',
+      pageTitle: 'Page Not Found',
+    },
+    showBgSvg: false,
+  },
+})
 
 const NotFound = () => (
   <NotFoundStyles>

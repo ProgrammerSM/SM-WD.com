@@ -1,4 +1,5 @@
 // Modules
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   faLinkedin,
@@ -10,10 +11,16 @@ import ContentContainer1 from 'components/content-containers/ContentContainer1'
 import ContentContainer2 from 'components/content-containers/ContentContainer2'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
+import MetaData from 'components/MetaData'
 import WideContentContainer from 'components/content-containers/WideContentContainer'
 
 // Data
 import { largeUp } from 'data/media-queries'
+import { pageContentEntryIds } from 'data/page-content-ids'
+import { pageRevalidate } from 'data/page-revalidate'
+
+// Services
+import { getPageContent } from 'services/contentful-service'
 
 // Styles
 const ThankYouPageStyles = styled.div`
@@ -70,7 +77,20 @@ const ThankYouPageStyles = styled.div`
   }
 `
 
-const ThankYou = () => (
+export const getStaticProps = async () => {
+
+  const pageContent = await getPageContent(pageContentEntryIds.thankYou)
+
+  return {
+    props: {
+      metaData: pageContent?.thankYouPageMetaData?.fields,
+      pageContent: {},
+      revalidate: pageRevalidate.thankYou,
+    },
+  }
+}
+
+const ThankYou = ({ pageContent }) => (
   <ThankYouPageStyles>
     <div className='thank-you-container'>
       <WideContentContainer
@@ -117,4 +137,5 @@ const ThankYou = () => (
   </ThankYouPageStyles>
 )
 
+ThankYou.propTypes = { pageContent: PropTypes.shape({ thankYouPageMetaData: PropTypes.shape({ fields: PropTypes.any }) }) }
 export default ThankYou

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Disallow: *
+
+# Host
+Host: http://localhost:5000
+
+# Sitemaps
+Sitemap: http://localhost:5000/sitemap.xml

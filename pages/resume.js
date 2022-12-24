@@ -26,7 +26,7 @@ import { LoadingContext } from 'context/LoadingContext'
 
 // Data
 import { pageContentEntryIds } from 'data/page-content-ids'
-import { sharedData } from 'data/shared-data'
+import { pageRevalidate } from 'data/page-revalidate'
 import {
   largeUp,
   medium,
@@ -179,12 +179,22 @@ const ResumeButtons = styled.div`
 export const getStaticProps = async () => {
 
   const pageContent = await getPageContent(pageContentEntryIds.resume)
-  const revalidate = sharedData.revalidationRate
 
   return {
     props: {
-      pageContent,
-      revalidate,
+      metaData: pageContent?.resumePageMetaData?.fields,
+      pageContent: {
+        contactLinkTitle: pageContent?.contactLink?.fields?.buttonOrLinkTitle,
+        isLooking: pageContent?.shared?.fields?.isLooking,
+        linkedInProfileLink: pageContent?.linkedInProfileLink?.fields,
+        otherWorkExperienceSection: pageContent?.otherWorkExperienceSection?.fields,
+        pdfTitle: pageContent?.resumePdfButton?.fields?.buttonOrLinkTitle,
+        resumeBanner: pageContent?.resumeBanner?.fields,
+        skillsSection: pageContent?.skillsSection?.fields,
+        summarySection: pageContent?.summarySection?.fields,
+        workExperienceSection: pageContent?.workExperienceSection?.fields,
+      },
+      revalidate: pageRevalidate.resume,
     },
   }
 }
@@ -253,38 +263,28 @@ const Resume = ({ pageContent }) => {
   }
 
   const {
-    contactLink: { fields: { buttonOrLinkTitle: contactLinkTitle }},
+    contactLinkTitle,
     linkedInProfileLink: {
-      fields: {
-        linkUrl,
-        buttonOrLinkTitle: linkedInProfileTitle,
-      },
+      linkUrl,
+      buttonOrLinkTitle: linkedInProfileTitle,
     },
     otherWorkExperienceSection: {
-      fields: {
-        workExperience: otherWorkExperience,
-        workExperienceSectionTitle: otherWorkExperienceTitle,
-      },
+      workExperience: otherWorkExperience,
+      workExperienceSectionTitle: otherWorkExperienceTitle,
     },
-    resumePdfButton: { fields: { buttonOrLinkTitle: pdfTitle }},
-    shared: { fields: { isLooking }},
+    isLooking,
+    pdfTitle,
     skillsSection: {
-      fields: {
-        skills,
-        skillsSectionTitle,
-      },
+      skills,
+      skillsSectionTitle,
     },
     summarySection: {
-      fields: {
-        resumeSummarySectionTitle,
-        summaryDetails,
-      },
+      resumeSummarySectionTitle,
+      summaryDetails,
     },
     workExperienceSection: {
-      fields: {
-        workExperience,
-        workExperienceSectionTitle,
-      },
+      workExperience,
+      workExperienceSectionTitle,
     },
   } = pageContent
 
@@ -292,8 +292,8 @@ const Resume = ({ pageContent }) => {
     <>
       {(!isLooking && pageContent?.resumeBanner) && (
         <Banner
-          heading={pageContent?.resumeBanner?.fields?.bannerHeading}
-          message={pageContent?.resumeBanner?.fields?.bannerMessage}
+          heading={pageContent?.resumeBanner?.bannerHeading}
+          message={pageContent?.resumeBanner?.bannerMessage}
         />
       )}
       <div
@@ -474,11 +474,32 @@ const Resume = ({ pageContent }) => {
 
 Resume.propTypes = {
   pageContent: PropTypes.shape({
+    contactLinkTitle: PropTypes.string,
+    isLooking: PropTypes.bool,
+    linkedInProfileLink: PropTypes.shape({
+      buttonOrLinkTitle: PropTypes.string,
+      linkUrl: PropTypes.string,
+    }),
+    otherWorkExperienceSection: PropTypes.shape({
+      workExperience: PropTypes.arrayOf(PropTypes.object),
+      workExperienceSectionTitle: PropTypes.string,
+    }),
+    pdfTitle: PropTypes.string,
     resumeBanner: PropTypes.shape({
-      fields: PropTypes.shape({
-        bannerHeading: PropTypes.any,
-        bannerMessage: PropTypes.any,
-      }),
+      bannerHeading: PropTypes.string,
+      bannerMessage: PropTypes.string,
+    }),
+    skillsSection: PropTypes.shape({
+      skills: PropTypes.arrayOf(PropTypes.string),
+      skillsSectionTitle: PropTypes.string,
+    }),
+    summarySection: PropTypes.shape({
+      resumeSummarySectionTitle: PropTypes.string,
+      summaryDetails: PropTypes.arrayOf(PropTypes.string),
+    }),
+    workExperienceSection: PropTypes.shape({
+      workExperience: PropTypes.arrayOf(PropTypes.object),
+      workExperienceSectionTitle: PropTypes.string,
     }),
   }),
 }

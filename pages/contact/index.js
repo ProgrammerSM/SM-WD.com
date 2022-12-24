@@ -9,14 +9,13 @@ import ContactForm from 'components/ContactForm'
 // Data
 import { mediumUp } from 'data/media-queries'
 import { pageContentEntryIds } from 'data/page-content-ids'
-import { sharedData } from 'data/shared-data'
+import { pageRevalidate } from 'data/page-revalidate'
 
 // Services
 import { getPageContent } from 'services/contentful-service'
 
 // Styles
 const ContactPageStyles = styled.div`
-
   .form-wrapper {
     display: flex;
     flex-direction: column;
@@ -45,22 +44,22 @@ const ContactPageStyles = styled.div`
 export const getStaticProps = async () => {
 
   const pageContent = await getPageContent(pageContentEntryIds.contact)
-  const revalidate = sharedData.revalidationRate
 
   return {
     props: {
-      pageContent,
-      revalidate,
+      metaData: pageContent?.contactPageMetaData?.fields,
+      pageContent: {
+        contactBanner: pageContent?.contactBanner,
+        isLooking: pageContent?.shared?.fields?.isLooking,
+      },
+      revalidate: pageRevalidate.contact,
       showBgSvg: false,
     },
   }
 }
 
 const Contact = ({ pageContent }) => {
-  const {
-    contactBanner,
-    shared: { fields: { isLooking }},
-  } = pageContent
+  const { isLooking } = pageContent
 
   return (
     <ContactPageStyles>
@@ -82,10 +81,12 @@ Contact.propTypes = {
   pageContent: PropTypes.shape({
     contactBanner: PropTypes.shape({
       fields: PropTypes.shape({
-        bannerHeading: PropTypes.any,
-        bannerMessage: PropTypes.any,
+        bannerHeading: PropTypes.string,
+        bannerMessage: PropTypes.string,
       }),
     }),
+    contactPageMetaData: PropTypes.shape({ fields: PropTypes.object }),
+    isLooking: PropTypes.bool,
   }),
 }
 
