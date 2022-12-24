@@ -1,9 +1,6 @@
 // Modules
 import PropTypes from 'prop-types'
 
-// Components
-import MetaData from 'components/MetaData'
-
 // Data
 import { pageContentEntryIds } from 'data/page-content-ids'
 import { pageRevalidate } from 'data/page-revalidate'
@@ -17,19 +14,16 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      pageContent,
+      metaData: pageContent?.homePageMetaData?.fields,
+      pageContent: {},
       revalidate: pageRevalidate.home,
     },
   }
 }
 
-const Home = ({ pageContent }) => {
-  const { homePageMetaData } = pageContent
-
-  return (
-    <MetaData data={homePageMetaData?.fields} />
-  )
-}
+const Home = ({ pageContent }) => (
+  <div>Home Page</div>
+)
 
 Home.propTypes = {
   pageContent: PropTypes.shape({

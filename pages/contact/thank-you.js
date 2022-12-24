@@ -83,65 +83,59 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      pageContent,
+      metaData: pageContent?.thankYouPageMetaData?.fields,
+      pageContent: {},
       revalidate: pageRevalidate.thankYou,
     },
   }
 }
 
-const ThankYou = ({ pageContent }) => {
-  const { thankYouPageMetaData } = pageContent
-
-  return (
-    <>
-      <MetaData data={thankYouPageMetaData?.fields} />
-      <ThankYouPageStyles>
-        <div className='thank-you-container'>
-          <WideContentContainer
-            headingData={{ headingText: 'Thank You' }}
-          >{'<p>Thank you for contacting me. Your request will be answered shortly, and you will receive a response to your email.</p>'}</WideContentContainer>
-        </div>
-        <div className='thank-you-container column-wrapper'>
-          <div className='social-container'>
-            <ContentContainer1>
-              <div>
-                <h4>Social Media</h4>
-              </div>
-              <div className='social-media-icons'>
-                <a
-                  href='https://www.linkedin.com/in/sterling-may-web-developer/'
-                  rel='noreferrer noopener'
-                  target='_blank'
-                >
-                  <FontAwesomeIcon icon={faLinkedin} />
-                </a>
-                <a
-                  href='https://github.com/ProgrammerSM'
-                  rel='noreferrer noopener'
-                  target='_blank'
-                >
-                  <FontAwesomeIcon icon={faSquareGithub} />
-                </a>
-              </div>
-            </ContentContainer1>
+const ThankYou = ({ pageContent }) => (
+  <ThankYouPageStyles>
+    <div className='thank-you-container'>
+      <WideContentContainer
+        headingData={{ headingText: 'Thank You' }}
+      >{'<p>Thank you for contacting me. Your request will be answered shortly, and you will receive a response to your email.</p>'}</WideContentContainer>
+    </div>
+    <div className='thank-you-container column-wrapper'>
+      <div className='social-container'>
+        <ContentContainer1>
+          <div>
+            <h4>Social Media</h4>
           </div>
-          <div className='navigation-container'>
-            <ContentContainer2>
-              <div>
-                <h4>Keep Exploring</h4>
-              </div>
-              <div className='navigation-link'>
-                <Link href='/' >
-                  <a className='styled-link'>Let's Go!</a>
-                </Link>
-              </div>
-            </ContentContainer2>
+          <div className='social-media-icons'>
+            <a
+              href='https://www.linkedin.com/in/sterling-may-web-developer/'
+              rel='noreferrer noopener'
+              target='_blank'
+            >
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
+            <a
+              href='https://github.com/ProgrammerSM'
+              rel='noreferrer noopener'
+              target='_blank'
+            >
+              <FontAwesomeIcon icon={faSquareGithub} />
+            </a>
           </div>
-        </div>
-      </ThankYouPageStyles>
-    </>
-  )
-}
+        </ContentContainer1>
+      </div>
+      <div className='navigation-container'>
+        <ContentContainer2>
+          <div>
+            <h4>Keep Exploring</h4>
+          </div>
+          <div className='navigation-link'>
+            <Link href='/' >
+              <a className='styled-link'>Let's Go!</a>
+            </Link>
+          </div>
+        </ContentContainer2>
+      </div>
+    </div>
+  </ThankYouPageStyles>
+)
 
 ThankYou.propTypes = { pageContent: PropTypes.shape({ thankYouPageMetaData: PropTypes.shape({ fields: PropTypes.any }) }) }
 export default ThankYou
