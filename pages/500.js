@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Head from 'next/head'
 import Link from 'next/link'
 
 // Data
@@ -38,26 +37,29 @@ const ErrorPageStyles = styled.div`
   }
 `
 
-export const getStaticProps = () => ({ props: { showBgSvg: false }})
+export const getStaticProps = () => ({
+  props: {
+    metaData: {
+      pageDescription: 'An error was encountered.',
+      pageTitle: 'Error Encountered',
+    },
+    showBgSvg: false,
+  },
+})
 
 const ErrorPage = () => (
-  <>
-    <Head>
-      <title>Error Encountered</title>
-    </Head>
-    <ErrorPageStyles>
-      <p className='error-message'>
-        <span className='error-icon'>
-          <FontAwesomeIcon icon={faTriangleExclamation} />
-        </span>
-        <span className='error-message-title'>FATAL ERROR</span>
-        <span>a server error has occured, please return to a safer area</span>
-      </p>
-      <Link href='/' >
-        <a className='styled-link'>- Home Page -</a>
-      </Link>
-    </ErrorPageStyles>
-  </>
+  <ErrorPageStyles>
+    <p className='error-message'>
+      <span className='error-icon'>
+        <FontAwesomeIcon icon={faTriangleExclamation} />
+      </span>
+      <span className='error-message-title'>FATAL ERROR</span>
+      <span>a server error has occured, please return to a safer area</span>
+    </p>
+    <Link href='/' >
+      <a className='styled-link'>- Home Page -</a>
+    </Link>
+  </ErrorPageStyles>
 )
 
 export default ErrorPage

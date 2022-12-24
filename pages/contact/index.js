@@ -5,7 +5,6 @@ import styled from 'styled-components'
 // Components
 import Banner from 'components/content-containers/Banner'
 import ContactForm from 'components/ContactForm'
-import MetaData from 'components/MetaData'
 
 // Data
 import { mediumUp } from 'data/media-queries'
@@ -48,7 +47,11 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      pageContent,
+      metaData: pageContent?.contactPageMetaData?.fields,
+      pageContent: {
+        contactBanner: pageContent?.contactBanner,
+        isLooking: pageContent?.shared?.fields?.isLooking,
+      },
       revalidate: pageRevalidate.contact,
       showBgSvg: false,
     },
@@ -56,27 +59,21 @@ export const getStaticProps = async () => {
 }
 
 const Contact = ({ pageContent }) => {
-  const {
-    contactPageMetaData,
-    shared: { fields: { isLooking }},
-  } = pageContent
+  const { isLooking } = pageContent
 
   return (
-    <>
-      <MetaData data={contactPageMetaData?.fields} />
-      <ContactPageStyles>
-        {(!isLooking && pageContent?.contactBanner) && (
-          <Banner
-            heading={pageContent?.contactBanner?.fields?.bannerHeading}
-            message={pageContent?.contactBanner?.fields?.bannerMessage}
-          />
-        )}
-        <div className='form-wrapper'>
-          <div>test section</div>
-          <ContactForm />
-        </div>
-      </ContactPageStyles>
-    </>
+    <ContactPageStyles>
+      {(!isLooking && pageContent?.contactBanner) && (
+        <Banner
+          heading={pageContent?.contactBanner?.fields?.bannerHeading}
+          message={pageContent?.contactBanner?.fields?.bannerMessage}
+        />
+      )}
+      <div className='form-wrapper'>
+        <div>test section</div>
+        <ContactForm />
+      </div>
+    </ContactPageStyles>
   )
 }
 
@@ -89,7 +86,7 @@ Contact.propTypes = {
       }),
     }),
     contactPageMetaData: PropTypes.shape({ fields: PropTypes.object }),
-    shared: PropTypes.shape({ fields: PropTypes.shape({ isLooking: PropTypes.bool }) }),
+    isLooking: PropTypes.bool,
   }),
 }
 

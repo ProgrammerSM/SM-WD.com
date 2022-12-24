@@ -41,26 +41,29 @@ const NotFoundStyles = styled.div`
   }
 `
 
-export const getStaticProps = () => ({ props: { showBgSvg: false }})
+export const getStaticProps = () => ({
+  props: {
+    metaData: {
+      pageDescription: '404 page not found',
+      pageTitle: 'Page Not Found',
+    },
+    showBgSvg: false,
+  },
+})
 
 const NotFound = () => (
-  <>
-    <Head>
-      <title>Page Not Found</title>
-    </Head>
-    <NotFoundStyles>
-      <p className='not-found-message'>
-        <span className='not-found-icon'>
-          <FontAwesomeIcon icon={faLinkSlash} />
-        </span>
-        <span className='not-found-message-title'>404</span>
-        <span>system route failure, please return to known location</span>
-      </p>
-      <Link href='/' >
-        <a className='styled-link'>- Home Page -</a>
-      </Link>
-    </NotFoundStyles>
-  </>
+  <NotFoundStyles>
+    <p className='not-found-message'>
+      <span className='not-found-icon'>
+        <FontAwesomeIcon icon={faLinkSlash} />
+      </span>
+      <span className='not-found-message-title'>404</span>
+      <span>system route failure, please return to known location</span>
+    </p>
+    <Link href='/' >
+      <a className='styled-link'>- Home Page -</a>
+    </Link>
+  </NotFoundStyles>
 )
 
 export default NotFound
