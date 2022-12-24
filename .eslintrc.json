@@ -349,7 +349,8 @@
     "react/destructuring-assignment": "warn",
     "react/display-name": "warn",
     "react/forbid-prop-types": ["warn", {
-      "checkContextTypes": true
+      "checkContextTypes": true,
+      "forbid": ["any"]
     }],
     "react/function-component-definition": ["warn", {
       "namedComponents": "arrow-function",
