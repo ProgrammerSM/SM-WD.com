@@ -13,7 +13,10 @@ const nextConfig = {
     FORMSPREE_CONTACT_FORM: process.env.FORMSPREE_CONTACT_FORM
   },
   images: {
-    domains: ['spaceholder.cc'],
+    domains: [
+      'images.ctfassets.net',
+      'spaceholder.cc'
+    ],
   },
   sentry: {
     hideSourceMaps: true,

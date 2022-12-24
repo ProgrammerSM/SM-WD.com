@@ -6,6 +6,7 @@ import MetaData from 'components/MetaData'
 
 // Data
 import { pageContentEntryIds } from 'data/page-content-ids'
+import { pageRevalidate } from 'data/page-revalidate'
 
 // Services
 import { getPageContent } from 'services/contentful-service'
@@ -13,12 +14,11 @@ import { getPageContent } from 'services/contentful-service'
 export const getStaticProps = async () => {
 
   const pageContent = await getPageContent(pageContentEntryIds.home)
-  const revalidate = (60 * 60) * 24
 
   return {
     props: {
       pageContent,
-      revalidate,
+      revalidate: pageRevalidate.home,
     },
   }
 }

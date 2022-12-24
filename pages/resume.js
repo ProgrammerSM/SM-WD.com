@@ -19,6 +19,7 @@ import {
 import Banner from 'components/content-containers/Banner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
+import MetaData from 'components/MetaData'
 
 // Context
 import { BreakpointContext } from 'context/BreakpointContext'
@@ -26,7 +27,7 @@ import { LoadingContext } from 'context/LoadingContext'
 
 // Data
 import { pageContentEntryIds } from 'data/page-content-ids'
-import { sharedData } from 'data/shared-data'
+import { pageRevalidate } from 'data/page-revalidate'
 import {
   largeUp,
   medium,
@@ -179,12 +180,11 @@ const ResumeButtons = styled.div`
 export const getStaticProps = async () => {
 
   const pageContent = await getPageContent(pageContentEntryIds.resume)
-  const revalidate = sharedData.revalidationRate
 
   return {
     props: {
       pageContent,
-      revalidate,
+      revalidate: pageRevalidate.resume,
     },
   }
 }
@@ -266,6 +266,7 @@ const Resume = ({ pageContent }) => {
         workExperienceSectionTitle: otherWorkExperienceTitle,
       },
     },
+    resumePageMetaData,
     resumePdfButton: { fields: { buttonOrLinkTitle: pdfTitle }},
     shared: { fields: { isLooking }},
     skillsSection: {
@@ -290,6 +291,7 @@ const Resume = ({ pageContent }) => {
 
   return (
     <>
+      <MetaData data={resumePageMetaData?.fields} />
       {(!isLooking && pageContent?.resumeBanner) && (
         <Banner
           heading={pageContent?.resumeBanner?.fields?.bannerHeading}
@@ -474,10 +476,44 @@ const Resume = ({ pageContent }) => {
 
 Resume.propTypes = {
   pageContent: PropTypes.shape({
+    contactLink: PropTypes.shape({ fields: PropTypes.shape({ buttonOrLinkTitle: PropTypes.string }) }),
+    linkedInProfileLink: PropTypes.shape({
+      fields: PropTypes.shape({
+        buttonOrLinkTitle: PropTypes.string,
+        linkUrl: PropTypes.string,
+      }),
+    }),
+    otherWorkExperienceSection: PropTypes.shape({
+      fields: PropTypes.shape({
+        workExperience: PropTypes.arrayOf(PropTypes.object),
+        workExperienceSectionTitle: PropTypes.string,
+      }),
+    }),
     resumeBanner: PropTypes.shape({
       fields: PropTypes.shape({
-        bannerHeading: PropTypes.any,
-        bannerMessage: PropTypes.any,
+        bannerHeading: PropTypes.string,
+        bannerMessage: PropTypes.string,
+      }),
+    }),
+    resumePageMetaData: PropTypes.shape({ fields: PropTypes.object }),
+    resumePdfButton: PropTypes.shape({ fields: PropTypes.shape({ buttonOrLinkTitle: PropTypes.string }) }),
+    shared: PropTypes.shape({ fields: PropTypes.shape({ isLooking: PropTypes.bool }) }),
+    skillsSection: PropTypes.shape({
+      fields: PropTypes.shape({
+        skills: PropTypes.arrayOf(PropTypes.string),
+        skillsSectionTitle: PropTypes.string,
+      }),
+    }),
+    summarySection: PropTypes.shape({
+      fields: PropTypes.shape({
+        resumeSummarySectionTitle: PropTypes.string,
+        summaryDetails: PropTypes.arrayOf(PropTypes.string),
+      }),
+    }),
+    workExperienceSection: PropTypes.shape({
+      fields: PropTypes.shape({
+        workExperience: PropTypes.arrayOf(PropTypes.object),
+        workExperienceSectionTitle: PropTypes.string,
       }),
     }),
   }),
