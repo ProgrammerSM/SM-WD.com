@@ -1,3 +1,5 @@
+const { withSentryConfig } = require('@sentry/nextjs')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   meta: {},
@@ -10,7 +12,13 @@ const nextConfig = {
       version: require('jest/package.json').version,
     },
   },
-
+  sentry: {
+    hideSourceMaps: true,
+  },
 }
 
-module.exports = nextConfig
+const sentryWebpackPluginOptions = {
+  silent: true, // Suppresses all logs
+};
+
+module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
