@@ -35,14 +35,7 @@ const MyApp = ({
 
 MyApp.propTypes = {
   Component: PropTypes.func.isRequired,
-  pageProps: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.number,
-      PropTypes.object,
-      PropTypes.string,
-    ]),
-  ).isRequired,
+  pageProps: PropTypes.object.isRequired,
 }
 
 export default MyApp

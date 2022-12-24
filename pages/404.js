@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Head from 'next/head'
 import Link from 'next/link'
 
 // Data
@@ -43,18 +44,23 @@ const NotFoundStyles = styled.div`
 export const getStaticProps = () => ({ props: { showBgSvg: false }})
 
 const NotFound = () => (
-  <NotFoundStyles>
-    <p className='not-found-message'>
-      <span className='not-found-icon'>
-        <FontAwesomeIcon icon={faLinkSlash} />
-      </span>
-      <span className='not-found-message-title'>404</span>
-      <span>system route failure, please return to known location</span>
-    </p>
-    <Link href='/' >
-      <a className='styled-link'>- Home Page -</a>
-    </Link>
-  </NotFoundStyles>
+  <>
+    <Head>
+      <title>Page Not Found</title>
+    </Head>
+    <NotFoundStyles>
+      <p className='not-found-message'>
+        <span className='not-found-icon'>
+          <FontAwesomeIcon icon={faLinkSlash} />
+        </span>
+        <span className='not-found-message-title'>404</span>
+        <span>system route failure, please return to known location</span>
+      </p>
+      <Link href='/' >
+        <a className='styled-link'>- Home Page -</a>
+      </Link>
+    </NotFoundStyles>
+  </>
 )
 
 export default NotFound

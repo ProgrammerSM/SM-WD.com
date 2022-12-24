@@ -5,18 +5,18 @@ import styled from 'styled-components'
 // Components
 import Banner from 'components/content-containers/Banner'
 import ContactForm from 'components/ContactForm'
+import MetaData from 'components/MetaData'
 
 // Data
 import { mediumUp } from 'data/media-queries'
 import { pageContentEntryIds } from 'data/page-content-ids'
-import { sharedData } from 'data/shared-data'
+import { pageRevalidate } from 'data/page-revalidate'
 
 // Services
 import { getPageContent } from 'services/contentful-service'
 
 // Styles
 const ContactPageStyles = styled.div`
-
   .form-wrapper {
     display: flex;
     flex-direction: column;
@@ -45,12 +45,11 @@ const ContactPageStyles = styled.div`
 export const getStaticProps = async () => {
 
   const pageContent = await getPageContent(pageContentEntryIds.contact)
-  const revalidate = sharedData.revalidationRate
 
   return {
     props: {
       pageContent,
-      revalidate,
+      revalidate: pageRevalidate.contact,
       showBgSvg: false,
     },
   }
@@ -58,23 +57,26 @@ export const getStaticProps = async () => {
 
 const Contact = ({ pageContent }) => {
   const {
-    contactBanner,
+    contactPageMetaData,
     shared: { fields: { isLooking }},
   } = pageContent
 
   return (
-    <ContactPageStyles>
-      {(!isLooking && pageContent?.contactBanner) && (
-        <Banner
-          heading={pageContent?.contactBanner?.fields?.bannerHeading}
-          message={pageContent?.contactBanner?.fields?.bannerMessage}
-        />
-      )}
-      <div className='form-wrapper'>
-        <div>test section</div>
-        <ContactForm />
-      </div>
-    </ContactPageStyles>
+    <>
+      <MetaData data={contactPageMetaData?.fields} />
+      <ContactPageStyles>
+        {(!isLooking && pageContent?.contactBanner) && (
+          <Banner
+            heading={pageContent?.contactBanner?.fields?.bannerHeading}
+            message={pageContent?.contactBanner?.fields?.bannerMessage}
+          />
+        )}
+        <div className='form-wrapper'>
+          <div>test section</div>
+          <ContactForm />
+        </div>
+      </ContactPageStyles>
+    </>
   )
 }
 
@@ -82,10 +84,12 @@ Contact.propTypes = {
   pageContent: PropTypes.shape({
     contactBanner: PropTypes.shape({
       fields: PropTypes.shape({
-        bannerHeading: PropTypes.any,
-        bannerMessage: PropTypes.any,
+        bannerHeading: PropTypes.string,
+        bannerMessage: PropTypes.string,
       }),
     }),
+    contactPageMetaData: PropTypes.shape({ fields: PropTypes.object }),
+    shared: PropTypes.shape({ fields: PropTypes.shape({ isLooking: PropTypes.bool }) }),
   }),
 }
 
